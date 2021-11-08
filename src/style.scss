@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,600;0,800&display=swap');
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #map {
+  height: 100%;
+}
+
+#sidebar {
+  padding: 20px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 0;
+  // border-right: none;
+
+  h1 {
+    text-transform: uppercase;
+    font-weight: 800;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: rgb(54, 167, 233);
+  }
+
+  .lead {
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+  // sidebar style
+  .leaflet-sidebar-content, .leaflet-sidebar-tabs {
+    background-color: rgba(255, 255, 255, 0.85)
+  }
+
+  .leaflet-sidebar-tabs > ul > li.active {
+    color: rgb(54, 167, 233);
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+
+  // font awesome icons: vertical centering
+  i.fa {
+    margin-top: 25%;
+  }
+
+  .leaflet-sidebar-close i.fa {
+    color: rgb(107, 118, 127);
+  }
+}
+
+// style sidebar 
+// @media (min-width: 768px) {
+//   #sidebar {
+//     border-radius: 0;
+//     border: none;
+//   } 
+// }

@@ -1,8 +1,12 @@
 library(tidyverse)
 library(CoordinateCleaner)
 library(glue)
+library(sf)
+library(jsonlite)
 library(leaflet)
 library(leaflet.extras2)
+library(htmlwidgets)
+library(htmltools)
 library(here)
 
 # get country centroids
@@ -33,6 +37,9 @@ irena <-
   # add the centroids on
   left_join(country_list, by = c("iso" = "iso3"))
 
+write_csv(irena, here("src", "data", "irena.csv"))
+write_json(irena, here("src", "data", "irena.json"))
+
 # test case: total renewable figures in 2019
 renewables_2019 <-
   irena %>%
@@ -42,15 +49,18 @@ renewables_2019 <-
     centroid.lat = centroid.lat[1],
     centroid.lon = centroid.lon[1],
     generated_gwh = sum(generated_gwh, na.rm = TRUE),
-    capacity_mw = sum(capacity_mw, na.rm = TRUE),) %>%
+    capacity_mw = sum(capacity_mw, na.rm = TRUE)) %>%
   ungroup()
+
+# TODO - for timeslider, add sf location col, add Date column from year
 
 # visualise test case!
 popup_label <- partial(scales::number,
   big.mark = ", ", suffix = " MW", accuracy = 1)
 
-leaflet(renewables_2019, options = leafletOptions(
-  minZoom = 2)) %>%
+renew_map <-
+  leaflet(renewables_2019, options = leafletOptions(
+    minZoom = 2)) %>%
   addTiles() %>%
   # addTimeslider() %>%
   addCircles(
@@ -62,4 +72,15 @@ leaflet(renewables_2019, options = leafletOptions(
     color = "transparent",
     popup = ~ glue(
       "<h2>{country}</h2>",
-      "<p>{popup_label(capacity_mw)}</p>"))
+      "<p>Capacity: {popup_label(capacity_mw)}</p>"))
+
+# add css/js dependencies
+# htmlDependencies(renew_map) <- list(
+#   htmlDependency()
+# )
+
+# export map
+renew_map %>%
+  saveWidget(here("test", "test.html"), 
+  title = "Fancy title here",
+  selfcontained = FALSE, libdir = "js")
