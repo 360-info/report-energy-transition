@@ -52,10 +52,21 @@ html, body, #map {
   }
 }
 
-// style sidebar 
-// @media (min-width: 768px) {
-//   #sidebar {
-//     border-radius: 0;
-//     border: none;
-//   } 
-// }
+// match zoom controls to 360 style
+.leaflet-touch .leaflet-bar.leaflet-control-zoom {
+  border-radius: 0;
+  border: none;
+  
+  a {
+    background-color: $bg360;
+
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    &:last-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
