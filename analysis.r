@@ -40,6 +40,22 @@ irena <-
 write_csv(irena, here("src", "data", "irena.csv"))
 write_json(irena, here("src", "data", "irena.json"))
 
+# renewables vs non-renewables
+totals <-
+  irena %>%
+  mutate(renewable = recode(renewable_status, "Total Renewable" = TRUE, "Total Non-Renewable" = FALSE)) %>%
+  select(-renewable_status) %>%
+  group_by(iso, country, region, year, renewable) %>%
+  summarise(
+    centroid.lat = centroid.lat[1],
+    centroid.lon = centroid.lon[1],
+    generated_gwh = sum(generated_gwh, na.rm = TRUE),
+    capacity_mw = sum(capacity_mw, na.rm = TRUE)) %>%
+  ungroup()
+
+write_csv(totals, here("src", "data", "irena-totals.csv"))
+write_json(totals, here("src", "data", "irena-totals.json"))
+
 # test case: total renewable figures in 2019
 renewables_2019 <-
   irena %>%
