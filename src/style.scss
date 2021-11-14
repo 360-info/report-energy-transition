@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,600;0,800&display=swap');
 
-$bg360: rgba(255, 255, 255, 0.9);
+$bg360: rgba(255, 255, 255, 0.95);
 $primary360: rgb(54, 167, 233);
 
 body {
@@ -12,61 +12,103 @@ html, body, #map {
   height: 100%;
 }
 
-#sidebar {
-  font-family: 'Libre Franklin', sans-serif;
-  font-size: 0.9em;
-  border: none;
-  border-radius: 0;
-  // border-right: none;
+// ------------------------------------------------
+
+.flex-center {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center {
+  left: 0px;
+}
+
+.sidebar-inner {
+  position: absolute;
+  // width: 95%;
+  // height: 95%;
+  width: 100%;
+  height: 100%;
+  font-family: 'Libre Franklin', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: black;
+  background-color: $bg360;
+  padding: 0 20px;  
+  // padding: 0 42px 0 0;
 
   h1 {
-    text-transform: uppercase;
-    font-weight: 800;
-    background-color: $bg360;
     color: $primary360;
-  }
-
-  .lead {
     text-transform: uppercase;
-    font-size: 1em;
-    font-weight: 600;
-  }
-
-  // sidebar style
-  .leaflet-sidebar-content, .leaflet-sidebar-tabs {
-    background-color: $bg360
-  }
-
-  .leaflet-sidebar-tabs > ul > li.active {
-    color: $primary360;
-    background-color: $bg360;
-  }
-
-  // font awesome icons: vertical centering
-  i.fa {
-    margin-top: 25%;
-  }
-
-  .leaflet-sidebar-close i.fa {
-    color: rgb(107, 118, 127);
   }
 }
 
-// match zoom controls to 360 style
-.leaflet-touch .leaflet-bar.leaflet-control-zoom {
-  border-radius: 0;
-  border: none;
-  
-  a {
-    background-color: $bg360;
+#sidebarToggleBtn {
+  // toggle button positioning
+  right: 0;
+  top: 0;
+  position: absolute;
+  width: 1.3em;
+  height: 1.3em;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: translate 0.5s;
+  font-size: 2rem;
+}
 
-    &:first-child {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-    &:last-child {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+#sidebarToggleBtn:hover {
+  color: $primary360;
+}
+
+.sidebar {
+  transition: transform 0.5s;
+  transform: translateX(0px);
+  z-index: 1;
+  width: 400px;
+  // width: 25%;
+  height: 100%;
+}
+
+.sidebar-content {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+/*
+The sidebar styling has them "expanded" by default, we use CSS transforms to push them offscreen
+The toggleSidebar() function removes this class from the element in order to expand it.
+*/
+.collapsed {
+  transform: translateX(-390px);
+
+  .sidebar-content {
+    opacity: 0.1;
   }
+
+  #sidebarToggleBtn {
+    top: 50%;
+  }
+}
+
+// mobile sizing (not hooked up yet)
+
+.sidebar.small {
+  width: 100%;
+}
+
+.collapsed.small {
+  transform: translateX(-100%);
+}
+
+// controls
+
+.mapboxgl-ctrl {
+  // background-color: greenyellow;
+  background: $bg360;
+  border-radius: 0;
+  box-shadow: none;
 }

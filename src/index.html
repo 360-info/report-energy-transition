@@ -9,50 +9,17 @@
 
   </head>
   <body>
-    <div id="map"></div>
-    <div id="sidebar" class="leaflet-sidebar collapsed">
-
-      <!-- nav tabs -->
-      <div class="leaflet-sidebar-tabs">
-        <!-- top aligned tabs -->
-        <ul role="tablist">
-          <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-          <li><a href="#share" role="tab"><i class="fa fa-share"></i></a></li>
-        </ul>
-
-        <!-- bottom aligned tabs -->
-        <ul role="tablist">
-            <li><a href="https://github.com/jimjam-slam/report-energy-transition"><i class="fa fa-github"></i></a></li>
-        </ul>
-      </div>
-
-      <div class="leaflet-sidebar-content">
-        
-        <!-- tab 1: explainer -->
-        <div class="leaflet-sidebar-pane" id="home">
-          <h1 class="leaflet-sidebar-header">
-              Energy transition
-              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-          </h1>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum leo eros, blandit viverra nulla facilisis sit amet. Aliquam iaculis in velit at iaculis.</p>
-          <p>Donec egestas, enim ac congue molestie, lorem lectus euismod quam, et euismod ante lectus eleifend justo. Aliquam ut odio id massa consequat accumsan.</p>          
-          <p>Cras felis lectus, pellentesque at dui et, consequat tristique est. Sed faucibus bibendum eros a rhoncus. Cras quis turpis finibus massa placerat consequat non eget erat. Ut eros purus, vestibulum ut sagittis eget, bibendum ut augue.</p>
-
+    <div id="map">
+      <div id="left" class="sidebar flex-center left collapsed">
+        <div id="sidebarToggle" class="sidebar-inner rounded-rect flex-center">
+          <div class="sidebar-content">
+            <h1>Left Sidebar</h1>
+            <p>Here's some content, haha</p>
+          </div>
+          <div id="sidebarToggleBtn"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
         </div>
 
-        <!-- tab 2: share + remix -->
-        <div class="leaflet-sidebar-pane" id="share">
-          <h1 class="leaflet-sidebar-header">
-              Share + remix
-              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-          </h1>
-
-          <p>Instructions for sharing and remixing this map go here.</p>
-        </div>
-
-
       </div>
-
     </div>
     <script src="index.js"></script>
   </body>
