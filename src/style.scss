@@ -36,7 +36,6 @@ html, body, #map {
   color: black;
   background-color: $bg360;
   padding: 0 20px;  
-  // padding: 0 42px 0 0;
 
   h1 {
     color: $primary360;
@@ -56,7 +55,6 @@ html, body, #map {
   justify-content: center;
   align-items: center;
   padding: 5px;
-  transition: translate 0.5s;
   font-size: 2rem;
 }
 
@@ -89,10 +87,6 @@ The toggleSidebar() function removes this class from the element in order to exp
   .sidebar-content {
     opacity: 0.1;
   }
-
-  #sidebarToggleBtn {
-    top: 50%;
-  }
 }
 
 // mobile sizing (not hooked up yet)
@@ -105,7 +99,7 @@ The toggleSidebar() function removes this class from the element in order to exp
   transform: translateX(-100%);
 }
 
-// controls
+// mapbox controls
 
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
   // background-color: greenyellow;
@@ -113,6 +107,7 @@ The toggleSidebar() function removes this class from the element in order to exp
   border-radius: 0;
   box-shadow: none;
 }
+
 // timebar
 
 .map-overlay {
