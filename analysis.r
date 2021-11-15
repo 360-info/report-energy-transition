@@ -38,18 +38,6 @@ irena <-
   mutate(
     generated_gwh = parse_number(generated_gwh),
     capacity_mw = parse_number(capacity_mw))
-    
-    
-# join with centroid geometry, reorder, export
-irena %>%
-  left_join(country_list, by = "iso") %>%
-  select(starts_with("country"), iso, everything()) %>%
-  st_write(here("src", "data", "irena.geojson")) %>%
-  # conflicting country names
-  select(starts_with("country"), iso, region) %>%
-  filter(country.x != country.y) %>%
-  distinct(country.x, .keep_all = TRUE) %>%
-  write_csv(here("country-conflicts.csv")) %>%
 
 # renewables vs non-renewables: summarise, join with geometry, reorder, export
 totals <-
@@ -66,17 +54,22 @@ totals <-
 
 # now output as geojson points
 # (sf doesn't support nested geojson output, so we'll have to do it super wide)
-totals %>%
-  # create nested structure...
+totals_wide <-
+  totals %>%
   pivot_wider(
     names_from = c(renewable, year),
     values_from = c(totalgen_gwh, totalcap_mw),
     names_sep = ".") %>%
-  # ... then clear out blank countries and export
-  left_join(country_list, by = "iso") %>%
-  select(country = country.x, iso, everything(), -country.y) %>%
-  st_write(here("src", "data", "irena-totals.geojson")) ->
-totals_wide
+  left_join(country_list, by = "iso")
+
+# export final irena totals data for map
+totals_wide %>%
+  select(region, iso, irena_name = country.x, rgeo_name = country.y, iso) %>%
+  write_csv(here("country-list.csv")) %>%
+  # (... and also conflicted country names)
+  filter(irena_name != rgeo_name) %>%
+  distinct(irena_name, .keep_all = TRUE) %>%
+  write_csv(here("country-conflicts.csv"))
 
 # summarise the figures (for setting scales in mapbox)
 totals %>% filter(renewable == "renewable") %>% summary()
