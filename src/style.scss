@@ -71,6 +71,7 @@ html, body, #map {
   width: 400px;
   // width: 25%;
   height: 100%;
+  top: 0;
 }
 
 .sidebar-content {
@@ -106,9 +107,42 @@ The toggleSidebar() function removes this class from the element in order to exp
 
 // controls
 
-.mapboxgl-ctrl {
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
   // background-color: greenyellow;
   background: $bg360;
   border-radius: 0;
   box-shadow: none;
+}
+// timebar
+
+.map-overlay {
+  font: 12px/20px 'Libre Franklin', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  position: absolute;
+  width: 25%;
+  top: 10px;
+  right: 50px;
+}
+   
+.map-overlay .map-overlay-inner {
+  background-color: $bg360;
+  // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  // border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+   
+.map-overlay h2 {
+  line-height: 24px;
+  display: block;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.map-overlay input {
+  background-color: transparent;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  cursor: ew-resize;
 }
