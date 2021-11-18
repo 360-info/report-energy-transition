@@ -13,7 +13,7 @@ var map = new mapboxgl.Map({
   center: [0, 30],
   zoom: 2,
   logoPosition: 'bottom-right',
-  attributionControl: false
+  // attributionControl: false
 
 });
 
@@ -22,61 +22,61 @@ map.addControl(new mapboxgl.NavigationControl());
 
 // toggleSidebar: adapted from https://codesandbox.io/s/bjiow
 // use css classes to animate sidebar movement in or out
-function toggleSidebar(id) 
-{
+// function toggleSidebar(id) 
+// {
 
-  console.log('Toggling...');
+//   console.log('Toggling...');
 
-  // check if sidebar is 'collapsed'
-  var elem = document.getElementById(id);
-  var classes = elem.className.split(' ');
-  var collapsed = classes.indexOf('collapsed') !== -1;
+//   // check if sidebar is 'collapsed'
+//   var elem = document.getElementById(id);
+//   var classes = elem.className.split(' ');
+//   var collapsed = classes.indexOf('collapsed') !== -1;
 
-  var padding = {};
+//   var padding = {};
 
-  // bring the sidebar back by removing 'collapsed'
-  if (collapsed) 
-  {
-    console.log('Restoring sidebar...');
-    classes.splice(classes.indexOf('collapsed'), 1);
+//   // bring the sidebar back by removing 'collapsed'
+//   if (collapsed) 
+//   {
+//     console.log('Restoring sidebar...');
+//     classes.splice(classes.indexOf('collapsed'), 1);
 
-    // adjust the map view to match the sidebar's restoration
-    padding[id] = 300;
-    map.easeTo({
-      padding: padding,
-      duration: 500
-    });
+//     // adjust the map view to match the sidebar's restoration
+//     padding[id] = 300;
+//     map.easeTo({
+//       padding: padding,
+//       duration: 500
+//     });
 
-  } 
-  // otherwise, send the sidebar away by adding 'collapsed'
-  else 
-  {
-    console.log('Dismissing sidebar...');
-    padding[id] = 0;
-    classes.push('collapsed');
+//   } 
+//   // otherwise, send the sidebar away by adding 'collapsed'
+//   else 
+//   {
+//     console.log('Dismissing sidebar...');
+//     padding[id] = 0;
+//     classes.push('collapsed');
 
-    // adjust the map view to match the sidebar's dismissal
-    map.easeTo({
-      padding: padding,
-      duration: 500
-    });
-  }
+//     // adjust the map view to match the sidebar's dismissal
+//     map.easeTo({
+//       padding: padding,
+//       duration: 500
+//     });
+//   }
 
-  // Update the class list on the element
-  elem.className = classes.join(' ');
+//   // Update the class list on the element
+//   elem.className = classes.join(' ');
 
-}
+// }
 
 /* onload: attach sidebar event listeners */
 map.on('load', function () {
   
   // initialise sidebar state
-  toggleSidebar('left');
-  document
-    .getElementById("sidebarToggleBtn")
-    .addEventListener("click", function() {
-      toggleSidebar('left');
-    });
+  // toggleSidebar('left');
+  // document
+  //   .getElementById("sidebarToggleBtn")
+  //   .addEventListener("click", function() {
+  //     toggleSidebar('left');
+  //   });
 
   // call this to change the column mapping of the bubbles and labels
   function updateMapState() {
@@ -104,18 +104,6 @@ map.on('load', function () {
   function powerCircleColor(year, powerSource, indicator) {
     console.log('Configuring colour')
     return powerSource == 'renewable' ? '#2fedce' : '#cc7802';
-    // return [
-    //   'interpolate',
-    //   ['linear'],
-    //   ['to-number', ['get', indicator + '.' + powerSource + '.' + year]],
-    //   0,
-    //   // scale low colours (@ low opacity) based on powerSource
-    //   powerSource == 'renewable' ? '#ffff0033' : '#7f312133',
-    //   // scale radius to the max of the selected indicator
-    //   indicator == 'totalgen_gw' ? 5518446 : 1306693,
-    //   // scale max colours (@ full opacity) based on powerSource
-    //   powerSource == 'renewable' ? '#ffff00ff' : '#7f3121ff'
-    // ]
   }
 
   function powerCircleRadius(year, powerSource, indicator) {
@@ -132,17 +120,17 @@ map.on('load', function () {
     ]
   }
 
-  function powerLabel(year, powerSource, indicator) {
-    console.log('Configuring label')
-    return [
-      'concat',
-      [
-        'to-string',
-        ['get', indicator + '.' + powerSource + '.' + year]
-      ],
-      '?'
-    ]
-  }
+  // function powerLabel(year, powerSource, indicator) {
+  //   console.log('Configuring label')
+  //   return [
+  //     'concat',
+  //     [
+  //       'to-string',
+  //       ['get', indicator + '.' + powerSource + '.' + year]
+  //     ],
+  //     '?'
+  //   ]
+  // }
 
   function onDataLoaded(data) {
     console.log("Data loaded! Continuing initialisation...")

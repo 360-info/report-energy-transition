@@ -16,7 +16,7 @@
         <div id="sidebarToggle" class="sidebar-inner rounded-rect flex-center">
           <div class="sidebar-content">
             <h1>Left Sidebar</h1>
-            <p>Here's some content, haha</p>
+            <p>Sidebar content goes here</p>
             <p><a href="https://mapbox.com">Map tiles © Mapbox</a></p>
           </div>
           <div id="sidebarToggleBtn">
@@ -32,36 +32,39 @@
         <label id="year" for="slider"></label>
         <input id="slider" type="range" min="2000" max="2019" step="1" value="2019">
         
-        <div>
-          <label for="renewable-power">Renewable</label>
-          <input
+        <div class="radio-group">
+          <div>
+            <input
             id="renewable-power"
             type="radio"
             name="powerTypeGroup"
             value="renewable">
-        </div>
-        <div>
-          <label for="nonrenewable-power">Non-Renewable</label>
-          <input
+            <label for="renewable-power">Renewable</label>
+          </div>
+          <div>
+            <input
             id="nonrenewable-power"
             type="radio"
             name="powerTypeGroup"
             value="nonrenewable"
             checked>
+            <label for="nonrenewable-power">Non-Renewable</label>
+          </div>
         </div>
-
-        <div>
-          <label for="generated">Generated (GWh)</label>
-          <input
+        <div class="radio-group">
+          <div>
+            <input
             id="generated"
             type="radio"
             name="indicatorGroup"
             value="totalgen_gwh"
             checked>
-        </div>
-        <div>
-          <label for="capacity">Capacity (MW)</label>
-          <input id="capacity" type="radio" name="indicatorGroup" value="totalcap_mw">
+            <label for="generated">Generated (GWh)</label>
+          </div>
+          <div>
+            <input id="capacity" type="radio" name="indicatorGroup" value="totalcap_mw">
+            <label for="capacity">Capacity (MW)</label>
+          </div>
         </div>
       </div>
       <!-- <div class="map-overlay-inner">
