@@ -3,17 +3,15 @@ This map visualises the progression of installed energy capacity and generation 
 
 # Use + Remix
 
-# Analysis
+Please attribute 360info and IRENA when you use and remix this visualisation.
 
-Our analysis of IRENA data is done in R and can be found in `analysis.r`. it creates `src/data/irena-totals.geojson`.
-
-### Prerequisites
+### Prerequisite: Mapnbox access token
 
 However you deploy this map, you'll need an access token from [Mapbox](https://www.mapbox.com). Simply sign up for an account and, from the [account dashboard](https://account.mapbox.com), create a new access token with public scopes selected.
 
 Mapbox offers 50 000 map loads per month for free, but further use by your users beyond that will require a [paid plan](https://www.mapbox.com/pricing/#maploads).
 
-### With Netlify
+## Deploy with Netlify
 
 The quickest way to get started with this map is with Netlify:
 
@@ -23,11 +21,17 @@ Netlify will ask you for your Mapbox access token. Once you've deployed the site
 
 Netlify offers 100 GB of bandwidth per month for free; additional use beyond that requires a [paid plan](https://www.netlify.com/pricing).
 
-### GitHub
+## Manual deployment
 
 You can also fork this repo and deploy it somewhere else yourself.
 
-To build the site, use:
+To build the site, create a `.env` file in the project root that contains your Mapbox access token:
+
+```
+MAPBOX_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Then use:
 
 ```shell
 npm install
@@ -35,6 +39,10 @@ npm run build
 ```
 
 The site builds from the `src` dubdirectory to `dist`.
+
+## Analysis
+
+Our analysis of IRENA data is done in R and can be found in `analysis.r`. It creates `src/data/irena-totals.geojson`.
 
 # Help
 
