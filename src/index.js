@@ -9,7 +9,7 @@ mapboxgl.accessToken =
 
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/dark-v10',
+  style: 'mapbox://styles/james-goldie/ckw5rwsnl2jb714pqrhp3hteg/draft',
   center: [0, 30],
   zoom: 2,
   logoPosition: 'bottom-right',
