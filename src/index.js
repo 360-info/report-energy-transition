@@ -20,113 +20,69 @@ var map = new mapboxgl.Map({
 // add zoom and rotation controls to the map
 map.addControl(new mapboxgl.NavigationControl());
 
-// toggleSidebar: adapted from https://codesandbox.io/s/bjiow
-// use css classes to animate sidebar movement in or out
-// function toggleSidebar(id) 
-// {
-
-//   console.log('Toggling...');
-
-//   // check if sidebar is 'collapsed'
-//   var elem = document.getElementById(id);
-//   var classes = elem.className.split(' ');
-//   var collapsed = classes.indexOf('collapsed') !== -1;
-
-//   var padding = {};
-
-//   // bring the sidebar back by removing 'collapsed'
-//   if (collapsed) 
-//   {
-//     console.log('Restoring sidebar...');
-//     classes.splice(classes.indexOf('collapsed'), 1);
-
-//     // adjust the map view to match the sidebar's restoration
-//     padding[id] = 300;
-//     map.easeTo({
-//       padding: padding,
-//       duration: 500
-//     });
-
-//   } 
-//   // otherwise, send the sidebar away by adding 'collapsed'
-//   else 
-//   {
-//     console.log('Dismissing sidebar...');
-//     padding[id] = 0;
-//     classes.push('collapsed');
-
-//     // adjust the map view to match the sidebar's dismissal
-//     map.easeTo({
-//       padding: padding,
-//       duration: 500
-//     });
-//   }
-
-//   // Update the class list on the element
-//   elem.className = classes.join(' ');
-
-// }
-
 /* onload: attach sidebar event listeners */
 map.on('load', function () {
-  
-  // initialise sidebar state
-  // toggleSidebar('left');
-  // document
-  //   .getElementById("sidebarToggleBtn")
-  //   .addEventListener("click", function() {
-  //     toggleSidebar('left');
-  //   });
 
   // call this to change the column mapping of the bubbles and labels
   function updateMapState() {
 
     // get control state
     const year = document.querySelector('#slider').value;
-    const powerSource =
-      document.querySelector('input[name="powerTypeGroup"]:checked').value;
     const indicator =
       document.querySelector('input[name="indicatorGroup"]:checked').value;
-    console.log("Slider is " + year + "; source is " + powerSource +
-        "; indicator is " + indicator);
+    console.log("Slider is " + year + "; indicator is " + indicator);
 
     // change column mapping of circles and labels
     map.setPaintProperty('power-circles', 'circle-color',
-      powerCircleColor(year, powerSource, indicator));
+      powerCircleColor(year, indicator));
     map.setPaintProperty('power-circles', 'circle-radius',
-      powerCircleRadius(year, powerSource, indicator));
+      powerCircleRadius(year, indicator));
     
     // set the plot title to the selected year
     document.getElementById('plotTitle').textContent =
       'Power gen and capacity in ' + String(year);
   }
 
-  function powerCircleColor(year, powerSource, indicator) {
-    console.log('Configuring colour')
-    return powerSource == 'renewable' ? '#2fedce' : '#cc7802';
-  }
-
-  function powerCircleRadius(year, powerSource, indicator) {
-    console.log('Configuring radius')
+  function powerCircleColor(year, indicator) {
+    console.log('Configuring colour w/: ' + "prop" + indicator + '_renewable.' + year)
     return [
       'interpolate',
       ['linear'],
-      ['to-number', ['get', indicator + '.' + powerSource + '.' + year]],
+      ['to-number', ['get', "prop" + indicator + '_renewable.' + year]],
+      0,   "#543005",
+      0.1, "#8c510a",
+      0.2, "#bf812d",
+      0.3, "#dfc27d",
+      0.4, "#f6e8c3",
+      0.5, "#c7eae5",
+      0.6, "#80cdc1",
+      0.7, "#35978f",
+      0.8, "#01665e",
+      0.9, "#003c30"
+    ]
+  }
+
+  function powerCircleRadius(year, indicator) {
+    console.log('Configuring radius w/: ' + "all" + indicator + '.' + year)
+    return [
+      'interpolate',
+      ['linear'],
+      ['sqrt', ['to-number', ['get', "all" + indicator + '.' + year]]],
       0,
       0,
       // scale radius to the max of the selected indicator
-      indicator == "totalgen_gw" ? 5518446 : 1306693,
+      indicator == "gen_gwh" ? 2740 : 1380,
       50
     ]
   }
 
-  // function powerLabel(year, powerSource, indicator) {
+  // function powerLabel(year, indicator) {
   //   console.log('Configuring label')
   //   return [
   //     'concat',
   //     [
   //       'to-string',
-  //       ['get', indicator + '.' + powerSource + '.' + year]
+  //       ['get', indicator + '.' + '.' + year]
   //     ],
   //     '?'
   //   ]
@@ -138,12 +94,9 @@ map.on('load', function () {
 
     // get initial control state
     const year = parseInt(document.querySelector('#slider').value, 10);
-    const powerSource =
-      document.querySelector('input[name="powerTypeGroup"]:checked').value;
     const indicator =
       document.querySelector('input[name="indicatorGroup"]:checked').value;
-      console.log("Slider is " + year + "; source is " + powerSource +
-        "; indicator is " + indicator);
+      console.log("Slider is " + year + "; indicator is " + indicator);
 
     // format the time property we want to filter on
     // data.features = data.features.map((d) => {
@@ -160,9 +113,9 @@ map.on('load', function () {
       'type': 'circle',
       'source': 'power',
       'paint': {
-        'circle-color': powerCircleColor(year, powerSource, indicator),
+        'circle-color': powerCircleColor(year, indicator),
         'circle-opacity': 0.75,
-        'circle-radius': powerCircleRadius(year, powerSource, indicator)
+        'circle-radius': powerCircleRadius(year, indicator)
       }
     });
     // map.addLayer({
@@ -180,14 +133,10 @@ map.on('load', function () {
     // });
 
     // initialise, then set up a callback for the input slider
-    // filterBy(year, powerSource, indicator)
+    // filterBy(year, indicator)
     // filterBy(0);
     console.log("Attaching listeners...")
     document.getElementById('slider').addEventListener('input',
-      updateMapState);
-    document.getElementById('renewable-power').addEventListener('input',
-      updateMapState);
-    document.getElementById('nonrenewable-power').addEventListener('input',
       updateMapState);
     document.getElementById('generated').addEventListener('input',
       updateMapState);
