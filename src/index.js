@@ -19,6 +19,9 @@ var map = new mapboxgl.Map({
 
 // add zoom and rotation controls to the map
 map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.FullscreenControl(
+  {container: document.querySelector('body')}));
+
 
 /* onload: attach sidebar event listeners */
 map.on('load', function () {
@@ -72,7 +75,7 @@ map.on('load', function () {
       0,
       // scale radius to the max of the selected indicator
       indicator == "gen_gwh" ? 2740 : 1380,
-      50
+      100
     ]
   }
 

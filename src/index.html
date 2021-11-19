@@ -16,6 +16,15 @@
         <h2 id="plotTitle">Power gen and capacity in 2019</h2>
         <label id="year" for="slider"></label>
         <input id="slider" type="range" min="2000" max="2019" step="1" value="2019">
+
+        <div id="legend" class="legend">
+          <div class="bar"></div>
+          <ul class="stops">
+            <li>0%</li>
+            <li>50%</li>
+            <li>100%</li>
+          </ul>
+        </div>
         
         <div class="radio-group">
           <div>
@@ -32,13 +41,11 @@
             <label for="capacity">Capacity installed (MW)</label>
           </div>
         </div>
+
+        
+
       </div>
-      <!-- <div class="map-overlay-inner">
-        <div id="legend" class="legend">
-          <div class="bar"></div>
-          <div>Magnitude (m)</div>
-        </div>
-      </div> -->
+
     </div>
           
     <script src="index.js"></script>
