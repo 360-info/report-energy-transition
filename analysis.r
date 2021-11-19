@@ -81,7 +81,7 @@ totals <-
   select(-renewable_status) %>%
   group_by(iso, country, region, year, renewable) %>%
   summarise(
-    totalcap = sum(generated_gwh, na.rm = TRUE),
+    totalgen_gwh = sum(generated_gwh, na.rm = TRUE),
     totalcap_mw = sum(capacity_mw, na.rm = TRUE)) %>%
   ungroup()
 
@@ -99,8 +99,8 @@ proportions <-
   mutate(
     allgen_gwh = totalgen_gwh_renewable + totalgen_gwh_nonrenewable,
     allcap_mw = totalcap_mw_renewable + totalcap_mw_nonrenewable,
-    propgen_renewable = totalgen_gwh_renewable / allgen_gwh,
-    propcap_renewable = totalcap_mw_renewable / allcap_mw) %>%
+    propgen_gwh_renewable = totalgen_gwh_renewable / allgen_gwh,
+    propcap_mw_renewable = totalcap_mw_renewable / allcap_mw) %>%
   select(iso, country, region, year, starts_with("all"), starts_with("prop"))
 
 # now output as geojson points
@@ -109,8 +109,8 @@ totals_wide <-
   proportions %>%
   pivot_wider(
     names_from = year,
-    values_from = c(allgen_gwh, allcap_mw, propgen_renewable,
-      propcap_renewable),
+    values_from = c(allgen_gwh, allcap_mw, propgen_gwh_renewable,
+      propcap_mw_renewable),
     names_sep = ".") %>%
   left_join(country_list, by = "iso") %>%
   select(-starts_with("country")) %>%
