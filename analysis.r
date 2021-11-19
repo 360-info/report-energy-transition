@@ -1,3 +1,6 @@
+# analysis of irena data
+# james goldie, 360info, nov 2021
+
 library(tidyverse)
 library(glue)
 library(sf)
@@ -5,10 +8,6 @@ library(rgeoboundaries)
 library(countrycode)
 library(lwgeom)
 library(jsonlite)
-library(leaflet)
-library(leaflet.extras2)
-library(htmlwidgets)
-library(htmltools)
 library(here)
 
 name_subs <- c(
