@@ -4,8 +4,10 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js'
 
 console.log("Parcel linking correctly! Aha!")
 
-mapboxgl.accessToken =
-  'pk.eyJ1IjoiamFtZXMtZ29sZGllIiwiYSI6ImNrdnQzOXRkczd0ZWcybnFwNXEzMDV6OWEifQ.YRo6Wgm0Yf_JoPofQJfmlQ';
+// mapbox token is injected by parcel from an environment variable
+// use either a src/.env file or the netlify deploy template
+let mapbox_token = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = mapbox_token;
 
 var map = new mapboxgl.Map({
   container: 'map',
@@ -14,7 +16,6 @@ var map = new mapboxgl.Map({
   zoom: 2,
   logoPosition: 'bottom-right',
   // attributionControl: false
-
 });
 
 // add zoom and rotation controls to the map
@@ -43,7 +44,7 @@ map.on('load', function () {
     
     // set the plot title to the selected year
     document.getElementById('plotTitle').textContent =
-      'Power gen and capacity in ' + String(year);
+      'Energy transition: ' + String(year);
   }
 
   function powerCircleColor(year, indicator) {

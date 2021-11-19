@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[template.environment]
+  MAPBOX_TOKEN = "Get an access token from mapbox.com"
