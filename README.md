@@ -40,9 +40,9 @@ npm run build
 
 The site builds from the `src` dubdirectory to `dist`.
 
-## Analysis
+## Reproduce the analysis
 
-Our analysis of IRENA data is done in R and can be found in `analysis.r`. It creates `src/data/irena-totals.geojson`.
+Our analysis of IRENA data is done in [R](http://r-project.org) and can be found in `analysis.r`. It creates `src/data/irena-totals.geojson`.
 
 # Help
 
