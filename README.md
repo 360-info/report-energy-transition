@@ -1,5 +1,5 @@
 
-This map visualises the progression of installed energy capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series) - please acknowledge both them and 360info when 
+This map visualises the progression of installed energy capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series).
 
 # Use + Remix
 
