@@ -53,4 +53,4 @@ Our analysis of IRENA data is done in [R](http://r-project.org) and can be found
 
 ## Help
 
-If you find any problems with our analysis or the map, please feel free to [create an issue](https://github.com/jimjam-slam/report-energy-transition/issues/new)!
+If you find any problems with our analysis or the map, please feel free to [create an issue](https://github.com/360-info/report-energy-transition/issues/new)!
