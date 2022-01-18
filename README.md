@@ -12,7 +12,7 @@ The data is made available by the [International Renewable Energy Agency](https:
 
 **Please attribute 360info and IRENA when you use and remix this visualisation.**
 
-### Prerequisite: Mapnbox access token
+### Prerequisite: Mapbox access token
 
 However you deploy this map, you'll need an access token from [Mapbox](https://www.mapbox.com). Simply sign up for an account and, from the [account dashboard](https://account.mapbox.com), create a new access token with public scopes selected.
 
@@ -50,6 +50,8 @@ The site builds from the `src` dubdirectory to `dist`.
 ### Reproduce the analysis
 
 Our analysis of IRENA data is done in [R](http://r-project.org) and can be found in `analysis.r`. It creates `src/data/irena-totals.geojson`.
+
+The `renv.lock` file can be used with the [`renv`](https://rstudio.github.io/renv) or [`capsule`](https://github.com/MilesMcBain/capsule) packages to recreate the R package dependencies.
 
 ## Help
 
