@@ -1,4 +1,4 @@
-import {json} from 'd3-fetch'
+import json from 'd3-fetch'
 import geoJSONFile from './data/irena-totals.geojson'
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js'
 
