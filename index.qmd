@@ -1,6 +1,10 @@
-# analysis of irena data
-# james goldie, 360info, nov 2021
+---
+title: "Analysis of IRENA data"
+author: "James Goldie, 360info"
+---
 
+```{r}
+#| label: setup
 library(tidyverse)
 library(glue)
 library(sf)
@@ -9,123 +13,139 @@ library(countrycode)
 library(lwgeom)
 library(jsonlite)
 library(here)
+```
 
+```{r}
+#| label: define-name-subs
 name_subs <- c(
-  "BIH" = "Bosnia and Herzegovina",
-  "BOL" = "Bolivia",
-  "BRN" = "Brunei",
-  "CAF" = "Central African Republic",
-  "CHN" = "China",
-  "COD" = "Democratic Republic of the Congo",
-  "FLK" = "Falkland Islands",
   "FSM" = "Micronesia",
-  "GBR" = "United Kingdom",
-  "IRN" = "Iran",
-  "KOR" = "South Korea",
-  "LAO" = "Laos",
-  "MAF" = "Saint Martin",
-  "MKD" = "North Macedonia",
-  "MMR" = "Myanmar",
-  "NPL" = "Nepal",
-  "PHL" = "Philippines",
-  "PRK" = "North Korea",
-  "PSE" = "Palestine",
-  # ? SGS   South Georgia and the South Sandwich Islands
-  # ? SPM   Saint Pierre and Miquelon
-  # ? STP   Sao Tome and Principe
-  # ? TCA   Turks and Caicos Islands
-  "TWN" = "Taiwan",
-  "TZA" = "Tanzania",
-  "VCT" = "Saint Vincent and Grenadines",
-  "VEN" = "Venezuela",
   "XKX" = "Kosovo")
 standardise_countries <- partial(countrycode, origin = "iso3c",
-    destination = "country.name.en", custom_match = name_subs)
+    destination = c("country.name.en", "iso.name.en"),
+    custom_match = name_subs)
+```
 
+```{r}
+#| label: get-centroids
 # calculate country centroids (roughly - no spherical geometry b/c it's broken)
 # NOTE - rgeoboundaries will cache its downloads
 sf::sf_use_s2(FALSE)
-country_list <-
+country_points <-
   geoboundaries() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
-  select(country = shapeName, iso = shapeISO, geometry)
+  select(country = shapeName, iso = shapeISO, geometry) %>%
+  mutate(iso = recode(country, "Kosovo" = "XKX", .default = iso))
+```
 
-# TODO - recode some country names
-# manual_countries <- tribble(
-#   ~ iso, ~ country,
-#   "AAA", "testtesttest"
-# )
+The original version of this analysis used data from IRENA's Excel downloading tool, but it seems to be playing up. I've downloaded the data from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) instead, but it's slightly differently shaped (partly because installed capacity and generation are separate tables; partly because IRENASTAT has a 100k row export limit).
 
-# import the data
-# (readr isn't handling the combo of quoting _and_ group separating the figures,
-# so i process them manually)
-irena <-
-  read_csv(
-    here("data", "irena-stats.csv"),
-    col_names = c("region", "country", "iso", "renewable_status",
-      "tech_group", "technology", "grid_status", "year", "generated_gwh",
-      "capacity_mw"),
-    col_types = "cccccccdcc",
-    skip = 1) %>%
-  mutate(
-    generated_gwh = parse_number(generated_gwh),
-    capacity_mw = parse_number(capacity_mw))
+```{r}
+#| label: irenastat-patch
 
-# renewables vs non-renewables: summarise, join with geometry, reorder, export
-totals <-
-  irena %>%
-  mutate(renewable = recode(renewable_status,
-    "Total Renewable" = "renewable",
-    "Total Non-Renewable" = "nonrenewable")) %>%
-  select(-renewable_status) %>%
-  group_by(iso, country, region, year, renewable) %>%
-  summarise(
-    totalgen_gwh = sum(generated_gwh, na.rm = TRUE),
-    totalcap_mw = sum(capacity_mw, na.rm = TRUE)) %>%
-  ungroup()
+list.files(here("data"), full.names = TRUE,
+  pattern = glob2rx("irena-src-*.csv")) %>%
+  set_names(basename(.)) %>%
+  map(read_csv, skip = 3,
+    col_names = c("country", "tech", "grid", "year", "value"),
+    col_types = "cccid",
+    na = c("", "NA", "..")) %>%
+  bind_rows(.id = "filename") %>%
+  separate(filename,
+    into = c("irena", "src", "measure", "grid", "ext"), sep = "[-.]") %>%
+  select(country, tech, measure, year, grid, value) ->
+irena_bound
+```
 
-# widen by renewable status to calculate proportion of renewables
-proportions <-
-  totals %>%
+The IRENASTAT data, in this form, doesn't classify technologies as renewable or non-renewable, so we'll have to do that ourselves. We'll also have to aggregate on- and off-grid values.
+
+I've used `irena_bound %>% pull(tech) %>% unique()` to check which technologies are in the data, and then compared those technologies against both `OLD-irena-stats.csv` (which _did_ categorise them) and the [dashboards on IRENA's website](https://www.irena.org/Data/View-data-by-topic/Capacity-and-Generation/Statistics-Time-Series) to group most of the technologies.
+
+Most notably, nuclear does not appear to be considered renewable by IRENA.
+
+```{r}
+#| label: aggregate-totals
+irena_bound %>%
+  mutate(renewable_status = if_else(
+    tech %in% c(
+      "Solar photovoltaic",   "Solar thermal energy",
+      "Onshore wind energy",  "Offshore wind energy",
+      "Renewable hydropower", "Mixed Hydro Plants",
+      "Pumped storage",       "Marine energy",
+      "Solid biofuels",       "Renewable municipal waste",
+      "Liquid biofuels",      "Biogas",
+      "Geothermal energy"),
+    "renewable", "nonrenewable")) %>%
+  group_by(country, measure, renewable_status, year) %>%
+  summarise(total = sum(value, na.rm = TRUE)) %>%
+  mutate(measure = recode(measure,
+    "generation" = "totalgen_gwh", "capacity" = "totalcap_mw")) %>%
   pivot_wider(
-    names_from = renewable,
-    values_from = c("totalgen_gwh", "totalcap_mw")) %>%
-  replace_na(list(
-    totalgen_gwh_renewable = 0,
-    totalcap_mw_renewable = 0,
-    totalgen_gwh_nonrenewable = 0,
-    totalcap_mw_nonrenewable = 0)) %>%
+    id_cols = c(country, year),
+    names_from = c(measure, renewable_status), names_sep = "_",
+    values_from = total) ->
+irena_wide
+```
+
+Finally, we also need ISO codes for the new data. I'm going to cheat here and steal them from `OLD-irena-stats.csv` for consistency's sake.
+
+```{r}
+#| label: merge-iso-codes
+here("data", "OLD-irena-stats.csv") %>%
+  read_csv(col_types = "-cc-------") %>%
+  set_names(c("country", "iso")) %>%
+  distinct() %>%
+  arrange(country) ->
+iso_map
+
+# a few country names have text encoding errors or have otherwise changed since
+# the last dataset. we'll patch their codes here
+# ({countrycodes} will standardise the names)
+irena_wide %>%
+  left_join(iso_map, by = "country") %>%
+  mutate(
+    iso = recode(country,
+      "T�rkiye" = "TUR",
+      "Saint Barth�lemy" = "BLM",
+      "C�te d'Ivoire" = "CIV",
+      "Cura�ao" = "CUW",
+      "China, Hong Kong Special Administrative Region" = "HKG",
+      .default = iso)) %>%
+  select(iso, everything()) ->
+irena_joined  
+```
+
+```{r}
+#| label: calc-renewable-proportions
+# widen by renewable status to calculate proportion of renewables
+irena_joined %>%
   mutate(
     allgen_gwh = totalgen_gwh_renewable + totalgen_gwh_nonrenewable,
     allcap_mw = totalcap_mw_renewable + totalcap_mw_nonrenewable,
     propgen_gwh_renewable = totalgen_gwh_renewable / allgen_gwh,
     propcap_mw_renewable = totalcap_mw_renewable / allcap_mw) %>%
-  select(iso, country, region, year, starts_with("all"), starts_with("prop"))
+  select(iso, country, year, starts_with("all"), starts_with("prop")) ->
+proportions
+```
 
+Finally, we'll join the centroids and export to geoJSON.
+
+```{r}
+#| label: join-centroids-export
+#| 
 # now output as geojson points
 # (sf doesn't support nested geojson output, so we'll have to do it super wide)
-totals_wide <-
-  proportions %>%
+proportions %>%
+  write_csv(here("data", "irena-processed.csv")) %>%
   pivot_wider(
     names_from = year,
     values_from = c(allgen_gwh, allcap_mw, propgen_gwh_renewable,
       propcap_mw_renewable),
     names_sep = ".") %>%
-  left_join(country_list, by = "iso") %>%
+  left_join(country_points, by = "iso") %>%
   select(-starts_with("country")) %>%
   mutate(country = standardise_countries(iso)) %>%
-  select(iso, country, region, everything()) %>%
-  st_write(here("src", "data", "irena-totals.geojson"))
+  select(iso, country, everything()) %>%
+  st_write(here("data", "irena-totals.geojson"), delete_dsn = TRUE) ->
+totals_wide
+```
 
-# country lists
-totals_wide %>%
-  select(region, iso, irena_name = country.x, rgeo_name = country.y, iso) %>%
-  write_csv(here("country-list.csv")) %>%
-  # (... and also conflicted country names)
-  filter(irena_name != rgeo_name) %>%
-  distinct(irena_name, .keep_all = TRUE) %>%
-  write_csv(here("country-conflicts.csv"))
-
-# summarise the figures (for setting scales in mapbox)
-totals %>% filter(renewable == "renewable") %>% summary()
-totals %>% filter(renewable == "nonrenewable") %>% summary()
