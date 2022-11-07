@@ -1,6 +1,6 @@
 ---
-title: '[Suppliers]{style="color: #0d0887; background-color: #0d088733; padding-inline-start: 0.2rem; padding-inline-end: 0.2rem; border-radius: 10px;"} and [recipients]{style="color:#e01455; background-color: #e0145533; padding-inline-start: 0.2rem; padding-inline-end: 0.2rem; border-radius: 10px;"} of international arms transfers'
-description: "Every year, billions of dollars in weapons and other military equipment is shipped across the globe. Explore these transfers in our new interactive map."
+title: 'TITLE HERE'
+description: "Description here..."
 page-layout: custom
 theme: none
 # this includes some default css for the titling, the bootstrap icons (since
@@ -21,20 +21,7 @@ resources:
   - tiles/*/*/*.pbf
   - font/*
   - font/*/*
-  # - sipri-exports-processed.csv
-format:
-  html:
-    header-includes: |
-      <!-- Global site tag (gtag.js) - Google Analytics (no cookies!) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-FHGGBJD1HT"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-FHGGBJD1HT', {
-          client_storage: 'none'
-        });
-      </script>
+  - data/irena-totals.geojson
 ---
 
 {{< include _popup-buttons.qmd >}}
@@ -50,10 +37,6 @@ r = require.alias({
 
 maplibregl = r("maplibregl").catch(() => window["maplibregl"]);
 deck = r("deck");
-
-/* animated arcs:
-   https://observablehq.com/@yarynam/animated-deck-gl-arcs
-   https://symbolixau.github.io/mapdeck/articles/layers.html#animated-arcs */
 ```
 
 
@@ -61,11 +44,11 @@ deck = r("deck");
 //| label: inputs
 //| classes: inputForm
 
-filterSummary = filteredTransferCount > 0 ?
-  html`<strong>${filteredTransferCount}</strong> transfers selected totalling at least <strong>$${filteredTransferSum > 1000 ? (filteredTransferSum / 1000).toFixed(1) + " billion" : filteredTransferSum + " million" }</strong> TIV` :
-  html`No transfers selected`;
+// filterSummary = filteredTransferCount > 0 ?
+//   html`<strong>${filteredTransferCount}</strong> transfers selected totalling at least <strong>$${filteredTransferSum > 1000 ? (filteredTransferSum / 1000).toFixed(1) + " billion" : filteredTransferSum + " million" }</strong> TIV` :
+//   html`No transfers selected`;
 
-html`<a href="#" data-micromodal-trigger="modal-about" style="font-size:smaller"><i class="bi bi-info-circle-fill"></i> What is TIV?</a>`
+// html`<a href="#" data-micromodal-trigger="modal-about" style="font-size:smaller"><i class="bi bi-info-circle-fill"></i> What is TIV?</a>`
 
 viewof selectedCountry = Inputs.text({ 
   label: "Who",
@@ -74,17 +57,28 @@ viewof selectedCountry = Inputs.text({
 
 // i've added some extra css styling on this one by targeting
 // .inputForm input[type="number"]
-viewof selectedYear = Inputs.range([1950, 2021], {
+viewof selectedYear = Inputs.range([2000, 2021], {
   label: "Year",
   step: 1,
-  value: 2021,
+  value: 2020,
   width: "100%"
 });
+
+viewof selectedMeasure = Inputs.radio(
+  new Map([
+    ["Installed capacity (MW)", "cap_mw"],
+    ["Energy generated this year (GWh)", "gen_gwh"],
+  ]),
+  {
+    value: "cap_mw",
+    label: "Measure"
+  }
+)
 
 ```
 
 ```{ojs}
-//| label: arc-layer
+//| label: bubble-layer
 //| output: false
 
 widthScale =
@@ -92,9 +86,9 @@ widthScale =
   .domain([0, 4500]) 
   .range([0.25, 30]);
 
-transferArcs = new deck.MapboxLayer({
-  id: "transferArcs", 
-  type: deck.ArcLayer,
+energyBubbles = new deck.MapboxLayer({
+  id: "energyBubbles", 
+  type: deck.ScatterplotLayer,
   data: [],
   getSourcePosition:
     d => [Number(d.supplier_lon), Number(d.supplier_lat)],
@@ -150,7 +144,7 @@ viewof map = {
     container.value = map;
     container.dispatchEvent(new CustomEvent("input"));
     
-    map.addLayer(transferArcs);
+    map.addLayer(energyBubbles);
 
     function updatePopup(info, event) {
       if (info && info.object) {
@@ -178,10 +172,10 @@ viewof map = {
 
     // attach our hover updater to the layer (can't do this until after the
     // layer is itself attached)
-    transferArcs.setProps({ onHover: updatePopup });
+    energyBubbles.setProps({ onHover: updatePopup });
 
     // also configure the automatically-create deck instance
-    transferArcs.deck.setProps({ pickingRadius: 10 });
+    energyBubbles.deck.setProps({ pickingRadius: 10 });
     
   });
 
@@ -192,8 +186,7 @@ viewof map = {
 //| label: load-and-filter-data
 //| output: false
 
-allTransfers = FileAttachment("sipri-exports-processed.csv")
-  .csv({ typed: true });
+allTransfers = FileAttachment("irena-processed.csv").csv({ typed: true });
 
 /* the dataset is filtered first by selected year, then by search term
    (we use a separate text input instead of the search's because we want to
@@ -221,7 +214,7 @@ filteredTransferSum = {
 //| label: update-arcs
 //| output: false
 
-transferArcs.setProps({ data: filteredTransfers });
+energyBubbles.setProps({ data: filteredTransfers });
 
 // TODO - maybe update map bounds based on bounds of currentYearTransfers?
 ```

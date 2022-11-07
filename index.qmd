@@ -119,11 +119,11 @@ irena_joined
 # widen by renewable status to calculate proportion of renewables
 irena_joined %>%
   mutate(
-    allgen_gwh = totalgen_gwh_renewable + totalgen_gwh_nonrenewable,
-    allcap_mw = totalcap_mw_renewable + totalcap_mw_nonrenewable,
-    propgen_gwh_renewable = totalgen_gwh_renewable / allgen_gwh,
-    propcap_mw_renewable = totalcap_mw_renewable / allcap_mw) %>%
-  select(iso, country, year, starts_with("all"), starts_with("prop")) ->
+    total_gen_gwh = totalgen_gwh_renewable + totalgen_gwh_nonrenewable,
+    total_cap_mw = totalcap_mw_renewable + totalcap_mw_nonrenewable,
+    renewprop_gen_gwh = totalgen_gwh_renewable / total_gen_gwh,
+    renewprop_cap_mw = totalcap_mw_renewable / total_cap_mw) %>%
+  select(iso, country, year, starts_with("total"), starts_with("renewprop")) ->
 proportions
 ```
 
@@ -131,15 +131,25 @@ Finally, we'll join the centroids and export to geoJSON.
 
 ```{r}
 #| label: join-centroids-export
-#| 
-# now output as geojson points
-# (sf doesn't support nested geojson output, so we'll have to do it super wide)
+
+# first export a "tall" csv for deckgl...
 proportions %>%
-  write_csv(here("data", "irena-processed.csv")) %>%
+  left_join(country_points, by = "iso") %>%
+  select(-starts_with("country")) %>%
+  mutate(
+    country = standardise_countries(iso),
+    point = st_coordinates(.$geometry),
+    lon = point[, "X"],
+    lat = point[, "Y"]) %>%
+  select(iso, country, lon, lat, ends_with("gwh"), ends_with("mw")) %>%
+  write_csv(here("data", "irena-totals.csv"))
+
+# ... then a wide geojson for other map users
+proportions %>%
   pivot_wider(
     names_from = year,
-    values_from = c(allgen_gwh, allcap_mw, propgen_gwh_renewable,
-      propcap_mw_renewable),
+    values_from = c(total_gen_gwh, total_cap_mw, renewprop_gen_gwh,
+      renewprop_cap_mw),
     names_sep = ".") %>%
   left_join(country_points, by = "iso") %>%
   select(-starts_with("country")) %>%
