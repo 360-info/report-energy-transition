@@ -141,7 +141,7 @@ proportions %>%
     point = st_coordinates(.$geometry),
     lon = point[, "X"],
     lat = point[, "Y"]) %>%
-  select(iso, country, lon, lat, ends_with("gwh"), ends_with("mw")) %>%
+  select(iso, country, lon, lat, year, ends_with("gwh"), ends_with("mw")) %>%
   write_csv(here("data", "irena-totals.csv"))
 
 # ... then a wide geojson for other map users
