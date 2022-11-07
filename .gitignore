@@ -3,3 +3,12 @@ node_modules
 bower_components
 .cache
 .env
+
+/.quarto/
+
+# remove for production
+/map/font/*
+/map/tiles/*
+/out/map/font/*
+/out/map/tiles/*
+/out

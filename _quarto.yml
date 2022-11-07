@@ -1,0 +1,17 @@
+project:
+  output-dir: out
+  type: website
+  resources:
+    - /data/irena-totals.csv
+
+website:
+  twitter-card:
+    creator: "@360info_global"
+    image: https://360info-energytransition.pages.dev/map/energytransition-interactive-featuremedia.png
+  open-graph:
+    image: https://360info-energytransition.pages.dev/map/energytransition-interactive-featuremedia.png
+    site-name: 360info
+
+execute:
+  freeze: auto
+  

@@ -1,0 +1,86 @@
+<!-- initialise miromodal.js -->
+
+```{ojs}
+//| include: false
+micro = require("micromodal@0.4.10")
+micro.init({
+  awaitOpenAnimation: true,
+  awaitCloseAnimation: true
+});
+```
+
+::::::: {#modal-useremix .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-useremix-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+:::: {#modal-useremix-content}
+## Use + Remix
+
+This map, as well as the analyses that underpin them, are available under a [**Creative Commons Attribution 4.0 licence**](https://creativecommons.org/licenses/by/4.0).
+
+Please acknowledge [**360info**](https://360info.org) and our data sources when you use these charts and data.
+
+#### Embed this chart in your article
+
+Copy and the following code and paste it into your story editor using the <i class="bi bi-code-square"></i> Embed button:
+
+::: {.embedcode}
+```
+{{< var embed.before >}}{{< var embed.url >}}{{< var embed.after >}}
+```
+:::
+
+This content is subject to [**360info's Terms of Use**](https://newshub.360info.org/page/terms).
+
+#### Get the data and code
+
+Visit the [GitHub repository](https://github.com/360-info/report-arms-trade/tree/main/data) to:
+
+* [**Download the data**](https://github.com/360-info/report-arms-trade/tree/main/data)
+* [**Recreate or remix the chart**](https://github.com/360-info/report-arms-trade)
+::::
+
+:::::
+::::::
+:::::::
+
+<!-- notes dialog -->
+
+::::::: {#modal-about .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-about-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+<header>
+## What do these numbers mean? {#modal-about-title}
+</header>
+
+:::: {#modal-about-content}
+
+**Trend Indicator Value** (TIV) is a kind of price that SIPRI, the provider of this dataset, puts on arms transfers. It doesn't measure the _financial_ value of the arms transferred but rather the _military capability_ those arms provide.
+
+This is important because while the financial value of different arms can change for many reasons, the lethality of a weapon doesn't typically change. The TIV helps us determine which countries are contributing or benefitting the most from arms transfers, and how a country's transfers have changed over time.
+
+To learn more about how these numbers are calculated, [**read SIPRI's factsheet**](https://www.sipri.org/sites/default/files/files/FS/SIPRIFS1212.pdf).
+
+## What kinds of equipment are transferred?
+
+Transfers include air defence systems, armoured vehicles, artillery, engines, missiles, naval weapons, satellites, sensors and other equipment. For a more detailed breakdown of the types of equipment transferred, refer to [**SIPRI's Arms Transfers Database**](https://www.sipri.org/databases/armstransfers), which allows imports and exports to be broken down by equipment type.
+
+## Notice
+
+Group placements on the map have been moved in some cases to make transfers clearer. 360info is neutral on the subject of disputed territories.
+
+## Data sources
+
+The data underpinning this map comes from the [**Stockholm International Peace Research Institute**](https://www.sipri.org), which licensed data from its [**Arms Industry Database**](https://www.sipri.org/databases/armsindustry) under Creative Commons 4.0 International.
+
+Vector map tiles are provided by [**MapLibre**](https://github.com/maplibre/demotiles) under the [**BSD 3-Clause licence**](https://github.com/maplibre/demotiles/blob/gh-pages/LICENSE).
+::::
+
+:::::
+::::::
+:::::::

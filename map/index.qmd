@@ -21,7 +21,6 @@ resources:
   - tiles/*/*/*.pbf
   - font/*
   - font/*/*
-  - data/irena-totals.geojson
 ---
 
 {{< include _popup-buttons.qmd >}}
@@ -50,10 +49,10 @@ deck = r("deck");
 
 // html`<a href="#" data-micromodal-trigger="modal-about" style="font-size:smaller"><i class="bi bi-info-circle-fill"></i> What is TIV?</a>`
 
-viewof selectedCountry = Inputs.text({ 
-  label: "Who",
-  placeholder: "Country or group name",
-  width: "100%" });
+// viewof selectedCountry = Inputs.text({ 
+//   label: "Who",
+//   placeholder: "Country or group name",
+//   width: "100%" });
 
 // i've added some extra css styling on this one by targeting
 // .inputForm input[type="number"]
@@ -81,30 +80,24 @@ viewof selectedMeasure = Inputs.radio(
 //| label: bubble-layer
 //| output: false
 
-widthScale =
-  d3.scaleLinear()
-  .domain([0, 4500]) 
-  .range([0.25, 30]);
-
 energyBubbles = new deck.MapboxLayer({
   id: "energyBubbles", 
   type: deck.ScatterplotLayer,
   data: [],
-  getSourcePosition:
-    d => [Number(d.supplier_lon), Number(d.supplier_lat)],
-  getTargetPosition:
-    d => [Number(d.recipient_lon), Number(d.recipient_lat)],
-  getSourceColor: d => [13, 8, 135, 180],
-  getTargetColor: d => [224, 20, 85, 180],
-  getWidth: d => widthScale(d.value),
-  getTilt: d => Number(d.supplier_lon) > Number(d.recipient_lon) ? 0 : -5,
+  getPosition: d => [Number(d.lon), Number(d.lat)],
+  stroked: false,
+  antialiasing: true,
+  radiusUnits: "pixels",
+  radiusMinPixels: 1,
+  radiusMaxPixels: 30,
   pickable: true,
   autoHighlight: true,
-  highlightColor: [255, 200, 0, 255]
+  highlightColor: [255, 200, 0, 128]
 })
 ```
 
 ```{ojs}
+//| label: define-popup
 popup = new maplibregl.Popup({
   closeButton: false,
   closeOnClick: false
@@ -130,7 +123,7 @@ viewof map = {
   let map = new maplibregl.Map({
     container,
     bounds: [[-175, -80], [175, 85]],
-    pitch: 30,
+    // pitch: 30,
     antialias: true,
     style: "style.json"
   });
@@ -148,22 +141,20 @@ viewof map = {
 
     function updatePopup(info, event) {
       if (info && info.object) {
-        // TODO - set coordinates with event.center?
-        
-        // format the amount
-        const tivText =
-          info.object.value > 1000 ?
-            "$" + (info.object.value / 1000).toFixed(1) + " B" :
-            info.object.value > 0 ?
-              "$" + info.object.value + " M" :
-              "< $0.5 M";
+
+        // const figureText = selectedMeasure == "cap_mw" ?
+        //   ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> of installed energy supply` :
+        //   ` generated <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;GWh</strong> of energy`;
+
 
         popup
           .setLngLat(info.coordinate)
           .setHTML(
-            `<span class="title">${info.object.supplier} → ${info.object.recipient}</span></br>
-            TIV ${tivText} in ${info.object.year}</br>
-            <a href="#" data-micromodal-trigger="modal-about"><i class="bi bi-info-circle-fill"></i> What is TIV?</a>`)
+            // `<span class="title">${info.object.country}</span>
+            // ${figureText} in ${info.object.year}.</br>
+            // <strong>${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%<strong> of it was from renewable sources.`
+            `(to come)`
+            )
           .addTo(map);
       } else {
         popup.remove();
@@ -186,37 +177,60 @@ viewof map = {
 //| label: load-and-filter-data
 //| output: false
 
-allTransfers = FileAttachment("irena-processed.csv").csv({ typed: true });
+allData = FileAttachment("/data/irena-totals.csv").csv({ typed: true });
 
 /* the dataset is filtered first by selected year, then by search term
    (we use a separate text input instead of the search's because we want to
    retain the search term when the year changes) */
 
-filteredTransfers = allTransfers.filter(
-  t => t.year == Number(selectedYear) && 
-    (t.supplier.toLowerCase().includes(selectedCountry.toLowerCase()) ||
-     t.recipient.toLowerCase().includes(selectedCountry.toLowerCase())));
+filteredData = allData.filter(t => t.year == Number(selectedYear));
 
-filteredTransferCount =
-  filteredTransfers.map(d => d.value).length;
-filteredTransferSum = {
-  const tivsToSum = filteredTransfers.map(d => d.value);
-  if (tivsToSum.length > 0) {
-    return tivsToSum.reduce((x, y) => x + y);
-  } else {
-    return 0;
-  }
-}
+// filteredTransferCount =
+//   filteredData.map(d => d.value).length;
+// filteredTransferSum = {
+//   const tivsToSum = filteredData.map(d => d.value);
+//   if (tivsToSum.length > 0) {
+//     return tivsToSum.reduce((x, y) => x + y);
+//   } else {
+//     return 0;
+//   }
+// }
   
 ```
 
 ```{ojs}
-//| label: update-arcs
+//| label: update-bubbles-and-scales
 //| output: false
 
-energyBubbles.setProps({ data: filteredTransfers });
+function divergingSolorScale(x) {
 
-// TODO - maybe update map bounds based on bounds of currentYearTransfers?
+  // handle missing values
+  if (x == "NA") {
+    return [0, 0, 0, 0]
+  }
+
+  const colorScale =
+    d3.scaleDiverging()
+    .domain([0, 0.5, 1])
+    .interpolator(d3.interpolateRdBu)
+
+  const obj = d3.color(colorScale(x))
+  console.log(x)
+  console.log([obj.r, obj.g, obj.b])
+  return [obj.r, obj.g, obj.b, 128]
+}
+
+
+
+energyBubbles.setProps({
+  data: filteredData,
+  // because the scales need to be told to point to a different data column
+  // depending on the selected controls, we also update them here
+  getFillColor:
+    d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
+  getRadius: d => Math.sqrt(d["total_" + selectedMeasure])
+});
+
 ```
 
 <!-- share/about popups -->
