@@ -184,10 +184,10 @@ function divergingSolorScale(x) {
   const colorScale =
     d3.scaleDiverging()
     .domain([0, 0.5, 1])
-    .interpolator(d3.interpolateRdBu)
+    .interpolator(d3.interpolateBrBG)
 
   const obj = d3.color(colorScale(x))
-  return [obj.r, obj.g, obj.b, 192]
+  return [obj.r, obj.g, obj.b, 216]
 }
 
 // radius scaling is handled by d3 (range is metres, not pixels)
