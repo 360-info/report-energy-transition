@@ -58,7 +58,7 @@ deck = r("deck");
 // i've added some extra css styling on this one by targeting
 // .inputForm input[type="number"]
 viewof selectedYear = Inputs.range([2000, 2021], {
-  label: "Year",
+  // label: "Year",
   step: 1,
   value: 2020,
   width: "100%"
@@ -71,7 +71,7 @@ viewof selectedMeasure = Inputs.radio(
   ]),
   {
     value: "cap_mw",
-    label: "Measure"
+    // label: "Measure"
   }
 )
 
