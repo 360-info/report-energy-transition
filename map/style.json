@@ -13,7 +13,7 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "#ffffff"
+        "background-color": "#111111"
       },
       "filter": [
         "all"
@@ -27,7 +27,7 @@
       "id": "countries-fill",
       "type": "fill",
       "paint": {
-        "fill-color": "#cccccc"
+        "fill-color": "#333333"
       },
       "filter": [
         "all"
@@ -43,7 +43,7 @@
       "id": "countries-boundary",
       "type": "line",
       "paint": {
-        "line-color": "rgba(255, 255, 255, 1)",
+        "line-color": "#222222",
         "line-width": 1,
         "line-opacity": 1
       },
@@ -60,7 +60,7 @@
       "id": "countries-label",
       "type": "symbol",
       "paint": {
-        "text-color": "rgba(8, 37, 77, 1)",
+        "text-color": "#999999",
         "text-halo-blur": {
           "stops": [
             [
@@ -73,7 +73,7 @@
             ]
           ]
         },
-        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-color": "#111111",
         "text-halo-width": {
           "stops": [
             [
@@ -98,15 +98,15 @@
           "stops": [
             [
               2,
-              10
+              11
             ],
             [
               4,
-              12
+              13
             ],
             [
               6,
-              16
+              17
             ]
           ]
         },
