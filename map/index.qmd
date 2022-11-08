@@ -1,6 +1,6 @@
 ---
 title: 'RENEWABLES TRANSITION'
-subtitle: "The transition to **RENEWABLE ELECTRICITY** is well underway, but there's still a long way to go"
+subtitle: "The transition to [**RENEWABLE ELECTRICITY**]{style='color:#3595ac;'} is well underway, but there's still a long way to go"
 description: "The transition to **RENEWABLE ELECTRICITY** is well underway, but there's still a long way to go"
 page-layout: custom
 theme: none
