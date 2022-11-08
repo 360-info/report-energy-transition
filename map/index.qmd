@@ -87,12 +87,9 @@ energyBubbles = new deck.MapboxLayer({
   getPosition: d => [Number(d.lon), Number(d.lat)],
   stroked: false,
   antialiasing: true,
-  radiusUnits: "pixels",
-  radiusMinPixels: 1,
-  radiusMaxPixels: 30,
   pickable: true,
   autoHighlight: true,
-  highlightColor: [255, 200, 0, 128]
+  highlightColor: [0, 0, 0, 64]
 })
 ```
 
@@ -142,18 +139,18 @@ viewof map = {
     function updatePopup(info, event) {
       if (info && info.object) {
 
-        // const figureText = selectedMeasure == "cap_mw" ?
-        //   ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> of installed energy supply` :
-        //   ` generated <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;GWh</strong> of energy`;
+        const figureText = selectedMeasure == "cap_mw" ?
+          ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> of installed energy supply` :
+          ` generated <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;GWh</strong> of energy`;
 
 
         popup
           .setLngLat(info.coordinate)
           .setHTML(
-            // `<span class="title">${info.object.country}</span>
-            // ${figureText} in ${info.object.year}.</br>
-            // <strong>${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%<strong> of it was from renewable sources.`
-            `(to come)`
+            `<span class="title">${info.object.country}</span>
+            ${figureText} in ${info.object.year}.</br>
+            <strong>${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%</strong> of it was from renewable sources.`
+            // `(to come)`
             )
           .addTo(map);
       } else {
@@ -177,13 +174,16 @@ viewof map = {
 //| label: load-and-filter-data
 //| output: false
 
-allData = FileAttachment("/data/irena-totals.csv").csv({ typed: true });
+// add a calculate field converting the iso code to a numeric, just so we have
+// something to separate the circles on vertically
+allData = FileAttachment("/data/irena-totals.csv")
+  .csv({ typed: true })
 
-/* the dataset is filtered first by selected year, then by search term
-   (we use a separate text input instead of the search's because we want to
-   retain the search term when the year changes) */
-
-filteredData = allData.filter(t => t.year == Number(selectedYear));
+// filter for (a) data matching the selected year and (b) present figures   
+filteredData = allData
+  .filter(d => d.year == Number(selectedYear))
+  .filter(d => !isNaN(d["total_" + selectedMeasure]))
+  .filter(d => !isNaN(d["renewprop_" + selectedMeasure]));
 
 // filteredTransferCount =
 //   filteredData.map(d => d.value).length;
@@ -202,12 +202,9 @@ filteredData = allData.filter(t => t.year == Number(selectedYear));
 //| label: update-bubbles-and-scales
 //| output: false
 
+// color scale fn is a bit more complicated because we translate from d3's
+// color format to deck.gl's
 function divergingSolorScale(x) {
-
-  // handle missing values
-  if (x == "NA") {
-    return [0, 0, 0, 0]
-  }
 
   const colorScale =
     d3.scaleDiverging()
@@ -215,20 +212,19 @@ function divergingSolorScale(x) {
     .interpolator(d3.interpolateRdBu)
 
   const obj = d3.color(colorScale(x))
-  console.log(x)
-  console.log([obj.r, obj.g, obj.b])
-  return [obj.r, obj.g, obj.b, 128]
+  return [obj.r, obj.g, obj.b, 192]
 }
 
+// radius scaling is handled by d3 (range is metres, not pixels)
+radiusScale = d3.scaleSqrt()
+  .domain([0, d3.max(allData, d => d["total_" + selectedMeasure])])
+  .range([10, 2000000])
 
-
+// when the data updates, update the data passed to the map and the scale fns
 energyBubbles.setProps({
   data: filteredData,
-  // because the scales need to be told to point to a different data column
-  // depending on the selected controls, we also update them here
-  getFillColor:
-    d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
-  getRadius: d => Math.sqrt(d["total_" + selectedMeasure])
+  getFillColor: d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
+  getRadius:    d => radiusScale(d["total_" + selectedMeasure])
 });
 
 ```
