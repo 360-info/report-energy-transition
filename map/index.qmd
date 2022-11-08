@@ -1,5 +1,6 @@
 ---
 title: 'TITLE HERE'
+subtitle: "Subtitle here"
 description: "Description here..."
 page-layout: custom
 theme: none
@@ -140,17 +141,21 @@ viewof map = {
       if (info && info.object) {
 
         const figureText = selectedMeasure == "cap_mw" ?
-          ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> of installed energy supply` :
-          ` generated <strong>${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;GWh</strong> of energy`;
-
+          ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
+          &nbsp;MW</strong> of installed energy supply as of 
+          ${info.object.year}` :
+          ` generated 
+          <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
+          &nbsp;GWh</strong> of energy in ${info.object.year}`;
 
         popup
           .setLngLat(info.coordinate)
           .setHTML(
             `<span class="title">${info.object.country}</span>
-            ${figureText} in ${info.object.year}.</br>
-            <strong>${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%</strong> of it was from renewable sources.`
-            // `(to come)`
+            ${figureText}.</br>
+            <strong>
+            ${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%
+            </strong> of it was from renewable sources.`
             )
           .addTo(map);
       } else {
