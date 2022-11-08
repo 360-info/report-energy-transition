@@ -192,11 +192,11 @@ function updatePopup(info, event) {
 
     const figureText = selectedMeasure == "cap_mw" ?
       ` had <strong>
-      ${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> 
+      ${Math.floor(info.object["total_" + selectedMeasure]).toLocaleString()}&nbsp;MW</strong> 
       of installed electricity supply as of 
       ${info.object.year}` :
       ` generated 
-      <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
+      <strong>${Math.floor(info.object["total_" + selectedMeasure]).toLocaleString()}
       &nbsp;GWh</strong> of electricity in ${info.object.year}`;
 
     popup
