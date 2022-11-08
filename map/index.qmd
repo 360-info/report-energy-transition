@@ -209,8 +209,7 @@ function updatePopup(info, event) {
       .setLngLat(info.coordinate)
       .setHTML(
         `<span class="title">${info.object.country}</span>
-        ${figureText}.</br>
-        <strong>
+        ${figureText}. <strong>
         ${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%
         </strong> of it was from renewable sources.`
         )
@@ -231,7 +230,13 @@ electricityBubbles.setProps({
   getRadius:    d => radiusScale(d["total_" + selectedMeasure]),
   onHover: updatePopup
 });
+```
 
+```{ojs}
+//| label: no-data-notice
+noDataNotice = filteredData.length < 1 ?
+  html`Data for this measure isn't available for ${selectedYear} yet.` :
+  html``
 ```
 
 <!-- share/about popups -->
