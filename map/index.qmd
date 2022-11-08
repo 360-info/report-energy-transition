@@ -202,8 +202,9 @@ function updatePopup(info, event) {
   if (info && info.object) {
 
     const figureText = selectedMeasure == "cap_mw" ?
-      ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
-      &nbsp;MW</strong> of installed energy supply as of 
+      ` had <strong>
+      ${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> 
+      of installed energy supply as of 
       ${info.object.year}` :
       ` generated 
       <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
