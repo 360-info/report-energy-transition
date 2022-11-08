@@ -1,6 +1,6 @@
 ---
-title: 'TITLE HERE'
-subtitle: "Subtitle here, with **some markdown** as well"
+title: 'ELECTRICITY'
+subtitle: "The transition to **RENEWABLE ELECTRICITY** is well underway."
 description: "Description here..."
 page-layout: custom
 theme: none
@@ -44,25 +44,19 @@ deck = r("deck");
 //| label: inputs
 //| classes: inputForm
 
-// filterSummary = filteredTransferCount > 0 ?
-//   html`<strong>${filteredTransferCount}</strong> transfers selected totalling at least <strong>$${filteredTransferSum > 1000 ? (filteredTransferSum / 1000).toFixed(1) + " billion" : filteredTransferSum + " million" }</strong> TIV` :
-//   html`No transfers selected`;
+// ISC-licensed range slider with play/pause
+import { Scrubber } from "@mbostock/scrubber";
 
-// html`<a href="#" data-micromodal-trigger="modal-about" style="font-size:smaller"><i class="bi bi-info-circle-fill"></i> What is TIV?</a>`
-
-// viewof selectedCountry = Inputs.text({ 
-//   label: "Who",
-//   placeholder: "Country or group name",
-//   width: "100%" });
-
-// i've added some extra css styling on this one by targeting
-// .inputForm input[type="number"]
-viewof selectedYear = Inputs.range([2000, 2021], {
-  // label: "Year",
-  step: 1,
-  value: 2020,
-  width: "100%"
-});
+viewof selectedYear = Scrubber(
+  Array.from(Array(22).keys(), n => n + 2000), // 2000 to 2021
+  {
+    autoplay: true,
+    delay: 100,
+    loop: true,
+    loopDelay: 500,
+    initial: 2000
+  }
+);
 
 viewof selectedMeasure = Inputs.radio(
   new Map([

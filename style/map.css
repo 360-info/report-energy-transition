@@ -38,11 +38,26 @@ body {
   font-size: larger;
 }
 
-/* my very lazy way to colorise a range slider */
+/* my very lazy way to colorise a range slider and make it fluid-width */
 input[type=range] {
   filter: sepia(100%) saturate(265%) hue-rotate(160deg);
+  width: 100% !important;
 }
 
+form label {
+  flex-grow: 1;
+}
+
+form button {
+  color: #36a7e9;
+  background-color: transparent;
+  border: 1px solid #36a7e9;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 4px;
+}
+
+/* put notice in the middle of the screen when there's no data */
 #no-data-notice {
   z-index: 1000;
   color: #cccccc99  ;
