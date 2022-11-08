@@ -37,15 +37,44 @@ sf::sf_use_s2(FALSE)
 country_points <-
   geoboundaries() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
-  select(country = shapeName, iso = shapeISO, geometry) %>%
+  select(country = shapeName, iso = shapeISO, geometry)
   
 missing_points <-
   tribble(
-    ~ country,        ~ iso, ~lat, ~ lon,
-    "Greece",         "GRC", 39.543080, 22.286516,
-    "Aruba",          "ABW", 12.505922, -69.975792,
-    "Philippines",    "PHL", 11.651120, 123.347990,
-    "American Samoa", "ASM", -14.303205, -170.706638) %>%
+    ~ country,                                ~ iso, ~lat, ~ lon,
+    "Greece",                                 "GRC", 39.543080, 22.286516,
+    "Aruba",                                  "ABW", 12.505922, -69.975792,
+    "Philippines",                            "PHL", 11.651120, 123.347990,
+    "American Samoa",                         "ASM", -14.303205, -170.706638,
+    "Anguilla",                               "AIA", 18.216434, -63.047010,
+    "Caribbean Netherlands",                  "BES", 17.630239, -63.238425,
+    "British Virgin Islands",                 "VGB", 18.447914, -64.568766,
+    "Cayman Islands",                         "CYM", 19.482559, -80.524865,
+    "Hong Kong",                              "HKG", 22.390828, 114.148064,
+    "Cook Islands",                           "COK", -20.506062, -158.705700,
+    "Curaçao",                                "CUW", 12.191968, -68.998956,
+    "Falkland Islands",                       "FLK", -51.815445, -59.497967,
+    "Faroe Islands",                          "FRO", 62.060991, -6.931548,
+    "French Guiana",                          "GUF", 3.822285, -53.168343,
+    "French Polynesia",                       "PYF", -13.309305, -145.011540,
+    "Guadeloupe",                             "GLP", 16.211332, -61.451932,
+    "Guam",                                   "GUM", 13.427806, 144.777799,
+    "Kosovo",                                 "XKX", 42.534097, 20.847340,
+    "Martinique",                             "MTQ", 14.636397, -61.001410,
+    "Mayotte",                                "MYT", -12.831253, 45.153049,
+    "Montserrat",                             "MSR", 16.738979, -62.191919,
+    "New Caledonia",                          "NCL", -21.527411, 165.661714,
+    "Niue",                                   "NIU", -19.056664, -169.857740,
+    "Puerto Rico",                            "PRI", 18.201229, -66.464860,
+    "St. Barthélemy",                         "BLM", 17.896951, -62.830260,
+    "Saint Martin (French part)",             "MAF", 18.083456, -63.051166,
+    "St. Pierre & Miquelon",                  "SPM", 46.948623, -56.326391,
+    "South Georgia & South Sandwich Islands", "SGS", -56.602045, -31.574932,
+    "Palestinian Territories",                "PSE", 31.861835, 35.362214,
+    "Switzerland",                            "CHE", 46.803317, 8.437373,
+    "Tokelau",                                "TKL", -9.158506, -171.816830,
+    "Turks & Caicos Islands",                 "TCA", 21.802045, -71.874711,
+    "U.S. Virgin Islands",                    "VIR", 18.033734, -64.798169) %>%
   st_as_sf(coords = c("lon", "lat"), dim = "XY") %>%
   st_set_crs(4326)
 
@@ -124,10 +153,12 @@ irena_wide %>%
   left_join(iso_map, by = "country") %>%
   mutate(
     iso = recode(country,
+      "R�union" = "REU",
       "T�rkiye" = "TUR",
       "Saint Barth�lemy" = "BLM",
       "C�te d'Ivoire" = "CIV",
       "Cura�ao" = "CUW",
+      "Kosovo" = "XKX",
       "China, Hong Kong Special Administrative Region" = "HKG",
       .default = iso)) %>%
   select(iso, everything()) ->
