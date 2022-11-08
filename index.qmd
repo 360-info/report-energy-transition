@@ -1,5 +1,5 @@
 ---
-title: "Analysis of IRENA data"
+title: "Analysis of IRENA electricity data"
 author: "James Goldie, 360info"
 ---
 
@@ -15,6 +15,8 @@ library(jsonlite)
 library(here)
 ```
 
+Before we get started with the electricity data, let's set up the spatial data we're going to use to locate and name countries. First the names, using [`{countrycode}`](https://github.com/vincentarelbundock/countrycode):
+
 ```{r}
 #| label: define-name-subs
 name_subs <- c(
@@ -24,6 +26,8 @@ standardise_countries <- partial(countrycode, origin = "iso3c",
     destination = c("country.name.en", "iso.name.en"),
     custom_match = name_subs)
 ```
+
+Then the country boundaries, using [`{rgeoboundaries}`](https://github.com/wmgeolab/rgeoboundaries):
 
 ```{r}
 #| label: get-centroids
@@ -38,6 +42,11 @@ country_points <-
 ```
 
 The original version of this analysis used data from IRENA's Excel downloading tool, but it seems to be playing up. I've downloaded the data from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) instead, but it's slightly differently shaped (partly because installed capacity and generation are separate tables; partly because IRENASTAT has a 100k row export limit).
+
+The tables used (which can be updated by downloading them from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) and placing them in `data` as `irena-src-[measure][grid_status].csv`) are:
+
+* Installed electricity capacity by country/area (MW) by Country/area, Technology, Grid connection and Year
+* Electricity generation (GWh) by Country/area, Technology, Grid connection and Year
 
 ```{r}
 #| label: irenastat-patch

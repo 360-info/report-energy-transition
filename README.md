@@ -1,6 +1,6 @@
-# Energy transition: map of installed energy capacity 2000–2019, shaded by renewable fraction
+# Renewables transition: map of installed electricity capacity 2000–2019, shaded by renewable fraction
 
-This map visualises the progression of installed energy capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series).
+This map visualises the progression of installed electricity capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series).
 
 ## Use + Remix
 

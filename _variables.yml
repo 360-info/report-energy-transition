@@ -2,6 +2,6 @@
 embed:
   before: |
     &lt;iframe allow=&quotfullscreen&quot allowfullscreen=&quottrue&quot src=&quot;
-  url: https://360info-energytransition.pages.dev/map
+  url: https://360info-electricitytransition.pages.dev/map
   after: |
-    &quot; title="Interactive map: energy transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no">&lt;/iframe&gt;
+    &quot; title="Interactive map: electricity transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no">&lt;/iframe&gt;

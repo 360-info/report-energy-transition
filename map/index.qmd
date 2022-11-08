@@ -16,7 +16,7 @@ css:
 execute:
   echo: false
 resources:
-  # - energy-transition-featuremedia.png
+  # - electricity-transition-featuremedia.png
   - style.json
   - tiles/*
   - tiles/*/*/*.pbf
@@ -66,8 +66,8 @@ viewof selectedYear = Inputs.range([2000, 2021], {
 
 viewof selectedMeasure = Inputs.radio(
   new Map([
-    ["Installed capacity (MW)", "cap_mw"],
-    ["Energy generated this year (GWh)", "gen_gwh"],
+    ["Installed electricity capacity (MW)", "cap_mw"],
+    ["Electricity generated this year (GWh)", "gen_gwh"],
   ]),
   {
     value: "cap_mw",
@@ -81,8 +81,8 @@ viewof selectedMeasure = Inputs.radio(
 //| label: bubble-layer
 //| output: false
 
-energyBubbles = new deck.MapboxLayer({
-  id: "energyBubbles", 
+electricityBubbles = new deck.MapboxLayer({
+  id: "electricityBubbles", 
   type: deck.ScatterplotLayer,
   data: [],
   getPosition: d => [Number(d.lon), Number(d.lat)],
@@ -135,10 +135,10 @@ viewof map = {
     container.value = map;
     container.dispatchEvent(new CustomEvent("input"));
     
-    map.addLayer(energyBubbles);
+    map.addLayer(electricityBubbles);
 
     // also configure the automatically-create deck instance
-    energyBubbles.deck.setProps({ pickingRadius: 10 });
+    electricityBubbles.deck.setProps({ pickingRadius: 10 });
     
   });
 
@@ -149,12 +149,8 @@ viewof map = {
 //| label: load-and-filter-data
 //| output: false
 
-// add a calculate field converting the iso code to a numeric, just so we have
-// something to separate the circles on vertically
-allData = FileAttachment("/data/irena-totals.csv")
-  .csv({ typed: true })
-
-// filter for (a) data matching the selected year and (b) present figures   
+// load, filter for (a) data matching the selected year and (b) present figures   
+allData = FileAttachment("/data/irena-totals.csv").csv({ typed: true });
 filteredData = allData
   .filter(d => d.year == Number(selectedYear))
   .filter(d => !isNaN(d["total_" + selectedMeasure]))
@@ -170,7 +166,6 @@ filteredData = allData
 //     return 0;
 //   }
 // }
-  
 ```
 
 ```{ojs}
@@ -204,11 +199,11 @@ function updatePopup(info, event) {
     const figureText = selectedMeasure == "cap_mw" ?
       ` had <strong>
       ${info.object["total_" + selectedMeasure].toFixed(0)}&nbsp;MW</strong> 
-      of installed energy supply as of 
+      of installed electricity supply as of 
       ${info.object.year}` :
       ` generated 
       <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
-      &nbsp;GWh</strong> of energy in ${info.object.year}`;
+      &nbsp;GWh</strong> of electricity in ${info.object.year}`;
 
     popup
       .setLngLat(info.coordinate)
@@ -227,10 +222,10 @@ function updatePopup(info, event) {
 
 // attach our hover updater to the layer (can't do this until after the
 // layer is itself attached)
-// energyBubbles.setProps({ onHover: updatePopup });
+// electricityBubbles.setProps({ onHover: updatePopup });
 
 // when the data updates, update the data passed to the map and the scale fns
-energyBubbles.setProps({
+electricityBubbles.setProps({
   data: filteredData,
   getFillColor: d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
   getRadius:    d => radiusScale(d["total_" + selectedMeasure]),
