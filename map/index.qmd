@@ -137,36 +137,6 @@ viewof map = {
     
     map.addLayer(energyBubbles);
 
-    function updatePopup(info, event) {
-      if (info && info.object) {
-
-        const figureText = selectedMeasure == "cap_mw" ?
-          ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
-          &nbsp;MW</strong> of installed energy supply as of 
-          ${info.object.year}` :
-          ` generated 
-          <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
-          &nbsp;GWh</strong> of energy in ${info.object.year}`;
-
-        popup
-          .setLngLat(info.coordinate)
-          .setHTML(
-            `<span class="title">${info.object.country}</span>
-            ${figureText}.</br>
-            <strong>
-            ${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%
-            </strong> of it was from renewable sources.`
-            )
-          .addTo(map);
-      } else {
-        popup.remove();
-      }
-    }
-
-    // attach our hover updater to the layer (can't do this until after the
-    // layer is itself attached)
-    energyBubbles.setProps({ onHover: updatePopup });
-
     // also configure the automatically-create deck instance
     energyBubbles.deck.setProps({ pickingRadius: 10 });
     
@@ -225,11 +195,45 @@ radiusScale = d3.scaleSqrt()
   .domain([0, d3.max(allData, d => d["total_" + selectedMeasure])])
   .range([10, 2000000])
 
+// popup content also depends on the selected column, so it needs to be
+// added here outside the map load in order to stop the map from re-rendering 
+// when the selected column changes
+function updatePopup(info, event) {
+  if (info && info.object) {
+
+    const figureText = selectedMeasure == "cap_mw" ?
+      ` had <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
+      &nbsp;MW</strong> of installed energy supply as of 
+      ${info.object.year}` :
+      ` generated 
+      <strong>${info.object["total_" + selectedMeasure].toFixed(0)}
+      &nbsp;GWh</strong> of energy in ${info.object.year}`;
+
+    popup
+      .setLngLat(info.coordinate)
+      .setHTML(
+        `<span class="title">${info.object.country}</span>
+        ${figureText}.</br>
+        <strong>
+        ${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%
+        </strong> of it was from renewable sources.`
+        )
+      .addTo(map);
+  } else {
+    popup.remove();
+  }
+}
+
+// attach our hover updater to the layer (can't do this until after the
+// layer is itself attached)
+// energyBubbles.setProps({ onHover: updatePopup });
+
 // when the data updates, update the data passed to the map and the scale fns
 energyBubbles.setProps({
   data: filteredData,
   getFillColor: d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
-  getRadius:    d => radiusScale(d["total_" + selectedMeasure])
+  getRadius:    d => radiusScale(d["total_" + selectedMeasure]),
+  onHover: updatePopup
 });
 
 ```
