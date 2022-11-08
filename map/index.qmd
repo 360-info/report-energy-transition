@@ -16,7 +16,7 @@ css:
 execute:
   echo: false
 resources:
-  # - electricity-transition-featuremedia.png
+  - electricity-transition-featuremedia.png
   - style.json
   - tiles/*
   - tiles/*/*/*.pbf
