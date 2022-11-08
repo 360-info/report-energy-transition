@@ -38,7 +38,18 @@ country_points <-
   geoboundaries() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
   select(country = shapeName, iso = shapeISO, geometry) %>%
-  mutate(iso = recode(country, "Kosovo" = "XKX", .default = iso))
+  
+missing_points <-
+  tribble(
+    ~ country,        ~ iso, ~lat, ~ lon,
+    "Greece",         "GRC", 39.543080, 22.286516,
+    "Aruba",          "ABW", 12.505922, -69.975792,
+    "Philippines",    "PHL", 11.651120, 123.347990,
+    "American Samoa", "ASM", -14.303205, -170.706638) %>%
+  st_as_sf(coords = c("lon", "lat"), dim = "XY") %>%
+  st_set_crs(4326)
+
+country_points <- bind_rows(missing_points, country_points)
 ```
 
 The original version of this analysis used data from IRENA's Excel downloading tool, but it seems to be playing up. I've downloaded the data from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) instead, but it's slightly differently shaped (partly because installed capacity and generation are separate tables; partly because IRENASTAT has a 100k row export limit).
