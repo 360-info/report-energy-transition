@@ -1,6 +1,6 @@
 ---
 title: 'TITLE HERE'
-subtitle: "Subtitle here"
+subtitle: "Subtitle here, with **some markdown** as well"
 description: "Description here..."
 page-layout: custom
 theme: none
