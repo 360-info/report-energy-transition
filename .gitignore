@@ -5,6 +5,3 @@ bower_components
 .env
 
 /.quarto/
-
-# remove for production
-/out
