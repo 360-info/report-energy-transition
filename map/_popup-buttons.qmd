@@ -97,7 +97,7 @@ Data: IRENA
 
         // copy the embed code to the clipboard
         navigator.clipboard.writeText(
-          `{{< var embed.before >}}{{< var embed.url >}}?edshare{{< var embed.after >}}`);
+          `{{< var embed.before >}}{{< var embed.url >}}{{< var embed.after >}}`);
 
         // update button styles and content
         edshareBtn.classList.remove("ready");
