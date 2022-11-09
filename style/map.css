@@ -68,3 +68,12 @@ form button {
   font-size: large;
   text-align: center;
 }
+
+/* also position the legend absolutely on the page */
+.legendOnMap svg {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  transform: scale(0.8);
+  transform-origin: bottom left;
+}

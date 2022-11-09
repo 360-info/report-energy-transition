@@ -233,6 +233,29 @@ noDataNotice = filteredData.length < 1 ?
   html``
 ```
 
+```{ojs}
+//| label: legend
+//| classes: legendOnMap
+
+width = 25
+bins = 10
+legend =
+  svg`<svg>
+    <text fill="white" y=15 text-anchor="start" x=0>No renewables</text>
+    <text fill="white" y=15 text-anchor="end" x=${width * bins}>
+      Fully renewable
+    </text>
+    ${d3.schemeBrBG[bins].map(
+      (colour, i) => svg`<rect height=15 y=23 width=${width}
+        x=${width * i} fill="${colour}"></rect>`
+    )}
+    <text fill="white" y=55 text-anchor="start" x=0>0%</text>
+    <text fill="white" y=55 text-anchor="end" x=${width * bins}>
+      100%
+    </text>
+  </svg>`
+```
+
 <!-- share/about popups -->
 
 {{< include _popup-dialogs.qmd >}}

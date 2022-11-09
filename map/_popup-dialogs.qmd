@@ -60,11 +60,17 @@ Visit the [GitHub repository](https://github.com/360-info/report-energy-transiti
 
 :::: {#modal-about-content}
 
-The bubbles on this map concern a country's electricity supply and how that electricity is generated. There are two measures available: the _installed capacity_, which represents the amount of electrical power a country can produce, and the _generated energy_, which represents the amount of electricity actually produced.
+The bubbles on this map concern a country's electricity supply and how that electricity is generated.
+
+There are two measures available: the _**installed capacity**_, which represents the amount of electrical power a country _can_ theoretically produce at any one time, and the _**electricity generated**_, which represents the amount of electricity actually produced that year.
 
 These measure might differ for many reasons: perhaps a source of electricity is only operational for part of the year, for example.
 
-Regardless of the measure used, the bubbles are shaded according to the fraction of electricity (or electrical power) that comes from **renewable sources**, with [**green tones representing more renewable electricity**]{style="color: #3595ac;"} and [**brown tones representing fewer renewables**]{style="color: #a1661a"}. The renewable sources in this dataset include:
+Regardless of the measure used, the bubbles are coloured according to the fraction of electricity (or electrical power) that comes from **renewable sources**, with [**green tones representing more renewable electricity**]{style="color: #3595ac;"} and [**brown tones representing fewer renewables**]{style="color: #a1661a"}:
+
+It's also important to note that electricity is [just a small part of many countries' greenhouse gas emissions](https://ourworldindata.org/emissions-by-sector)—this map says nothing about other sources, like manufacturing, heating or the tailpipe emissions from non-electric vehicles.
+
+The renewable electricity sources in this dataset include:
 
 :::{style="column-count: 2;"}
 * Solar photovoltaic
