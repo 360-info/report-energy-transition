@@ -7,8 +7,4 @@ bower_components
 /.quarto/
 
 # remove for production
-/map/font/*
-/map/tiles/*
-/out/map/font/*
-/out/map/tiles/*
 /out
