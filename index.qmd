@@ -1,0 +1,212 @@
+---
+title: "Analysis of IRENA electricity data"
+author: "James Goldie, 360info"
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(glue)
+library(sf)
+library(rgeoboundaries)
+library(countrycode)
+library(lwgeom)
+library(jsonlite)
+library(here)
+```
+
+Before we get started with the electricity data, let's set up the spatial data we're going to use to locate and name countries. First the names, using [`{countrycode}`](https://github.com/vincentarelbundock/countrycode):
+
+```{r}
+#| label: define-name-subs
+name_subs <- c(
+  "FSM" = "Micronesia",
+  "XKX" = "Kosovo")
+standardise_countries <- partial(countrycode, origin = "iso3c",
+    destination = c("country.name.en", "iso.name.en"),
+    custom_match = name_subs)
+```
+
+Then the country boundaries, using [`{rgeoboundaries}`](https://github.com/wmgeolab/rgeoboundaries):
+
+```{r}
+#| label: get-centroids
+# calculate country centroids (roughly - no spherical geometry b/c it's broken)
+# NOTE - rgeoboundaries will cache its downloads
+sf::sf_use_s2(FALSE)
+country_points <-
+  geoboundaries() %>%
+  st_centroid(of_largest_polygon = TRUE) %>%
+  select(country = shapeName, iso = shapeISO, geometry)
+  
+missing_points <-
+  tribble(
+    ~ country,                                ~ iso, ~lat, ~ lon,
+    "Greece",                                 "GRC", 39.543080, 22.286516,
+    "Aruba",                                  "ABW", 12.505922, -69.975792,
+    "Philippines",                            "PHL", 11.651120, 123.347990,
+    "American Samoa",                         "ASM", -14.303205, -170.706638,
+    "Anguilla",                               "AIA", 18.216434, -63.047010,
+    "Caribbean Netherlands",                  "BES", 17.630239, -63.238425,
+    "British Virgin Islands",                 "VGB", 18.447914, -64.568766,
+    "Cayman Islands",                         "CYM", 19.482559, -80.524865,
+    "Hong Kong",                              "HKG", 22.390828, 114.148064,
+    "Cook Islands",                           "COK", -20.506062, -158.705700,
+    "Curaçao",                                "CUW", 12.191968, -68.998956,
+    "Falkland Islands",                       "FLK", -51.815445, -59.497967,
+    "Faroe Islands",                          "FRO", 62.060991, -6.931548,
+    "French Guiana",                          "GUF", 3.822285, -53.168343,
+    "French Polynesia",                       "PYF", -13.309305, -145.011540,
+    "Guadeloupe",                             "GLP", 16.211332, -61.451932,
+    "Guam",                                   "GUM", 13.427806, 144.777799,
+    "Kosovo",                                 "XKX", 42.534097, 20.847340,
+    "Martinique",                             "MTQ", 14.636397, -61.001410,
+    "Mayotte",                                "MYT", -12.831253, 45.153049,
+    "Montserrat",                             "MSR", 16.738979, -62.191919,
+    "New Caledonia",                          "NCL", -21.527411, 165.661714,
+    "Niue",                                   "NIU", -19.056664, -169.857740,
+    "Puerto Rico",                            "PRI", 18.201229, -66.464860,
+    "St. Barthélemy",                         "BLM", 17.896951, -62.830260,
+    "Saint Martin (French part)",             "MAF", 18.083456, -63.051166,
+    "St. Pierre & Miquelon",                  "SPM", 46.948623, -56.326391,
+    "South Georgia & South Sandwich Islands", "SGS", -56.602045, -31.574932,
+    "Palestinian Territories",                "PSE", 31.861835, 35.362214,
+    "Switzerland",                            "CHE", 46.803317, 8.437373,
+    "Tokelau",                                "TKL", -9.158506, -171.816830,
+    "Turks & Caicos Islands",                 "TCA", 21.802045, -71.874711,
+    "U.S. Virgin Islands",                    "VIR", 18.033734, -64.798169) %>%
+  st_as_sf(coords = c("lon", "lat"), dim = "XY") %>%
+  st_set_crs(4326)
+
+country_points <- bind_rows(missing_points, country_points)
+```
+
+The original version of this analysis used data from IRENA's Excel downloading tool, but it seems to be playing up. I've downloaded the data from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) instead, but it's slightly differently shaped (partly because installed capacity and generation are separate tables; partly because IRENASTAT has a 100k row export limit).
+
+The tables used (which can be updated by downloading them from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) and placing them in `data` as `irena-src-[measure][grid_status].csv`) are:
+
+* Installed electricity capacity by country/area (MW) by Country/area, Technology, Grid connection and Year
+* Electricity generation (GWh) by Country/area, Technology, Grid connection and Year
+
+```{r}
+#| label: irenastat-patch
+
+list.files(here("data"), full.names = TRUE,
+  pattern = glob2rx("irena-src-*.csv")) %>%
+  set_names(basename(.)) %>%
+  map(read_csv, skip = 3,
+    col_names = c("country", "tech", "grid", "year", "value"),
+    col_types = "cccid",
+    na = c("", "NA", "..")) %>%
+  bind_rows(.id = "filename") %>%
+  separate(filename,
+    into = c("irena", "src", "measure", "grid", "ext"), sep = "[-.]") %>%
+  select(country, tech, measure, year, grid, value) ->
+irena_bound
+```
+
+The IRENASTAT data, in this form, doesn't classify technologies as renewable or non-renewable, so we'll have to do that ourselves. We'll also have to aggregate on- and off-grid values.
+
+I've used `irena_bound %>% pull(tech) %>% unique()` to check which technologies are in the data, and then compared those technologies against both `OLD-irena-stats.csv` (which _did_ categorise them) and the [dashboards on IRENA's website](https://www.irena.org/Data/View-data-by-topic/Capacity-and-Generation/Statistics-Time-Series) to group most of the technologies.
+
+Most notably, nuclear does not appear to be considered renewable by IRENA.
+
+```{r}
+#| label: aggregate-totals
+irena_bound %>%
+  mutate(renewable_status = if_else(
+    tech %in% c(
+      "Solar photovoltaic",   "Solar thermal energy",
+      "Onshore wind energy",  "Offshore wind energy",
+      "Renewable hydropower", "Mixed Hydro Plants",
+      "Pumped storage",       "Marine energy",
+      "Solid biofuels",       "Renewable municipal waste",
+      "Liquid biofuels",      "Biogas",
+      "Geothermal energy"),
+    "renewable", "nonrenewable")) %>%
+  group_by(country, measure, renewable_status, year) %>%
+  summarise(total = sum(value, na.rm = TRUE)) %>%
+  mutate(measure = recode(measure,
+    "generation" = "totalgen_gwh", "capacity" = "totalcap_mw")) %>%
+  pivot_wider(
+    id_cols = c(country, year),
+    names_from = c(measure, renewable_status), names_sep = "_",
+    values_from = total) ->
+irena_wide
+```
+
+Finally, we also need ISO codes for the new data. I'm going to cheat here and steal them from `OLD-irena-stats.csv` for consistency's sake.
+
+```{r}
+#| label: merge-iso-codes
+here("data", "OLD-irena-stats.csv") %>%
+  read_csv(col_types = "-cc-------") %>%
+  set_names(c("country", "iso")) %>%
+  distinct() %>%
+  arrange(country) ->
+iso_map
+
+# a few country names have text encoding errors or have otherwise changed since
+# the last dataset. we'll patch their codes here
+# ({countrycodes} will standardise the names)
+irena_wide %>%
+  left_join(iso_map, by = "country") %>%
+  mutate(
+    iso = recode(country,
+      "R�union" = "REU",
+      "T�rkiye" = "TUR",
+      "Saint Barth�lemy" = "BLM",
+      "C�te d'Ivoire" = "CIV",
+      "Cura�ao" = "CUW",
+      "Kosovo" = "XKX",
+      "China, Hong Kong Special Administrative Region" = "HKG",
+      .default = iso)) %>%
+  select(iso, everything()) ->
+irena_joined  
+```
+
+```{r}
+#| label: calc-renewable-proportions
+# widen by renewable status to calculate proportion of renewables
+irena_joined %>%
+  mutate(
+    total_gen_gwh = totalgen_gwh_renewable + totalgen_gwh_nonrenewable,
+    total_cap_mw = totalcap_mw_renewable + totalcap_mw_nonrenewable,
+    renewprop_gen_gwh = totalgen_gwh_renewable / total_gen_gwh,
+    renewprop_cap_mw = totalcap_mw_renewable / total_cap_mw) %>%
+  select(iso, country, year, starts_with("total"), starts_with("renewprop")) ->
+proportions
+```
+
+Finally, we'll join the centroids and export to geoJSON.
+
+```{r}
+#| label: join-centroids-export
+
+# first export a "tall" csv for deckgl...
+proportions %>%
+  left_join(country_points, by = "iso") %>%
+  select(-starts_with("country")) %>%
+  mutate(
+    country = standardise_countries(iso),
+    point = st_coordinates(.$geometry),
+    lon = point[, "X"],
+    lat = point[, "Y"]) %>%
+  select(iso, country, lon, lat, year, ends_with("gwh"), ends_with("mw")) %>%
+  write_csv(here("data", "irena-totals.csv"))
+
+# ... then a wide geojson for other map users
+proportions %>%
+  pivot_wider(
+    names_from = year,
+    values_from = c(total_gen_gwh, total_cap_mw, renewprop_gen_gwh,
+      renewprop_cap_mw),
+    names_sep = ".") %>%
+  left_join(country_points, by = "iso") %>%
+  select(-starts_with("country")) %>%
+  mutate(country = standardise_countries(iso)) %>%
+  select(iso, country, everything()) %>%
+  st_write(here("data", "irena-totals.geojson"), delete_dsn = TRUE) ->
+totals_wide
+```
+

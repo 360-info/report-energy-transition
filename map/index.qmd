@@ -1,0 +1,261 @@
+---
+title: 'RENEWABLES TRANSITION'
+subtitle: "The transition to [**RENEWABLE ELECTRICITY**]{style='color:#3595ac;'} is well underway, but there's still a long way to go"
+description: "The transition to **RENEWABLE ELECTRICITY** is well underway, but there's still a long way to go"
+page-layout: custom
+theme: none
+# this includes some default css for the titling, the bootstrap icons (since
+# they only come with the bootstrap themes usually), and some extra css for the
+# modals 
+css:
+  - /style/embed.css
+  - https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css
+  - /style/modal.css
+  - https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css
+  - /style/map.css
+execute:
+  echo: false
+resources:
+  - electricity-transition-featuremedia.png
+  - style.json
+  - tiles/*
+  - tiles/*/*/*.pbf
+  - font/*
+  - font/*/*
+---
+
+{{< include _popup-buttons.qmd >}}
+
+```{ojs}
+//| label: libraries
+
+r = require.alias({
+  maplibregl: "maplibre-gl@2.1.9/dist/maplibre-gl.js",
+  h3: {},
+  deck: "deck.gl@latest/dist.min.js"
+});
+
+maplibregl = r("maplibregl").catch(() => window["maplibregl"]);
+deck = r("deck");
+```
+
+
+```{ojs}
+//| label: inputs
+//| classes: inputForm
+
+// ISC-licensed range slider with play/pause
+import { Scrubber } from "@mbostock/scrubber";
+
+viewof selectedYear = Scrubber(
+  Array.from(Array(22).keys(), n => n + 2000), // 2000 to 2021
+  {
+    autoplay: true,
+    delay: 100,
+    loop: true,
+    loopDelay: 500,
+    initial: 2000
+  }
+);
+
+viewof selectedMeasure = Inputs.radio(
+  new Map([
+    ["Installed electricity capacity (MW)", "cap_mw"],
+    ["Electricity generated this year (GWh)", "gen_gwh"],
+  ]),
+  {
+    value: "cap_mw",
+    // label: "Measure"
+  }
+)
+
+```
+
+```{ojs}
+//| label: bubble-layer
+//| output: false
+
+electricityBubbles = new deck.MapboxLayer({
+  id: "electricityBubbles", 
+  type: deck.ScatterplotLayer,
+  data: [],
+  getPosition: d => [Number(d.lon), Number(d.lat)],
+  stroked: false,
+  antialiasing: true,
+  pickable: true,
+  autoHighlight: true,
+  highlightColor: [0, 0, 0, 64]
+})
+```
+
+```{ojs}
+//| label: define-popup
+popup = new maplibregl.Popup({
+  closeButton: false,
+  closeOnClick: false
+});
+```
+
+```{ojs}
+//| label: map
+
+/* this is a bit different to regular mapbox/maplibre instantiation
+   it lets have the map react to other values in the document, like
+   a button or a timer, without reinstantiating!
+   (based on https://observablehq.com/@tmcw/using-mapbox-gl-js) */
+   
+viewof map = {
+  let container = html`<div style="position: absolute; left: 0; top: 0; height: 100vh; width: 100%;" />`;
+
+  // Give the container dimensions.
+  yield container;
+
+  // Create the \`map\` object with the mapboxgl.Map constructor, referencing
+  // the container div
+  let map = new maplibregl.Map({
+    container,
+    bounds: [[-175, -80], [175, 85]],
+    // pitch: 30,
+    antialias: true,
+    style: "style.json"
+  });
+
+  // on map load:
+  // - dispatch its value back to ojs
+  // - add the deck.gl layer to the map
+  // - add a prop to the layer that adds/removes a popup from the map
+  //   (we can't do this on initial layer def because the map isn't ready yet)
+  map.on("load", () => {
+    container.value = map;
+    container.dispatchEvent(new CustomEvent("input"));
+    
+    map.addLayer(electricityBubbles);
+
+    // also configure the automatically-create deck instance
+    electricityBubbles.deck.setProps({ pickingRadius: 10 });
+    
+  });
+
+}
+```
+
+```{ojs}
+//| label: load-and-filter-data
+//| output: false
+
+// load, filter for (a) data matching the selected year and (b) present figures   
+allData = FileAttachment("/data/irena-totals.csv").csv({ typed: true });
+filteredData = allData
+  .filter(d => d.year == Number(selectedYear))
+  .filter(d => !isNaN(d["total_" + selectedMeasure]))
+  .filter(d => !isNaN(d["renewprop_" + selectedMeasure]));
+
+// filteredTransferCount =
+//   filteredData.map(d => d.value).length;
+// filteredTransferSum = {
+//   const tivsToSum = filteredData.map(d => d.value);
+//   if (tivsToSum.length > 0) {
+//     return tivsToSum.reduce((x, y) => x + y);
+//   } else {
+//     return 0;
+//   }
+// }
+```
+
+```{ojs}
+//| label: update-bubbles-and-scales
+//| output: false
+
+// color scale fn is a bit more complicated because we translate from d3's
+// color format to deck.gl's
+function divergingSolorScale(x) {
+
+  const colorScale =
+    d3.scaleDiverging()
+    .domain([0, 0.5, 1])
+    .interpolator(d3.interpolateBrBG)
+
+  const obj = d3.color(colorScale(x))
+  return [obj.r, obj.g, obj.b, 216]
+}
+
+// radius scaling is handled by d3 (range is metres, not pixels)
+radiusScale = d3.scaleSqrt()
+  .domain([0, d3.max(allData, d => d["total_" + selectedMeasure])])
+  .range([10, 2000000])
+
+// popup content also depends on the selected column, so it needs to be
+// added here outside the map load in order to stop the map from re-rendering 
+// when the selected column changes
+function updatePopup(info, event) {
+  if (info && info.object) {
+
+    const figureText = selectedMeasure == "cap_mw" ?
+      ` had <strong>
+      ${Math.floor(info.object["total_" + selectedMeasure]).toLocaleString()}&nbsp;MW</strong> 
+      of installed electricity supply as of 
+      ${info.object.year}` :
+      ` generated 
+      <strong>${Math.floor(info.object["total_" + selectedMeasure]).toLocaleString()}
+      &nbsp;GWh</strong> of electricity in ${info.object.year}`;
+
+    popup
+      .setLngLat(info.coordinate)
+      .setHTML(
+        `<span class="title">${info.object.country}</span>
+        ${figureText}. <strong>
+        ${(info.object["renewprop_" + selectedMeasure] * 100).toFixed(1)}%
+        </strong> of it was from renewable sources.`
+        )
+      .addTo(map);
+  } else {
+    popup.remove();
+  }
+}
+
+// attach our hover updater to the layer (can't do this until after the
+// layer is itself attached)
+// electricityBubbles.setProps({ onHover: updatePopup });
+
+// when the data updates, update the data passed to the map and the scale fns
+electricityBubbles.setProps({
+  data: filteredData,
+  getFillColor: d => divergingSolorScale(d["renewprop_" + selectedMeasure]),
+  getRadius:    d => radiusScale(d["total_" + selectedMeasure]),
+  onHover: updatePopup
+});
+```
+
+```{ojs}
+//| label: no-data-notice
+noDataNotice = filteredData.length < 1 ?
+  html`Data for this measure isn't available for ${selectedYear} yet.` :
+  html``
+```
+
+```{ojs}
+//| label: legend
+//| classes: legendOnMap
+
+width = 25
+bins = 10
+legend =
+  svg`<svg>
+    <text fill="white" y=15 text-anchor="start" x=0>No renewables</text>
+    <text fill="white" y=15 text-anchor="end" x=${width * bins}>
+      Fully renewable
+    </text>
+    ${d3.schemeBrBG[bins].map(
+      (colour, i) => svg`<rect height=15 y=23 width=${width}
+        x=${width * i} fill="${colour}"></rect>`
+    )}
+    <text fill="white" y=55 text-anchor="start" x=0>0%</text>
+    <text fill="white" y=55 text-anchor="end" x=${width * bins}>
+      100%
+    </text>
+  </svg>`
+```
+
+<!-- share/about popups -->
+
+{{< include _popup-dialogs.qmd >}}

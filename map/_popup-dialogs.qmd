@@ -1,0 +1,100 @@
+<!-- initialise miromodal.js -->
+
+```{ojs}
+//| include: false
+micro = require("micromodal@0.4.10")
+micro.init({
+  awaitOpenAnimation: true,
+  awaitCloseAnimation: true
+});
+```
+
+::::::: {#modal-useremix .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-useremix-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+:::: {#modal-useremix-content}
+## Use + Remix
+
+This map, as well as the analyses that underpin them, are available under a [**Creative Commons Attribution 4.0 licence**](https://creativecommons.org/licenses/by/4.0).
+
+Please acknowledge [**360info**](https://360info.org) and our data sources when you use these charts and data.
+
+#### Embed this chart in your article
+
+Copy and the following code and paste it into your story editor using the <i class="bi bi-code-square"></i> Embed button:
+
+::: {.embedcode}
+```
+{{< var embed.before >}}{{< var embed.url >}}{{< var embed.after >}}
+```
+:::
+
+This content is subject to [**360info's Terms of Use**](https://newshub.360info.org/page/terms).
+
+#### Get the data and code
+
+Visit the [GitHub repository](https://github.com/360-info/report-energy-transition/tree/main/data) to:
+
+* [**Download the data**](https://github.com/360-info/report-energy-transition/tree/main/data)
+* [**Recreate or remix the chart**](https://github.com/360-info/report-energy-transition)
+::::
+
+:::::
+::::::
+:::::::
+
+<!-- notes dialog -->
+
+::::::: {#modal-about .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-about-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+<header>
+## What do these numbers mean? {#modal-about-title}
+</header>
+
+:::: {#modal-about-content}
+
+The bubbles on this map concern a country's electricity supply and how that electricity is generated.
+
+There are two measures available: the _**installed capacity**_, which represents the amount of electrical power a country _can_ theoretically produce at any one time, and the _**electricity generated**_, which represents the amount of electricity actually produced that year.
+
+These measure might differ for many reasons: perhaps a source of electricity is only operational for part of the year, for example.
+
+Regardless of the measure used, the bubbles are coloured according to the fraction of electricity (or electrical power) that comes from **renewable sources**, with [**green tones representing more renewable electricity**]{style="color: #3595ac;"} and [**brown tones representing fewer renewables**]{style="color: #a1661a"}:
+
+It's also important to note that electricity is [just a small part of many countries' greenhouse gas emissions](https://ourworldindata.org/emissions-by-sector)—this map says nothing about other sources, like manufacturing, heating or the tailpipe emissions from non-electric vehicles.
+
+The renewable electricity sources in this dataset include:
+
+:::{style="column-count: 2;"}
+* Solar photovoltaic
+* Solar thermal energy
+* Onshore wind energy
+* Offshore wind energy
+* Renewable hydropower
+* Mixed Hydro Plants
+* Pumped storage
+* Marine energy
+* Solid biofuels
+* Renewable municipal waste
+* Liquid biofuels
+* Biogas
+* Geothermal energy
+:::
+
+## Data sources
+
+The data underpinning this map comes from the [**International Renewable Energy Agency**](https://www.irena.org), which licenses data from its [**Arms Industry Database**](https://www.sipri.org/databases/armsindustry) under Creative Commons 4.0 International.
+
+Vector map tiles are provided by [**MapLibre**](https://github.com/maplibre/demotiles) under the [**BSD 3-Clause licence**](https://github.com/maplibre/demotiles/blob/gh-pages/LICENSE).
+::::
+
+:::::
+::::::
+:::::::

@@ -1,57 +1,34 @@
-# Energy transition: map of installed energy capacity 2000–2019, shaded by renewable fraction
+# Renewables transition
 
-This map visualises the progression of installed energy capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series).
+Visualises the growth of renewable electricity capacity and generation over the last 20 years using data from the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series).
 
-## Use + Remix
+## Use + Remix rights
 
 ![[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0)](https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png)
 
-The map, as well as the analysis that underpins it, are available under a Creative Commons Attribution 4.0 licence. This includes commercial reuse and derivates.
+The map and the analysis that underpins it are available under a Creative Commons Attribution 4.0 licence. This includes commercial reuse and derivates.
 
-The data is made available by the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series), provided they are acknowledged as the soruce of the data.
+The data is made available by the [International Renewable Energy Agency](https://www.irena.org/Statistics/View-Data-by-Topic/Capacity-and-Generation/Statistics-Time-Series), provided they are acknowledged as the source of the data.
 
 **Please attribute 360info and IRENA when you use and remix this visualisation.**
 
-### Prerequisite: Mapbox access token
+## Reproduce the analysis
 
-However you deploy this map, you'll need an access token from [Mapbox](https://www.mapbox.com). Simply sign up for an account and, from the [account dashboard](https://account.mapbox.com), create a new access token with public scopes selected.
+We typically publish graphics using [Quarto](https://quarto.org) notebooks, which can be found in the`*.qmd` files. Quarto allows reproducible analysis and visualisation to be done in a mix of languages, but we typically use [R](https://r-project,.org) and [Observable JS](https://observablehq.com/@observablehq/observables-not-javascript).
 
-Mapbox offers 50 000 map loads per month for free, but further use by your users beyond that will require a [paid plan](https://www.mapbox.com/pricing/#maploads).
+You'll need to:
+- [Download and install Quarto](https://quarto.org/docs/get-started)
+- [Download the install R](https://www.r-project.org)
+- Satisfy the R package dependencies. In R:
+  * Install the [`renv`](https://rstudio.github.io/renv) package with `install.packages("renv")`,
+  * Then run `renv::restore()` to install the R package dependencies.
+  * (For problems satisfying R package dependencies, refer to [Quarto's documentation on virtual environments](https://quarto.org/docs/projects/virtual-environments.html).)
 
-### Deploy with Netlify
+Now, render the `.qmd` files to the `/out` directory with:
 
-The quickest way to get started with this map is with Netlify:
-
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jimjam-slam/report-energy-transition)
-
-Netlify will ask you for your Mapbox access token. Once you've deployed the site, you can configure it to use a custom domain or subdomain (if you have one), or simply serve it from the address that Netlify supplied.
-
-Netlify offers 100 GB of bandwidth per month for free; additional use beyond that requires a [paid plan](https://www.netlify.com/pricing).
-
-### Manual deployment
-
-You can also fork this repo and deploy it somewhere else yourself.
-
-To build the site, create a `.env` file in the project root that contains your Mapbox access token:
-
+```sh
+quarto render
 ```
-MAPBOX_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-Then use:
-
-```shell
-npm install
-npm run build
-```
-
-The site builds from the `src` dubdirectory to `dist`.
-
-### Reproduce the analysis
-
-Our analysis of IRENA data is done in [R](http://r-project.org) and can be found in `analysis.r`. It creates `src/data/irena-totals.geojson`.
-
-The `renv.lock` file can be used with the [`renv`](https://rstudio.github.io/renv) or [`capsule`](https://github.com/MilesMcBain/capsule) packages to recreate the R package dependencies.
 
 ## Help
 
