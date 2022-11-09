@@ -7,9 +7,9 @@ project:
 website:
   twitter-card:
     creator: "@360info_global"
-    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia
+    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
   open-graph:
-    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia
+    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
     site-name: 360info
 
 execute:
