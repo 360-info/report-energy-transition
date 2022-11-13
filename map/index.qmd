@@ -22,6 +22,13 @@ resources:
   - tiles/*/*/*.pbf
   - font/*
   - font/*/*
+include-in-header:
+  text: |
+    <script
+      defer
+      src='https://static.cloudflareinsights.com/beacon.min.js'
+      data-cf-beacon='{"token": "1d8ee784a39b4ff2b2b6a508b10ed28a"}'>
+    </script>
 ---
 
 {{< include _popup-buttons.qmd >}}
