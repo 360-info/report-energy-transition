@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,9 +18,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,44 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
@@ -125,7 +96,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header">
 <h1 class="title">RENEWABLES TRANSITION</h1>
 <p class="subtitle">The transition to <span style="color:#3595ac;"><strong>RENEWABLE ELECTRICITY</strong></span> is well underway, but there’s still a long way to go</p>
-
 
 </header>
 
@@ -215,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
         // copy the embed code to the clipboard
         navigator.clipboard.writeText(
-          `<iframe allow=&quotfullscreen&quot allowfullscreen=&quottrue&quot src="https://360info-electricitytransition.pages.dev/map" title="Interactive map: electricity transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no"></iframe>`);
+          `<iframe allow="fullscreen; clipboard-write self https://360info-electricitytransition.pages.dev/" allowfullscreen="true" src="https://360info-electricitytransition.pages.dev/map" title="Interactive map: electricity transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no"></iframe>`);
 
         // update button styles and content
         edshareBtn.classList.remove("ready");
@@ -585,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 id="embed-this-chart-in-your-article" class="anchored">Embed this chart in your article</h4>
 <p>Copy and the following code and paste it into your story editor using the <i class="bi bi-code-square"></i> Embed button:</p>
 <div class="embedcode">
-<pre><code>&lt;iframe allow=&amp;quotfullscreen&amp;quot allowfullscreen=&amp;quottrue&amp;quot src="https://360info-electricitytransition.pages.dev/map" title="Interactive map: electricity transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no"&gt;&lt;/iframe&gt;</code></pre>
+<pre><code>&lt;iframe allow="fullscreen; clipboard-write self https://360info-electricitytransition.pages.dev/" allowfullscreen="true" src="https://360info-electricitytransition.pages.dev/map" title="Interactive map: electricity transition" style="width:100%; height:500px; border:none; background-color: white;" scrolling="no"&gt;&lt;/iframe&gt;</code></pre>
 </div>
 <p>This content is subject to <a href="https://newshub.360info.org/page/terms"><strong>360info’s Terms of Use</strong></a>.</p>
 <h4 id="get-the-data-and-code" class="anchored">Get the data and code</h4>
@@ -644,6 +614,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 {"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"\nr = require.alias({\n  maplibregl: \"maplibre-gl@2.1.9/dist/maplibre-gl.js\",\n  h3: {},\n  deck: \"deck.gl@latest/dist.min.js\"\n});\n\nmaplibregl = r(\"maplibregl\").catch(() => window[\"maplibregl\"]);\ndeck = r(\"deck\");\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\n// ISC-licensed range slider with play/pause\nimport { Scrubber } from \"@mbostock/scrubber\";\n\nviewof selectedYear = Scrubber(\n  Array.from(Array(22).keys(), n => n + 2000), // 2000 to 2021\n  {\n    autoplay: true,\n    delay: 100,\n    loop: true,\n    loopDelay: 500,\n    initial: 2000\n  }\n);\n\nviewof selectedMeasure = Inputs.radio(\n  new Map([\n    [\"Installed electricity capacity (MW)\", \"cap_mw\"],\n    [\"Electricity generated this year (GWh)\", \"gen_gwh\"],\n  ]),\n  {\n    value: \"cap_mw\",\n    // label: \"Measure\"\n  }\n)\n\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"\nelectricityBubbles = new deck.MapboxLayer({\n  id: \"electricityBubbles\", \n  type: deck.ScatterplotLayer,\n  data: [],\n  getPosition: d => [Number(d.lon), Number(d.lat)],\n  stroked: false,\n  antialiasing: true,\n  pickable: true,\n  autoHighlight: true,\n  highlightColor: [0, 0, 0, 64]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"popup = new maplibregl.Popup({\n  closeButton: false,\n  closeOnClick: false\n});\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"\n/* this is a bit different to regular mapbox/maplibre instantiation\n   it lets have the map react to other values in the document, like\n   a button or a timer, without reinstantiating!\n   (based on https://observablehq.com/@tmcw/using-mapbox-gl-js) */\n   \nviewof map = {\n  let container = html`<div style=\"position: absolute; left: 0; top: 0; height: 100vh; width: 100%;\" />`;\n\n  // Give the container dimensions.\n  yield container;\n\n  // Create the \\`map\\` object with the mapboxgl.Map constructor, referencing\n  // the container div\n  let map = new maplibregl.Map({\n    container,\n    bounds: [[-175, -80], [175, 85]],\n    // pitch: 30,\n    antialias: true,\n    style: \"style.json\"\n  });\n\n  // on map load:\n  // - dispatch its value back to ojs\n  // - add the deck.gl layer to the map\n  // - add a prop to the layer that adds/removes a popup from the map\n  //   (we can't do this on initial layer def because the map isn't ready yet)\n  map.on(\"load\", () => {\n    container.value = map;\n    container.dispatchEvent(new CustomEvent(\"input\"));\n    \n    map.addLayer(electricityBubbles);\n\n    // also configure the automatically-create deck instance\n    electricityBubbles.deck.setProps({ pickingRadius: 10 });\n    \n  });\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"\n// load, filter for (a) data matching the selected year and (b) present figures   \nallData = FileAttachment(\"/data/irena-totals.csv\").csv({ typed: true });\nfilteredData = allData\n  .filter(d => d.year == Number(selectedYear))\n  .filter(d => !isNaN(d[\"total_\" + selectedMeasure]))\n  .filter(d => !isNaN(d[\"renewprop_\" + selectedMeasure]));\n\n// filteredTransferCount =\n//   filteredData.map(d => d.value).length;\n// filteredTransferSum = {\n//   const tivsToSum = filteredData.map(d => d.value);\n//   if (tivsToSum.length > 0) {\n//     return tivsToSum.reduce((x, y) => x + y);\n//   } else {\n//     return 0;\n//   }\n// }\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"\n// color scale fn is a bit more complicated because we translate from d3's\n// color format to deck.gl's\nfunction divergingSolorScale(x) {\n\n  const colorScale =\n    d3.scaleDiverging()\n    .domain([0, 0.5, 1])\n    .interpolator(d3.interpolateBrBG)\n\n  const obj = d3.color(colorScale(x))\n  return [obj.r, obj.g, obj.b, 216]\n}\n\n// radius scaling is handled by d3 (range is metres, not pixels)\nradiusScale = d3.scaleSqrt()\n  .domain([0, d3.max(allData, d => d[\"total_\" + selectedMeasure])])\n  .range([10, 2000000])\n\n// popup content also depends on the selected column, so it needs to be\n// added here outside the map load in order to stop the map from re-rendering \n// when the selected column changes\nfunction updatePopup(info, event) {\n  if (info && info.object) {\n\n    const figureText = selectedMeasure == \"cap_mw\" ?\n      ` had <strong>\n      ${Math.floor(info.object[\"total_\" + selectedMeasure]).toLocaleString()}&nbsp;MW</strong> \n      of installed electricity supply as of \n      ${info.object.year}` :\n      ` generated \n      <strong>${Math.floor(info.object[\"total_\" + selectedMeasure]).toLocaleString()}\n      &nbsp;GWh</strong> of electricity in ${info.object.year}`;\n\n    popup\n      .setLngLat(info.coordinate)\n      .setHTML(\n        `<span class=\"title\">${info.object.country}</span>\n        ${figureText}. <strong>\n        ${(info.object[\"renewprop_\" + selectedMeasure] * 100).toFixed(1)}%\n        </strong> of it was from renewable sources.`\n        )\n      .addTo(map);\n  } else {\n    popup.remove();\n  }\n}\n\n// attach our hover updater to the layer (can't do this until after the\n// layer is itself attached)\n// electricityBubbles.setProps({ onHover: updatePopup });\n\n// when the data updates, update the data passed to the map and the scale fns\nelectricityBubbles.setProps({\n  data: filteredData,\n  getFillColor: d => divergingSolorScale(d[\"renewprop_\" + selectedMeasure]),\n  getRadius:    d => radiusScale(d[\"total_\" + selectedMeasure]),\n  onHover: updatePopup\n});\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"noDataNotice = filteredData.length < 1 ?\n  html`Data for this measure isn't available for ${selectedYear} yet.` :\n  html``\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"\nwidth = 25\nbins = 10\nlegend =\n  svg`<svg>\n    <text fill=\"white\" y=15 text-anchor=\"start\" x=0>No renewables</text>\n    <text fill=\"white\" y=15 text-anchor=\"end\" x=${width * bins}>\n      Fully renewable\n    </text>\n    ${d3.schemeBrBG[bins].map(\n      (colour, i) => svg`<rect height=15 y=23 width=${width}\n        x=${width * i} fill=\"${colour}\"></rect>`\n    )}\n    <text fill=\"white\" y=55 text-anchor=\"start\" x=0>0%</text>\n    <text fill=\"white\" y=55 text-anchor=\"end\" x=${width * bins}>\n      100%\n    </text>\n  </svg>`\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"micro = require(\"micromodal@0.4.10\")\nmicro.init({\n  awaitOpenAnimation: true,\n  awaitCloseAnimation: true\n});\n"},{"methodName":"interpretQuiet","source":"shinyInput('selectedYear')"},{"methodName":"interpretQuiet","source":"shinyInput('selectedMeasure')"},{"methodName":"interpretQuiet","source":"shinyInput('map')"}]}
 </script>
 <script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
 window._ojs.paths.runtimeToDoc = "../../map";
 window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "..";
@@ -681,9 +652,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -695,17 +680,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -715,8 +716,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'light-border',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -731,24 +741,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      try { hash = new URL(url).hash; } catch {}
+      const id = hash.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note !== null) {
+        try {
+          const html = processXRef(id, note);
+          instance.setContent(html);
+        } finally {
+          instance.enable();
+          instance.show();
+        }
+      } else {
+        // See if we can fetch this
+        fetch(url.split('#')[0])
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.getElementById(id);
+          console.log(htmlDoc.body.innerHTML);
+          if (note !== null) {
+            const html = processXRef(id, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
