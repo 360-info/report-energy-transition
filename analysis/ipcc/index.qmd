@@ -1,0 +1,48 @@
+---
+title: "Analysis of IPCC decarbonisation cost/potential data"
+author: "James Goldie, 360info"
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(here)
+```
+
+```{r}
+#| label: import
+
+here("data", "ipcc-decarbonisation-costs-unprocessed.csv") |>
+  read_csv() ->
+solutions
+```
+
+Let's work out the fraction of a solution's potential each cost bucket represents.
+
+We also want to do this for the uncertainty, but we want to be careful about not _including_ the uncertainty in the bucket sums themselves, so let's move the uncertainty to the end of each group.
+
+Finally, we're going to rank the solutions within each cost bucket by their abatement potential. This will make positioning the bubbles easier in Observable Plot, as we don't have another axis upon which to position the bubbles.
+
+```{r}
+#| label: percentages-and-ranks
+
+solutions |>
+  mutate(is_uncertainty = cost_bucket == "Uncertainty") |>
+  group_by(item) |>
+  arrange(is_uncertainty) |>
+  mutate(
+    potential_frac = potential_abatement_mtco2eq /
+      sum(head(potential_abatement_mtco2eq, -1))) |>
+  group_by(cost_bucket) |>
+  arrange(potential_abatement_mtco2eq) |>
+  mutate(cost_bucket_potential_rank = 1:n()) ->
+solution_fracs
+```
+
+```{r}
+#| label: write-to-disk
+
+solution_fracs |>
+  write_csv(here("data", "ipcc-decarbonisation-costs-processed.csv"))
+```

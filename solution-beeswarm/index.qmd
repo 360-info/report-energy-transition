@@ -1,0 +1,138 @@
+---
+title: Untitled
+format:
+  360-embed-html: default
+360embed:
+  before: |
+    &lt;iframe allow=&quot;fullscreen&quot; allowfullscreen=&quot;true&quot; src=&quot;
+  # uncomment and modify this line for production
+  # url: https://feb2023.360info-heatmaps-narclim.pages.dev/news/
+  after: |
+    &quot; title=&quot;Interactive: future heat&quot; style=&quot;width:100%; height:500px; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+---
+
+{{< include _popup-buttons.qmd >}}
+
+```{ojs}
+//| label: color-map
+
+colorMap = ({
+  "Negative": {
+    fill: "lightblue",
+    color: "black"
+  },
+  "0-20 USD": {
+    fill: "gold",
+    color: "black"
+  },
+  "20-50 USD": {
+    fill: "orange",
+    color: "black"
+  },
+  "50-100 USD": {
+    fill: "red",
+    color: "white"
+  },
+  "100-200 USD": {
+    fill: "firebrick",
+    color: "white"
+  },
+  "Not allocated": {
+    fill: "lightgrey",
+    color: "black"
+  }  
+})
+```
+
+```{ojs}
+//| label: cost-controls
+//| classes: controls
+viewof selectedCostBucket = Inputs.radio(
+  new Map([
+    ["Saves money", "Negative"],
+    ["Low", "0-20 USD"],
+    ["Medium", "20-50 USD"],
+    ["High", "50-100 USD"],
+    ["Very high", "100-200 USD"],
+    ["Not allocated", "Not allocated"]
+  ]), {
+    label: html`<strong>Cost</strong>`,
+    value: "Negative",
+    format: x => html`<span style="border-bottom-color: ${colorMap[x[1]].fill};">${x[0]}</span>`
+})
+```
+
+```{ojs}
+//| label: load-data
+//| 
+
+allData = FileAttachment("/data/ipcc-decarbonisation-costs-processed.csv")
+  .csv({ typed: true });
+
+maxPotential = Math.max(...allData.map(d => d.potential_abatement_mtco2eq))
+
+filteredData = allData
+  .filter(d => d.cost_bucket == selectedCostBucket)
+  // .filter(d => )
+  // .map(d => {...d, potential_rank:})
+```
+
+```{ojs}
+//| label: beeswarm
+
+Plot = import("https://esm.run/@observablehq/plot")
+
+Plot.plot({
+  marks: [
+    Plot.dotX(
+      filteredData,
+      Plot.dodgeX("middle", {
+        y: "potential_abatement_mtco2eq",
+        // fx: "cost_bucket",
+        r: "potential_abatement_mtco2eq",
+        title: "item",
+        channels: {category: "category", item: "item"},
+        fill: "cost_bucket",
+        padding: 0.5,
+        tip: true
+      })),
+    Plot.text(
+      filteredData,
+      Plot.dodgeX("middle", {
+        filter: d => d.potential_abatement_mtco2eq > 1000,
+        y: "potential_abatement_mtco2eq",
+        r: "potential_abatement_mtco2eq",
+        text: d => d.item,
+        channels: {category: "category", item: "item"},
+        fill: "black",
+        stroke: "#ffffff99",
+        padding: 0.5,
+        pointerEvents: "none"
+      })),
+  ],
+  y: {axis: null},
+  r: {
+    domain: [0, maxPotential],
+    range: [2, 65]
+  },
+  color: {
+    domain: ["Negative", "0-20 USD", "20-50 USD", "50-100 USD", "100-200 USD",
+      "Not allocated"],
+    range: ["lightblue", "gold", "orange", "red", "firebrick", "lightgrey"]
+  },
+  height: 450,
+  marginLeft: 60,
+  marginRight: 60,
+  marginBottom: 60,
+  marginTop: 60,
+  insetTop: 40,
+  style: {
+    fontSize: 14,
+    fontFamily: "Roboto Condensed"
+  }
+})
+
+
+```
+
+{{< include _popup-dialogs.qmd >}}

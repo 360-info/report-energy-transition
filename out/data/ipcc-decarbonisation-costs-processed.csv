@@ -1,0 +1,145 @@
+category,item,cost_bucket,potential_abatement_mtco2eq,is_uncertainty,potential_frac,cost_bucket_potential_rank
+Energy,Reducing CH4 emissions from coal mining,50-100 USD,21.6,FALSE,0.04338220526210082,1
+Other,Reduce CH4 emissions from wastewater,Negative,21.7,FALSE,0.11567164179104478,1
+Energy,Reducing CH4 emissions from coal mining,20-50 USD,28.9,FALSE,0.05804378389234786,1
+Other,Reduce emission of fluorinated gas,100-200 USD,28.9,FALSE,0.023421671124078124,1
+Other,Reduce CH4 emissions from wastewater,0-20 USD,28.9,FALSE,0.15405117270788912,1
+Other,Reduce CH4 emissions from wastewater,50-100 USD,28.9,FALSE,0.15405117270788912,2
+Energy,Reducing CH4 emissions from coal mining,Negative,43.3,FALSE,0.08696525406708173,2
+Other,Reduce CH4 emissions from solid waste,50-100 USD,43.3,FALSE,0.06978243352135374,3
+Other,Reduce CH4 emissions from wastewater,20-50 USD,43.3,FALSE,0.2308102345415778,2
+Energy,Reducing CH4 emissions from oil and gas,50-100 USD,57.7,FALSE,0.05029198988930533,4
+Other,Reduce CH4 emissions from solid waste,20-50 USD,57.7,FALSE,0.09298952457695407,3
+Other,Reduce CH4 emissions from wastewater,100-200 USD,64.8,FALSE,0.34541577825159914,2
+Buildings,Onsite renewable production and use,0-20 USD,64.9,FALSE,0.13837953091684435,2
+Buildings,Onsite renewable production and use,50-100 USD,64.9,FALSE,0.13837953091684435,5
+Buildings,Improvement of existing building stock,0-20 USD,64.9,FALSE,0.24316223304608467,3
+Buildings,Improvement of existing building stock,50-100 USD,64.9,FALSE,0.24316223304608467,6
+Buildings,Improvement of existing building stock,100-200 USD,64.9,FALSE,0.24316223304608467,3
+Energy,Reducing CH4 emissions from oil and gas,20-50 USD,72.2,FALSE,0.06293035823237166,4
+Buildings,Onsite renewable production and use,20-50 USD,72.2,FALSE,0.15394456289978678,5
+Buildings,Improvement of existing building stock,20-50 USD,72.2,FALSE,0.27051330086174596,6
+Other,Reduce CH4 emissions from solid waste,100-200 USD,79.4,FALSE,0.12796132151490736,4
+Other,Reduce emission of fluorinated gas,50-100 USD,86.6,FALSE,0.07018396952751438,7
+Industry,Reduction of non-CO2 emissions,Uncertainty,89.7,TRUE,0.44405940594059407,1
+Energy,Hydropower,50-100 USD,101,FALSE,0.3182104599873976,8
+Energy,Reducing CH4 emissions from oil and gas,100-200 USD,101,FALSE,0.08803277259653099,5
+Energy,Hydropower,0-20 USD,108.2,FALSE,0.34089477000630125,4
+Energy,Hydropower,20-50 USD,108.2,FALSE,0.34089477000630125,7
+Other,Reduce CH4 emissions from solid waste,0-20 USD,108.2,FALSE,0.17437550362610799,5
+Buildings,New buildings with high energy performance,0-20 USD,115.4,FALSE,0.09812925170068028,6
+Buildings,New buildings with high energy performance,20-50 USD,115.4,FALSE,0.09812925170068028,8
+Buildings,New buildings with high energy performance,50-100 USD,115.4,FALSE,0.09812925170068028,9
+Buildings,Improvement of existing building stock,Uncertainty,120.1,TRUE,0.449981266391907,2
+AFOLU,Reduced conversion of forests and other ecosystems,20-50 USD,122.7,FALSE,0.03058477491400369,9
+Industry,Cementitious material substitution,Uncertainty,127.4,TRUE,0.45273631840796025,3
+Other,Reduce CH4 emissions from solid waste,Uncertainty,134.6,TRUE,0.2169218372280419,4
+Energy,Bioelectricity with CCS,50-100 USD,151.5,FALSE,0.5,10
+Energy,Bioelectricity with CCS,100-200 USD,151.5,FALSE,0.5,6
+AFOLU,"Ecosystem restoration, afforestation, reforestation",0-20 USD,151.5,FALSE,0.05356385235468816,7
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",100-200 USD,151.5,FALSE,0.07240489390173964,7
+Industry,Carbon capture with utilisation (CCU) and CCS,100-200 USD,151.5,FALSE,1,8
+Other,Reduce CH4 emissions from wastewater,Uncertainty,163.6,TRUE,0.8720682302771855,5
+Energy,Nuclear energy,Negative,173.2,FALSE,0.1967287596547024,3
+Energy,Nuclear energy,20-50 USD,173.2,FALSE,0.1967287596547024,10
+Energy,Nuclear energy,50-100 USD,173.2,FALSE,0.1967287596547024,11
+Transport,Shift to bikes and e-bikes,Uncertainty,178.1,TRUE,0.9493603411513859,6
+Industry,"Feedstock decarbonisation, process change",Uncertainty,178.1,TRUE,0.4657426778242678,7
+Energy,Nuclear energy,0-20 USD,180.4,FALSE,0.2049068605179464,8
+Energy,Nuclear energy,100-200 USD,180.4,FALSE,0.2049068605179464,9
+Other,Reduce emission of fluorinated gas,20-50 USD,180.4,FALSE,0.1462030958748683,11
+Transport,Aviation - energy efficiency,Uncertainty,185.3,TRUE,0.828341528833259,8
+Transport,Shift to bikes and e-bikes,Negative,187.6,FALSE,1,4
+Buildings,Enhanced use of wood products,Uncertainty,192.6,TRUE,0.5036610878661087,9
+Transport,"Electric heavy-duty vehicles, incl. buses",Uncertainty,199.8,TRUE,0.9550669216061186,10
+Industry,Reduction of non-CO2 emissions,0-20 USD,202,FALSE,1,9
+Transport,"Electric heavy-duty vehicles, incl. buses",Not allocated,209.2,FALSE,1,1
+AFOLU,Improved sustainable forest management,100-200 USD,216.5,FALSE,0.15792545043402142,10
+Transport,Aviation - energy efficiency,Negative,223.7,FALSE,1,5
+Industry,Enhanced recycling,Uncertainty,228.7,TRUE,0.48026039479210414,11
+Transport,Biofuels,0-20 USD,230.9,FALSE,0.3299042720388627,10
+Transport,Biofuels,50-100 USD,230.9,FALSE,0.3299042720388627,12
+Industry,Carbon capture with utilisation (CCU) and CCS,Uncertainty,236,TRUE,1.5577557755775577,12
+Transport,Biofuels,20-50 USD,238.1,FALSE,0.3401914559222746,12
+Energy,Geothermal,0-20 USD,245.3,FALSE,0.3333333333333333,11
+Energy,Geothermal,20-50 USD,245.3,FALSE,0.3333333333333333,13
+Energy,Geothermal,50-100 USD,245.3,FALSE,0.3333333333333333,13
+Other,Reduce emission of fluorinated gas,Negative,259.8,FALSE,0.21055190858254316,6
+Energy,Carbon capture and storage (CCS),50-100 USD,267,FALSE,0.49334811529933476,14
+Buildings,Onsite renewable production and use,100-200 USD,267,FALSE,0.5692963752665245,11
+Energy,Carbon capture and storage (CCS),100-200 USD,274.2,FALSE,0.5066518847006651,12
+AFOLU,Reduce CH4 and N2O emissions in agriculture,50-100 USD,281.4,FALSE,0.44830332961605857,15
+Industry,Cementitious material substitution,20-50 USD,281.4,FALSE,1,14
+Energy,Bioelectricity with CCS,Uncertainty,286.7,TRUE,0.9462046204620461,13
+Transport,Shipping - efficiency and optimisation,Uncertainty,293.9,TRUE,0.6266524520255863,14
+Energy,Hydropower,Uncertainty,308.4,TRUE,0.9716446124763705,15
+Energy,Reducing CH4 emissions from oil and gas,Negative,310.3,FALSE,0.2704610825416195,7
+Other,Reduce CH4 emissions from solid waste,Negative,331.9,FALSE,0.5348912167606769,8
+Buildings,Onsite renewable production and use,Uncertainty,337.4,TRUE,0.7194029850746269,16
+Transport,Fuel-efficient heavy-duty vehicles,Uncertainty,344.6,TRUE,0.95509977827051,17
+AFOLU,Reduce CH4 and N2O emissions in agriculture,0-20 USD,346.3,FALSE,0.5516966703839413,12
+Buildings,"Efficient lighting, appliances and equipment",Uncertainty,351.9,TRUE,0.4877338877338877,18
+Transport,Fuel-efficient heavy-duty vehicles,Negative,360.8,FALSE,1,9
+AFOLU,Improved sustainable forest management,0-20 USD,382.4,FALSE,0.2789408417827704,13
+Buildings,Enhanced use of wood products,Not allocated,382.4,FALSE,1,2
+Industry,"Feedstock decarbonisation, process change",50-100 USD,382.4,FALSE,1,16
+Energy,Reducing CH4 emissions from coal mining,0-20 USD,404.1,FALSE,0.8116087567784696,14
+Energy,Bioelectricity,100-200 USD,425.7,FALSE,0.4958071278825996,13
+Energy,Bioelectricity,50-100 USD,432.9,FALSE,0.5041928721174005,17
+Industry,Material efficiency,Uncertainty,451.8,TRUE,0.489172802078822,19
+Energy,Reducing CH4 emissions from coal mining,Uncertainty,460.5,TRUE,0.9248845149628439,20
+Transport,Shipping - efficiency and optimisation,Negative,469,FALSE,1,10
+Industry,Enhanced recycling,20-50 USD,476.2,FALSE,1,15
+AFOLU,Carbon sequestration in agriculture,0-20 USD,497.9,FALSE,0.14557628208876675,15
+AFOLU,Reduce food loss and food waste,Not allocated,497.9,FALSE,1,3
+Transport,Shift to public transportation,Uncertainty,507.6,TRUE,0.9637364723751661,21
+Transport,Shift to public transportation,Negative,526.7,FALSE,1,11
+Energy,Carbon capture and storage (CCS),Uncertainty,532.9,TRUE,0.9846637102734662,22
+Buildings,Avoid demand for energy services,Uncertainty,540.2,TRUE,0.9722822174226062,23
+Transport,Fuel-efficient light-duty vehicles,Uncertainty,547.4,TRUE,0.9852411807055435,24
+Industry,Energy efficiency,Uncertainty,554.6,TRUE,0.48958333333333337,25
+Buildings,Avoid demand for energy services,Negative,555.6,FALSE,1,12
+Transport,Fuel-efficient light-duty vehicles,Negative,555.6,FALSE,1,13
+AFOLU,"Ecosystem restoration, afforestation, reforestation",20-50 USD,562.8,FALSE,0.19898175647008906,16
+Transport,Electric light-duty vehicles,Uncertainty,576.4,TRUE,0.9741423018421497,26
+Energy,Solar energy,50-100 USD,591.7,FALSE,0.1322648426323319,18
+Transport,Electric light-duty vehicles,Not allocated,591.7,FALSE,1,4
+Energy,Solar energy,0-20 USD,598.9,FALSE,0.13387428469241772,16
+Energy,Solar energy,20-50 USD,598.9,FALSE,0.13387428469241772,17
+Energy,Reducing CH4 emissions from oil and gas,0-20 USD,606.1,FALSE,0.5282837967401727,17
+AFOLU,"Ecosystem restoration, afforestation, reforestation",100-200 USD,656.6,FALSE,0.23214538254843728,14
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",50-100 USD,663.8,FALSE,0.3172433569107246,19
+Other,Reduce emission of fluorinated gas,0-20 USD,678.2,FALSE,0.549639354890996,18
+Transport,Biofuels,Uncertainty,692.2,TRUE,0.9889984283469068,27
+Buildings,"Efficient lighting, appliances and equipment",Negative,721.5,FALSE,1,14
+Energy,Geothermal,Uncertainty,728.5,TRUE,0.9899442859084113,28
+AFOLU,Carbon sequestration in agriculture,20-50 USD,728.8,FALSE,0.21308695397929944,18
+Energy,Wind energy,0-20 USD,764.8,FALSE,0.19961892830109884,19
+Energy,Wind energy,50-100 USD,764.8,FALSE,0.19961892830109884,20
+AFOLU,Improved sustainable forest management,50-100 USD,772,FALSE,0.563133707783208,21
+AFOLU,Reduce food loss and food waste,Uncertainty,786.4,TRUE,1.5794336212090783,29
+Other,Reduce emission of fluorinated gas,Uncertainty,786.4,TRUE,0.637328794878029,30
+Buildings,New buildings with high energy performance,100-200 USD,829.8,FALSE,0.7056122448979592,15
+Energy,Bioelectricity,Uncertainty,844.3,TRUE,0.9833449802003261,31
+Energy,Nuclear energy,Uncertainty,866,TRUE,0.9836437982735121,32
+Buildings,New buildings with high energy performance,Uncertainty,873.3,TRUE,0.7426020408163265,33
+Industry,Material efficiency,20-50 USD,923.6,FALSE,1,19
+Energy,Reducing CH4 emissions from oil and gas,Uncertainty,924,TRUE,0.8053691275167786,34
+AFOLU,Reduce CH4 and N2O emissions in agriculture,Uncertainty,989.2,TRUE,1.5759120599012266,35
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",Uncertainty,1032.6,TRUE,0.4935002867520551,36
+Industry,Energy efficiency,0-20 USD,1132.8,FALSE,1,20
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",20-50 USD,1277.1,FALSE,0.6103517491875359,20
+AFOLU,"Ecosystem restoration, afforestation, reforestation",50-100 USD,1457.5,FALSE,0.5153090086267854,22
+AFOLU,Reduced conversion of forests and other ecosystems,50-100 USD,1623.5,FALSE,0.4046811904880602,23
+AFOLU,"Shift to balanced, sustainable health diets",Uncertainty,1677.1,TRUE,0.9890894078792168,37
+AFOLU,"Shift to balanced, sustainable health diets",Not allocated,1695.6,FALSE,1,5
+AFOLU,Improved sustainable forest management,Uncertainty,2176.8,TRUE,1.5878619884747247,38
+AFOLU,Carbon sequestration in agriculture,50-100 USD,2193.5,FALSE,0.6413367639319338,24
+AFOLU,Reduced conversion of forests and other ecosystems,0-20 USD,2265.6,FALSE,0.5647340345979361,21
+Energy,Wind energy,Negative,2301.7,FALSE,0.6007621433978023,15
+Energy,Solar energy,Negative,2684.1,FALSE,0.5999865879828326,16
+Energy,Wind energy,Uncertainty,3473,TRUE,0.9064808289614492,39
+AFOLU,"Ecosystem restoration, afforestation, reforestation",Uncertainty,3675.8,TRUE,1.2996040164050346,40
+AFOLU,Carbon sequestration in agriculture,Uncertainty,4070.5,TRUE,1.1901350798198935,41
+AFOLU,Reduced conversion of forests and other ecosystems,Uncertainty,4783.8,TRUE,1.1924323246423054,42
+Energy,Solar energy,Uncertainty,4964.8,TRUE,1.109799713876967,43

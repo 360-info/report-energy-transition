@@ -3,6 +3,10 @@ project:
   type: website
   resources:
     - /data/irena-totals.csv
+    - /data/ipcc-decarbonisation-costs-processed.csv
+  render:
+    - analysis/ipcc/index.qmd
+    - solution-beeswarm/index.qmd
 
 website:
   twitter-card:
