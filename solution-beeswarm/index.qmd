@@ -109,11 +109,21 @@ Plot.plot({
         padding: 0.5,
         pointerEvents: "none"
       })),
+    Plot.image(
+      [{src: "Example.svg", name: "Example", x: "Negative", y: 500}],
+      {
+        src: d => "https://upload.wikimedia.org/wikipedia/commons/8/84/" + d.src,
+        y: "y",
+        width: 60,
+        preserveAspectRatio: true
+        // filter: ???
+      }
+    )
   ],
   y: {axis: null},
   r: {
     domain: [0, maxPotential],
-    range: [2, 65]
+    range: [2, 95]
   },
   color: {
     domain: ["Negative", "0-20 USD", "20-50 USD", "50-100 USD", "100-200 USD",
