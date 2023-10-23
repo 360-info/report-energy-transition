@@ -54,6 +54,9 @@ form button {
   border: 1px solid #36a7e9;
   border-radius: 5px;
   font-size: 1rem;
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+  font-weight: bold;
   padding: 4px;
 }
 

@@ -6,8 +6,9 @@ project:
     - /data/ipcc-decarbonisation-costs-processed.csv
     - solution-beeswarm/assets/*.svg
   render:
-    - analysis/ipcc/index.qmd
+    - analysis/*/index.qmd
     - solution-beeswarm/index.qmd
+    - map/index.qmd
 
 website:
   twitter-card:

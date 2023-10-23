@@ -55,7 +55,7 @@ deck = r("deck");
 import { Scrubber } from "@mbostock/scrubber";
 
 viewof selectedYear = Scrubber(
-  Array.from(Array(22).keys(), n => n + 2000), // 2000 to 2021
+  Array.from(Array(23).keys(), n => n + 2000), // 2000 to 2022
   {
     autoplay: true,
     delay: 100,

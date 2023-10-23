@@ -5,3 +5,7 @@ bower_components
 .env
 
 /.quarto/
+
+# ignore svg assets unless we decide to use them
+solution-beeswarm/assets/*
+out/solution-beeswarm/assets/*

@@ -59,7 +59,8 @@ filteredData = allData.filter(d => d.cost_bucket == selectedCostBucket)
 
 Plot = import("https://esm.run/@observablehq/plot")
 
-// we're going to rotate this plot when 
+bubbleTitle = d =>
+  d.item + " could remove up to the equivalent of " + d3.format(".0f")(d.potential_abatement_mtco2eq) + " Mt of CO2 each year in the \"" + selectedCostBucket + "\" cost bucket.\n\nThat's " + d3.format(".0%")(d.potential_frac) + " of its potential benefit across all cost buckets."
 
 Plot.plot({
   marks: [
@@ -69,9 +70,8 @@ Plot.plot({
         y: "potential_abatement_mtco2eq",
         // fx: "cost_bucket",
         r: "potential_abatement_mtco2eq",
-        title: "item",
-        title : d =>
-          d.item + " could remove up to the equivalent of " + d3.format(".0f")(d.potential_abatement_mtco2eq) + " Mt of CO2 each year in the \"" + selectedCostBucket + "\" cost bucket.\n\nThat's " + d3.format(".0%")(d.potential_frac) + " of its potential benefit across all cost buckets.",
+        title: bubbleTitle,
+        ariaLabel: bubbleTitle,
         channels: {category: "category", item: "item"},
         stroke: "cost_bucket",
         fill: "cost_bucket",
