@@ -1,16 +1,16 @@
 category,item,cost_bucket,potential_abatement_mtco2eq,icon,is_uncertainty,potential_frac,cost_bucket_potential_rank
 Energy,Reducing CH4 emissions from coal mining,50-100 USD,21.6,miner,FALSE,0.04338220526210082,1
-Other,Reduce CH4 emissions from wastewater,Negative,21.7,NA,FALSE,0.1767100977198697,1
+Other,Reducing CH4 emissions from wastewater,Negative,21.7,NA,FALSE,0.1767100977198697,1
 Energy,Reducing CH4 emissions from coal mining,20-50 USD,28.9,miner,FALSE,0.05804378389234786,1
-Other,Reduce emission of fluorinated gas,100-200 USD,28.9,NA,FALSE,0.023421671124078124,1
-Other,Reduce CH4 emissions from wastewater,0-20 USD,28.9,NA,FALSE,0.23534201954397393,1
-Other,Reduce CH4 emissions from wastewater,50-100 USD,28.9,NA,FALSE,0.23534201954397393,2
+Other,Reducing emission of fluorinated gas,100-200 USD,28.9,NA,FALSE,0.023421671124078124,1
+Other,Reducing CH4 emissions from wastewater,0-20 USD,28.9,NA,FALSE,0.23534201954397393,1
+Other,Reducing CH4 emissions from wastewater,50-100 USD,28.9,NA,FALSE,0.23534201954397393,2
 Energy,Reducing CH4 emissions from coal mining,Negative,43.3,miner,FALSE,0.08696525406708173,2
-Other,Reduce CH4 emissions from solid waste,50-100 USD,43.3,NA,FALSE,0.06978243352135374,3
-Other,Reduce CH4 emissions from wastewater,20-50 USD,43.3,NA,FALSE,0.3526058631921824,2
+Other,Reducing CH4 emissions from solid waste,50-100 USD,43.3,NA,FALSE,0.06978243352135374,3
+Other,Reducing CH4 emissions from wastewater,20-50 USD,43.3,NA,FALSE,0.3526058631921824,2
 Energy,Reducing CH4 emissions from oil and gas,50-100 USD,57.7,miner,FALSE,0.05029198988930533,4
-Other,Reduce CH4 emissions from solid waste,20-50 USD,57.7,NA,FALSE,0.09298952457695407,3
-Other,Reduce CH4 emissions from wastewater,100-200 USD,64.8,NA,FALSE,0.5276872964169381,2
+Other,Reducing CH4 emissions from solid waste,20-50 USD,57.7,NA,FALSE,0.09298952457695407,3
+Other,Reducing CH4 emissions from wastewater,100-200 USD,64.8,NA,FALSE,0.5276872964169381,2
 Buildings,Onsite renewable production and use,0-20 USD,64.9,NA,FALSE,0.13837953091684435,2
 Buildings,Onsite renewable production and use,50-100 USD,64.9,NA,FALSE,0.13837953091684435,5
 Buildings,Improving existing building stock,0-20 USD,64.9,buildingup,FALSE,0.24316223304608467,3
@@ -19,21 +19,21 @@ Buildings,Improving existing building stock,100-200 USD,64.9,buildingup,FALSE,0.
 Energy,Reducing CH4 emissions from oil and gas,20-50 USD,72.2,miner,FALSE,0.06293035823237166,4
 Buildings,Onsite renewable production and use,20-50 USD,72.2,NA,FALSE,0.15394456289978678,5
 Buildings,Improving existing building stock,20-50 USD,72.2,buildingup,FALSE,0.27051330086174596,6
-Other,Reduce CH4 emissions from solid waste,100-200 USD,79.4,NA,FALSE,0.12796132151490736,4
-Other,Reduce emission of fluorinated gas,50-100 USD,86.6,NA,FALSE,0.07018396952751438,7
+Other,Reducing CH4 emissions from solid waste,100-200 USD,79.4,NA,FALSE,0.12796132151490736,4
+Other,Reducing emission of fluorinated gas,50-100 USD,86.6,NA,FALSE,0.07018396952751438,7
 Industry,Reduction of non-CO2 emissions,Uncertainty,89.7,NA,TRUE,0.44405940594059407,1
 Energy,Hydropower,50-100 USD,101,hydro,FALSE,0.3182104599873976,8
 Energy,Reducing CH4 emissions from oil and gas,100-200 USD,101,miner,FALSE,0.08803277259653099,5
 Energy,Hydropower,0-20 USD,108.2,hydro,FALSE,0.34089477000630125,4
 Energy,Hydropower,20-50 USD,108.2,hydro,FALSE,0.34089477000630125,7
-Other,Reduce CH4 emissions from solid waste,0-20 USD,108.2,NA,FALSE,0.17437550362610799,5
+Other,Reducing CH4 emissions from solid waste,0-20 USD,108.2,NA,FALSE,0.17437550362610799,5
 Buildings,New buildings with high energy performance,0-20 USD,115.4,buildingadd,FALSE,0.09812925170068028,6
 Buildings,New buildings with high energy performance,20-50 USD,115.4,buildingadd,FALSE,0.09812925170068028,8
 Buildings,New buildings with high energy performance,50-100 USD,115.4,buildingadd,FALSE,0.09812925170068028,9
 Buildings,Improving existing building stock,Uncertainty,120.1,buildingup,TRUE,0.449981266391907,2
 AFOLU,Reduced conversion of forests and other ecosystems,20-50 USD,122.7,forest,FALSE,0.03058477491400369,9
 Industry,Cementitious material substitution,Uncertainty,127.4,NA,TRUE,0.45273631840796025,3
-Other,Reduce CH4 emissions from solid waste,Uncertainty,134.6,NA,TRUE,0.2169218372280419,4
+Other,Reducing CH4 emissions from solid waste,Uncertainty,134.6,NA,TRUE,0.2169218372280419,4
 Energy,Bioelectricity with CCS,50-100 USD,151.5,NA,FALSE,0.5,10
 Energy,Bioelectricity with CCS,100-200 USD,151.5,NA,FALSE,0.5,6
 AFOLU,"Ecosystem restoration, afforestation, reforestation",0-20 USD,151.5,forest,FALSE,0.05356385235468816,7
@@ -46,7 +46,7 @@ Transport,Shifting to bikes and e-bikes,Uncertainty,178.1,bicycle,TRUE,0.9493603
 Industry,"Feedstock decarbonisation, process change",Uncertainty,178.1,industry,TRUE,0.4657426778242678,6
 Energy,Nuclear energy,0-20 USD,180.4,nuclear,FALSE,0.2049068605179464,8
 Energy,Nuclear energy,100-200 USD,180.4,nuclear,FALSE,0.2049068605179464,9
-Other,Reduce emission of fluorinated gas,20-50 USD,180.4,NA,FALSE,0.1462030958748683,11
+Other,Reducing emission of fluorinated gas,20-50 USD,180.4,NA,FALSE,0.1462030958748683,11
 Transport,Aviation - energy efficiency,Uncertainty,185.3,plane,TRUE,0.828341528833259,7
 Transport,Shifting to bikes and e-bikes,Negative,187.6,bicycle,FALSE,1,4
 Buildings,Enhanced use of wood products,Uncertainty,192.6,NA,TRUE,0.5036610878661087,8
@@ -63,7 +63,7 @@ Transport,Biofuels,20-50 USD,238.1,NA,FALSE,0.3401914559222746,12
 Energy,Geothermal,0-20 USD,245.3,geothermal,FALSE,0.3333333333333333,11
 Energy,Geothermal,20-50 USD,245.3,geothermal,FALSE,0.3333333333333333,13
 Energy,Geothermal,50-100 USD,245.3,geothermal,FALSE,0.3333333333333333,13
-Other,Reduce emission of fluorinated gas,Negative,259.8,NA,FALSE,0.21055190858254316,6
+Other,Reducing emission of fluorinated gas,Negative,259.8,NA,FALSE,0.21055190858254316,6
 Energy,Carbon capture and storage (CCS),50-100 USD,267,NA,FALSE,0.49334811529933476,14
 Buildings,Onsite renewable production and use,100-200 USD,267,NA,FALSE,0.5692963752665245,11
 Energy,Carbon capture and storage (CCS),100-200 USD,274.2,NA,FALSE,0.5066518847006651,12
@@ -73,7 +73,7 @@ Energy,Bioelectricity with CCS,Uncertainty,286.7,NA,TRUE,0.9462046204620461,12
 Transport,Shipping - efficiency and optimisation,Uncertainty,293.9,ship,TRUE,0.6266524520255863,13
 Energy,Hydropower,Uncertainty,308.4,hydro,TRUE,0.9716446124763705,14
 Energy,Reducing CH4 emissions from oil and gas,Negative,310.3,miner,FALSE,0.2704610825416195,7
-Other,Reduce CH4 emissions from solid waste,Negative,331.9,NA,FALSE,0.5348912167606769,8
+Other,Reducing CH4 emissions from solid waste,Negative,331.9,NA,FALSE,0.5348912167606769,8
 Buildings,Onsite renewable production and use,Uncertainty,337.4,NA,TRUE,0.7194029850746269,15
 Transport,Fuel-efficient heavy-duty vehicles,Uncertainty,344.6,truck,TRUE,0.95509977827051,16
 AFOLU,Reduced CH4 and N2O emissions in agriculture,0-20 USD,346.3,farm,FALSE,0.5516966703839413,12
@@ -108,7 +108,7 @@ Energy,Solar energy,20-50 USD,598.9,solar,FALSE,0.13387428469241772,17
 Energy,Reducing CH4 emissions from oil and gas,0-20 USD,606.1,miner,FALSE,0.5282837967401727,17
 AFOLU,"Ecosystem restoration, afforestation, reforestation",100-200 USD,656.6,forest,FALSE,0.23214538254843728,14
 Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",50-100 USD,663.8,fuelcell,FALSE,0.3172433569107246,19
-Other,Reduce emission of fluorinated gas,0-20 USD,678.2,NA,FALSE,0.549639354890996,18
+Other,Reducing emission of fluorinated gas,0-20 USD,678.2,NA,FALSE,0.549639354890996,18
 Transport,Biofuels,Uncertainty,692.2,NA,TRUE,0.9889984283469068,26
 Buildings,"Efficient lighting, appliances and equipment",Negative,721.5,bulb,FALSE,1,14
 Energy,Geothermal,Uncertainty,728.5,geothermal,TRUE,0.9899442859084113,27
@@ -117,7 +117,7 @@ Energy,Wind energy,0-20 USD,764.8,wind,FALSE,0.19961892830109884,19
 Energy,Wind energy,50-100 USD,764.8,wind,FALSE,0.19961892830109884,20
 AFOLU,Improved sustainable forest management,50-100 USD,772,forest,FALSE,0.563133707783208,21
 AFOLU,Reduce food loss and food waste,Uncertainty,786.4,waste,TRUE,1.5794336212090783,28
-Other,Reduce emission of fluorinated gas,Uncertainty,786.4,NA,TRUE,0.637328794878029,29
+Other,Reducing emission of fluorinated gas,Uncertainty,786.4,NA,TRUE,0.637328794878029,29
 Buildings,New buildings with high energy performance,100-200 USD,829.8,buildingadd,FALSE,0.7056122448979592,15
 Energy,Bioelectricity,Uncertainty,844.3,NA,TRUE,0.9833449802003261,30
 Energy,Nuclear energy,Uncertainty,866,nuclear,TRUE,0.9836437982735121,31

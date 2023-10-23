@@ -60,7 +60,7 @@ Visit the [GitHub repository](https://github.com/360-info/report-template/tree/m
 </header>
 
 :::: {#modal-about-content}
-
+This chart summarises data on the cost and efficacy of solutions for reducing greenhouse gas emissions from the [Inter-governmental Panel on Climate Change's](https://www.ipcc.ch) [Assessment Report 6](https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf).
 
 Icons used in this chart come from:
 

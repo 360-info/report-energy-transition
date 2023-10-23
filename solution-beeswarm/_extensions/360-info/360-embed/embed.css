@@ -13,21 +13,17 @@ a:visited {
   color: #1481c9;
 }
 
-h1.title,
-p.subtitle {
+h1.title {
   text-transform: uppercase;
   margin-block-start: 0;
-}
-
-h1.title {
   font-weight: 900;
   color: black;
   margin-block-end: 0.2em;
 }
 
 p.subtitle {
-  font-weight: 700;
   margin-block-end: 0;
+  width: 75%;
 }
 
 
@@ -72,9 +68,15 @@ header#title-block-header {
   width: 82%;
 }
 
+.controls label {
+  padding-top: 2px;
+}
+
 .controls label span {
   border-bottom-width: 2px;
   border-bottom-style: solid;
+  border-radius: 5px;
+  padding-inline: 3px;
   transition: border-bottom-width 0.2s;
   box-sizing: content-box;
 }

@@ -1,5 +1,6 @@
 ---
-title: Untitled
+title: Climate solutions
+subtitle: "Solutions with more potential to reduce emissions are shown as **larger circles**. They are grouped by their estimated cost as of 2030. They are 'sufficient to reduce global greenhouse gas (GHG) emissions to half of the current (2019) level or less,' <a href='https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf'>according to the IPCC</a>."
 format:
   360-embed-html: default
 360embed:
@@ -45,48 +46,6 @@ colorMap = ({
 ```
 
 ```{ojs}
-//| label: cost-controls
-//| classes: controls
-viewof selectedCostBucket = Inputs.radio(
-  new Map([
-    ["Saves money", "Negative"],
-    ["Low", "0-20 USD"],
-    ["Medium", "20-50 USD"],
-    ["High", "50-100 USD"],
-    ["Very high", "100-200 USD"],
-    ["Not allocated", "Not allocated"]
-  ]), {
-    label: html`<strong>Cost</strong>`,
-    value: "Negative",
-    format: x => html`<span style="border-bottom-color: ${colorMap[x[1]].fill};">${x[0]}</span>`
-})
-```
-
-```{ojs}
-//| label: cost-bucket-description
-
-description = {
-  const note = `<br><p style="font-size: 70%">Some solutions may appear in several cost buckets because they have a range of costs depending in circumstance.</p>`
-
-  switch (selectedCostBucket) {
-    case "Negative":
-      return(md`Solutions that **save money** might still cost something upfront, but they save enough in their use—or in their replacement of alternatives—to be cost-negative. ${note}`);
-      break;
-    case "0-20 USD":
-      return(md`**Low-cost solutions** are rated as costing less than US$20 per tonne of CO2 (or equivalent). ${note}`)
-    case "20-50 USD":
-      return(md`**Medium-cost solutions** are rated as costing between US$20 and US$50 per tonne of CO2 (or equivalent). ${note}`)
-    case "50-100 USD":
-      return(md`**High-cost solutions** are rated as costing between US$50 and US$100 per tonne of CO2 (or equivalent). ${note}`)
-    case "100-200 USD":
-      return(md`**Very high-cost solutions** are rated as costing between US$100 and US$200 per tonne of CO2 (or equivalent). ${note}`)
-    default:
-      return(md`Some solutions were not assigned a cost because of the difficulty in evaluating them. ${note}`);
-  }
-}
-```
-
-```{ojs}
 //| label: load-data
 
 allData = FileAttachment("/data/ipcc-decarbonisation-costs-processed.csv")
@@ -100,6 +59,8 @@ filteredData = allData.filter(d => d.cost_bucket == selectedCostBucket)
 
 Plot = import("https://esm.run/@observablehq/plot")
 
+// we're going to rotate this plot when 
+
 Plot.plot({
   marks: [
     Plot.dotX(
@@ -112,7 +73,9 @@ Plot.plot({
         title : d =>
           d.item + " could remove up to the equivalent of " + d3.format(".0f")(d.potential_abatement_mtco2eq) + " Mt of CO2 each year in the \"" + selectedCostBucket + "\" cost bucket.\n\nThat's " + d3.format(".0%")(d.potential_frac) + " of its potential benefit across all cost buckets.",
         channels: {category: "category", item: "item"},
+        stroke: "cost_bucket",
         fill: "cost_bucket",
+        fillOpacity: 0.2,
         padding: 0.5,
         tip: true
       })),
@@ -152,26 +115,67 @@ Plot.plot({
   },
   r: {
     domain: [0, maxPotential],
-    range: [2, 95]
+    range: [2, 95],
+    legend: true
   },
   color: {
     domain: ["Negative", "0-20 USD", "20-50 USD", "50-100 USD", "100-200 USD",
       "Not allocated"],
     range: ["lightblue", "gold", "orange", "red", "firebrick", "lightgrey"]
   },
-  height: 450,
-  marginLeft: 60,
-  marginRight: 60,
-  marginBottom: 60,
-  marginTop: 60,
+  height: 550,
+  marginLeft: 20,
+  marginRight: 20,
+  // marginBottom: 60,
+  marginTop: 35,
   insetTop: 40,
   style: {
     fontSize: 14,
     fontFamily: "Roboto Condensed"
   }
 })
+```
 
+```{ojs}
+//| label: cost-controls
+//| classes: controls
+viewof selectedCostBucket = Inputs.radio(
+  new Map([
+    ["Saves money", "Negative"],
+    ["Low", "0-20 USD"],
+    ["Medium", "20-50 USD"],
+    ["High", "50-100 USD"],
+    ["Very high", "100-200 USD"],
+    ["Not allocated", "Not allocated"]
+  ]), {
+    label: html`<strong>Cost</strong>`,
+    value: "Negative",
+    format: x => html`<span style="border-bottom-color: ${colorMap[x[1]].fill}; box-shadow: 0px 0px 1px ${colorMap[x[1]].fill}; padding: 5px;">${x[0]}</span>`
+})
+```
 
+```{ojs}
+//| label: cost-bucket-description
+
+description = {
+  const note = `<br><p style="font-size: 70%">Some solutions may appear in several cost buckets because they have a range of costs depending on the circumstance. The estimate potential for greenhouse gas reduction is subject to uncertainty not shown here.</p>`
+
+  switch (selectedCostBucket) {
+    case "Negative":
+      return(md`Solutions that **save money** might still cost something upfront, but they save enough in their use—or in their replacement of alternatives—to be cost-negative. ${note}`);
+      break;
+    case "0-20 USD":
+      return(md`**Low-cost solutions** are rated as costing less than US$20 per tonne of CO2 (or equivalent). ${note}`)
+    case "20-50 USD":
+      return(md`**Medium-cost solutions** are rated as costing between US$20 and US$50 per tonne of CO2 (or equivalent). ${note}`)
+    case "50-100 USD":
+      return(md`**High-cost solutions** are rated as costing between US$50 and US$100 per tonne of CO2 (or equivalent). ${note}`)
+    case "100-200 USD":
+      return(md`**Very high-cost solutions** are rated as costing between US$100 and US$200 per tonne of CO2 (or equivalent). ${note}`)
+    default:
+      return(md`Some solutions were **not assigned a cost** because of the difficulty in evaluating them. ${note}`);
+  }
+}
 ```
 
 {{< include _popup-dialogs.qmd >}}
