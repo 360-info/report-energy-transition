@@ -1,124 +1,124 @@
-category,item,cost_bucket,potential_abatement_mtco2eq
-Energy,Wind energy,Negative,2301.7
-Energy,Wind energy,0-20 USD,764.8
-Energy,Wind energy,50-100 USD,764.8
-Energy,Wind energy,Uncertainty,3473.0
-Energy,Solar energy,Negative,2684.1
-Energy,Solar energy,0-20 USD,598.9
-Energy,Solar energy,20-50 USD,598.9
-Energy,Solar energy,50-100 USD,591.7
-Energy,Solar energy,Uncertainty,4964.8
+category,item,cost_bucket,potential_abatement_mtco2eq,icon
+Energy,Wind energy,Negative,2301.7,wind
+Energy,Wind energy,0-20 USD,764.8,wind
+Energy,Wind energy,50-100 USD,764.8,wind
+Energy,Wind energy,Uncertainty,3473.0,wind
+Energy,Solar energy,Negative,2684.1,solar
+Energy,Solar energy,0-20 USD,598.9,solar
+Energy,Solar energy,20-50 USD,598.9,solar
+Energy,Solar energy,50-100 USD,591.7,solar
+Energy,Solar energy,Uncertainty,4964.8,solar
 Energy,Bioelectricity,50-100 USD,432.9
 Energy,Bioelectricity,100-200 USD,425.7
 Energy,Bioelectricity,Uncertainty,844.3
-Energy,Hydropower,0-20 USD,108.2
-Energy,Hydropower,20-50 USD,108.2
-Energy,Hydropower,50-100 USD,101.0
-Energy,Hydropower,Uncertainty,308.4
-Energy,Geothermal,0-20 USD,245.3
-Energy,Geothermal,20-50 USD,245.3
-Energy,Geothermal,50-100 USD,245.3
-Energy,Geothermal,Uncertainty,728.5
-Energy,Nuclear energy,Negative,173.2
-Energy,Nuclear energy,0-20 USD,180.4
-Energy,Nuclear energy,20-50 USD,173.2
-Energy,Nuclear energy,50-100 USD,173.2
-Energy,Nuclear energy,100-200 USD,180.4
-Energy,Nuclear energy,Uncertainty,866.0
+Energy,Hydropower,0-20 USD,108.2,hydro
+Energy,Hydropower,20-50 USD,108.2,hydro
+Energy,Hydropower,50-100 USD,101.0,hydro
+Energy,Hydropower,Uncertainty,308.4,hydro
+Energy,Geothermal,0-20 USD,245.3,geothermal
+Energy,Geothermal,20-50 USD,245.3,geothermal
+Energy,Geothermal,50-100 USD,245.3,geothermal
+Energy,Geothermal,Uncertainty,728.5,geothermal
+Energy,Nuclear energy,Negative,173.2,nuclear
+Energy,Nuclear energy,0-20 USD,180.4,nuclear
+Energy,Nuclear energy,20-50 USD,173.2,nuclear
+Energy,Nuclear energy,50-100 USD,173.2,nuclear
+Energy,Nuclear energy,100-200 USD,180.4,nuclear
+Energy,Nuclear energy,Uncertainty,866.0,nuclear
 Energy,Carbon capture and storage (CCS),50-100 USD,267.0
 Energy,Carbon capture and storage (CCS),100-200 USD,274.2
 Energy,Carbon capture and storage (CCS),Uncertainty,532.9
 Energy,Bioelectricity with CCS,50-100 USD,151.5
 Energy,Bioelectricity with CCS,100-200 USD,151.5
 Energy,Bioelectricity with CCS,Uncertainty,286.7
-Energy,Reducing CH4 emissions from coal mining,Negative,43.3
-Energy,Reducing CH4 emissions from coal mining,0-20 USD,404.1
-Energy,Reducing CH4 emissions from coal mining,20-50 USD,28.9
-Energy,Reducing CH4 emissions from coal mining,50-100 USD,21.6
-Energy,Reducing CH4 emissions from coal mining,Uncertainty,460.5
-Energy,Reducing CH4 emissions from oil and gas,Negative,310.3
-Energy,Reducing CH4 emissions from oil and gas,0-20 USD,606.1
-Energy,Reducing CH4 emissions from oil and gas,20-50 USD,72.2
-Energy,Reducing CH4 emissions from oil and gas,50-100 USD,57.7
-Energy,Reducing CH4 emissions from oil and gas,100-200 USD,101.0
-Energy,Reducing CH4 emissions from oil and gas,Uncertainty,924.0
-AFOLU,Carbon sequestration in agriculture,0-20 USD,497.9
-AFOLU,Carbon sequestration in agriculture,20-50 USD,728.8
-AFOLU,Carbon sequestration in agriculture,50-100 USD,2193.5
-AFOLU,Carbon sequestration in agriculture,Uncertainty,4070.5
-AFOLU,Reduce CH4 and N2O emissions in agriculture,0-20 USD,346.3
-AFOLU,Reduce CH4 and N2O emissions in agriculture,50-100 USD,281.4
-AFOLU,Reduce CH4 and N2O emissions in agriculture,Uncertainty,989.2
-AFOLU,Reduced conversion of forests and other ecosystems,0-20 USD,2265.6
-AFOLU,Reduced conversion of forests and other ecosystems,20-50 USD,122.7
-AFOLU,Reduced conversion of forests and other ecosystems,50-100 USD,1623.5
-AFOLU,Reduced conversion of forests and other ecosystems,Uncertainty,4783.8
-AFOLU,"Ecosystem restoration, afforestation, reforestation",0-20 USD,151.5
-AFOLU,"Ecosystem restoration, afforestation, reforestation",20-50 USD,562.8
-AFOLU,"Ecosystem restoration, afforestation, reforestation",50-100 USD,1457.5
-AFOLU,"Ecosystem restoration, afforestation, reforestation",100-200 USD,656.6
-AFOLU,"Ecosystem restoration, afforestation, reforestation",Uncertainty,3675.8
-AFOLU,Improved sustainable forest management,0-20 USD,382.4
-AFOLU,Improved sustainable forest management,50-100 USD,772.0
-AFOLU,Improved sustainable forest management,100-200 USD,216.5
-AFOLU,Improved sustainable forest management,Uncertainty,2176.8
-AFOLU,Reduce food loss and food waste,Not allocated,497.9
-AFOLU,Reduce food loss and food waste,Uncertainty,786.4
-AFOLU,"Shift to balanced, sustainable health diets",Not allocated,1695.6
-AFOLU,"Shift to balanced, sustainable health diets",Uncertainty,1677.1
-Buildings,Avoid demand for energy services,Negative,555.6
-Buildings,Avoid demand for energy services,Uncertainty,540.2
-Buildings,"Efficient lighting, appliances and equipment",Negative,721.5
-Buildings,"Efficient lighting, appliances and equipment",Uncertainty,351.9
-Buildings,New buildings with high energy performance,0-20 USD,115.4
-Buildings,New buildings with high energy performance,20-50 USD,115.4
-Buildings,New buildings with high energy performance,50-100 USD,115.4
-Buildings,New buildings with high energy performance,100-200 USD,829.8
-Buildings,New buildings with high energy performance,Uncertainty,873.3
+Energy,Reducing CH4 emissions from coal mining,Negative,43.3,miner
+Energy,Reducing CH4 emissions from coal mining,0-20 USD,404.1,miner
+Energy,Reducing CH4 emissions from coal mining,20-50 USD,28.9,miner
+Energy,Reducing CH4 emissions from coal mining,50-100 USD,21.6,miner
+Energy,Reducing CH4 emissions from coal mining,Uncertainty,460.5,miner
+Energy,Reducing CH4 emissions from oil and gas,Negative,310.3,miner
+Energy,Reducing CH4 emissions from oil and gas,0-20 USD,606.1,miner
+Energy,Reducing CH4 emissions from oil and gas,20-50 USD,72.2,miner
+Energy,Reducing CH4 emissions from oil and gas,50-100 USD,57.7,miner
+Energy,Reducing CH4 emissions from oil and gas,100-200 USD,101.0,miner
+Energy,Reducing CH4 emissions from oil and gas,Uncertainty,924.0,miner
+AFOLU,Carbon sequestration in agriculture,0-20 USD,497.9,farm
+AFOLU,Carbon sequestration in agriculture,20-50 USD,728.8,farm
+AFOLU,Carbon sequestration in agriculture,50-100 USD,2193.5,farm
+AFOLU,Carbon sequestration in agriculture,Uncertainty,4070.5,farm
+AFOLU,Reduced CH4 and N2O emissions in agriculture,0-20 USD,346.3,farm
+AFOLU,Reduced CH4 and N2O emissions in agriculture,50-100 USD,281.4,farm
+AFOLU,Reduced CH4 and N2O emissions in agriculture,Uncertainty,989.2,farm
+AFOLU,Reduced conversion of forests and other ecosystems,0-20 USD,2265.6,forest
+AFOLU,Reduced conversion of forests and other ecosystems,20-50 USD,122.7,forest
+AFOLU,Reduced conversion of forests and other ecosystems,50-100 USD,1623.5,forest
+AFOLU,Reduced conversion of forests and other ecosystems,Uncertainty,4783.8,forest
+AFOLU,"Ecosystem restoration, afforestation, reforestation",0-20 USD,151.5,forest
+AFOLU,"Ecosystem restoration, afforestation, reforestation",20-50 USD,562.8,forest
+AFOLU,"Ecosystem restoration, afforestation, reforestation",50-100 USD,1457.5,forest
+AFOLU,"Ecosystem restoration, afforestation, reforestation",100-200 USD,656.6,forest
+AFOLU,"Ecosystem restoration, afforestation, reforestation",Uncertainty,3675.8,forest
+AFOLU,Improved sustainable forest management,0-20 USD,382.4,forest
+AFOLU,Improved sustainable forest management,50-100 USD,772.0,forest
+AFOLU,Improved sustainable forest management,100-200 USD,216.5,forest
+AFOLU,Improved sustainable forest management,Uncertainty,2176.8,forest
+AFOLU,Reduce food loss and food waste,Not allocated,497.9,waste
+AFOLU,Reduce food loss and food waste,Uncertainty,786.4,waste
+AFOLU,"Shifting to balanced, sustainable health diets",Not allocated,1695.6,bowl
+AFOLU,"Shifting to balanced, sustainable health diets",Uncertainty,1677.1,bowl
+Buildings,Avoiding demand for energy services,Negative,555.6,lightbulboff
+Buildings,Avoiding demand for energy services,Uncertainty,540.2,lightbulboff
+Buildings,"Efficient lighting, appliances and equipment",Negative,721.5,bulb
+Buildings,"Efficient lighting, appliances and equipment",Uncertainty,351.9,bulb
+Buildings,New buildings with high energy performance,0-20 USD,115.4,buildingadd
+Buildings,New buildings with high energy performance,20-50 USD,115.4,buildingadd
+Buildings,New buildings with high energy performance,50-100 USD,115.4,buildingadd
+Buildings,New buildings with high energy performance,100-200 USD,829.8,buildingadd
+Buildings,New buildings with high energy performance,Uncertainty,873.3,buildingadd
 Buildings,Onsite renewable production and use,0-20 USD,64.9
 Buildings,Onsite renewable production and use,20-50 USD,72.2
 Buildings,Onsite renewable production and use,50-100 USD,64.9
 Buildings,Onsite renewable production and use,100-200 USD,267.0
 Buildings,Onsite renewable production and use,Uncertainty,337.4
-Buildings,Improvement of existing building stock,0-20 USD,64.9
-Buildings,Improvement of existing building stock,20-50 USD,72.2
-Buildings,Improvement of existing building stock,50-100 USD,64.9
-Buildings,Improvement of existing building stock,100-200 USD,64.9
-Buildings,Improvement of existing building stock,Uncertainty,120.1
+Buildings,Improving existing building stock,0-20 USD,64.9,buildingup
+Buildings,Improving existing building stock,20-50 USD,72.2,buildingup
+Buildings,Improving existing building stock,50-100 USD,64.9,buildingup
+Buildings,Improving existing building stock,100-200 USD,64.9,buildingup
+Buildings,Improving existing building stock,Uncertainty,120.1,buildingup
 Buildings,Enhanced use of wood products,Not allocated,382.4
 Buildings,Enhanced use of wood products,Uncertainty,192.6
-Transport,Fuel-efficient light-duty vehicles,Negative,555.6
-Transport,Fuel-efficient light-duty vehicles,Uncertainty,547.4
-Transport,Electric light-duty vehicles,Not allocated,591.7
-Transport,Electric light-duty vehicles,Uncertainty,576.4
-Transport,Shift to public transportation,Negative,526.7
-Transport,Shift to public transportation,Uncertainty,507.6
-Transport,Shift to bikes and e-bikes,Negative,187.6
-Transport,Shift to bikes and e-bikes,Uncertainty,178.1
-Transport,Fuel-efficient heavy-duty vehicles,Negative,360.8
-Transport,Fuel-efficient heavy-duty vehicles,Uncertainty,344.6
-Transport,"Electric heavy-duty vehicles, incl. buses",Not allocated,209.2
-Transport,"Electric heavy-duty vehicles, incl. buses",Uncertainty,199.8
-Transport,Shipping - efficiency and optimisation,Negative,469.0
-Transport,Shipping - efficiency and optimisation,Uncertainty,293.9
-Transport,Aviation - energy efficiency,Negative,223.7
-Transport,Aviation - energy efficiency,Uncertainty,185.3
+Transport,Fuel-efficient light-duty vehicles,Negative,555.6,carwash
+Transport,Fuel-efficient light-duty vehicles,Uncertainty,547.4,carwash
+Transport,Electric light-duty vehicles,Not allocated,591.7,electriccar
+Transport,Electric light-duty vehicles,Uncertainty,576.4,electriccar
+Transport,Shifting to public transportation,Negative,526.7,bus
+Transport,Shifting to public transportation,Uncertainty,507.6,bus
+Transport,Shifting to bikes and e-bikes,Negative,187.6,bicycle
+Transport,Shifting to bikes and e-bikes,Uncertainty,178.1,bicycle
+Transport,Fuel-efficient heavy-duty vehicles,Negative,360.8,truck
+Transport,Fuel-efficient heavy-duty vehicles,Uncertainty,344.6,truck
+Transport,"Electric heavy-duty vehicles, incl. buses",Not allocated,209.2,electricbus
+Transport,"Electric heavy-duty vehicles, incl. buses",Uncertainty,199.8,electricbus
+Transport,Shipping - efficiency and optimisation,Negative,469.0,ship
+Transport,Shipping - efficiency and optimisation,Uncertainty,293.9,ship
+Transport,Aviation - energy efficiency,Negative,223.7,plane
+Transport,Aviation - energy efficiency,Uncertainty,185.3,plane
 Transport,Biofuels,0-20 USD,230.9
 Transport,Biofuels,20-50 USD,238.1
 Transport,Biofuels,50-100 USD,230.9
 Transport,Biofuels,Uncertainty,692.2
-Industry,Energy efficiency,0-20 USD,1132.8
-Industry,Energy efficiency,Uncertainty,554.6
-Industry,Material efficiency,20-50 USD,923.6
-Industry,Material efficiency,Uncertainty,451.8
-Industry,Enhanced recycling,20-50 USD,476.2
-Industry,Enhanced recycling,Uncertainty,228.7
-Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",20-50 USD,1277.1
-Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",50-100 USD,663.8
-Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",100-200 USD,151.5
-Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",Uncertainty,1032.6
-Industry,"Feedstock decarbonisation, process change",50-100 USD,382.4
-Industry,"Feedstock decarbonisation, process change",Uncertainty,178.1
+Industry,Energy efficiency,0-20 USD,1132.8,industry
+Industry,Energy efficiency,Uncertainty,554.6,industry
+Industry,Material efficiency,20-50 USD,923.6,industry
+Industry,Material efficiency,Uncertainty,451.8,industry
+Industry,Enhanced recycling,20-50 USD,476.2,recycle
+Industry,Enhanced recycling,Uncertainty,228.7,recycle
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",20-50 USD,1277.1,fuelcell
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",50-100 USD,663.8,fuelcell
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",100-200 USD,151.5,fuelcell
+Industry,"Fuel switching (electric, natural gas, bio-energy, hydrogen)",Uncertainty,1032.6,fuelcell
+Industry,"Feedstock decarbonisation, process change",50-100 USD,382.4,industry
+Industry,"Feedstock decarbonisation, process change",Uncertainty,178.1,industry
 Industry,Carbon capture with utilisation (CCU) and CCS,100-200 USD,151.5
 Industry,Carbon capture with utilisation (CCU) and CCS,Uncertainty,236.0
 Industry,Cementitious material substitution,20-50 USD,281.4

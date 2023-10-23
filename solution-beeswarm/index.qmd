@@ -63,18 +63,36 @@ viewof selectedCostBucket = Inputs.radio(
 ```
 
 ```{ojs}
+//| label: cost-bucket-description
+
+description = {
+  const note = `<br><p style="font-size: 70%">Some solutions may appear in several cost buckets because they have a range of costs depending in circumstance.</p>`
+
+  switch (selectedCostBucket) {
+    case "Negative":
+      return(md`Solutions that **save money** might still cost something upfront, but they save enough in their use—or in their replacement of alternatives—to be cost-negative. ${note}`);
+      break;
+    case "0-20 USD":
+      return(md`**Low-cost solutions** are rated as costing less than US$20 per tonne of CO2 (or equivalent). ${note}`)
+    case "20-50 USD":
+      return(md`**Medium-cost solutions** are rated as costing between US$20 and US$50 per tonne of CO2 (or equivalent). ${note}`)
+    case "50-100 USD":
+      return(md`**High-cost solutions** are rated as costing between US$50 and US$100 per tonne of CO2 (or equivalent). ${note}`)
+    case "100-200 USD":
+      return(md`**Very high-cost solutions** are rated as costing between US$100 and US$200 per tonne of CO2 (or equivalent). ${note}`)
+    default:
+      return(md`Some solutions were not assigned a cost because of the difficulty in evaluating them. ${note}`);
+  }
+}
+```
+
+```{ojs}
 //| label: load-data
-//| 
 
 allData = FileAttachment("/data/ipcc-decarbonisation-costs-processed.csv")
   .csv({ typed: true });
-
 maxPotential = Math.max(...allData.map(d => d.potential_abatement_mtco2eq))
-
-filteredData = allData
-  .filter(d => d.cost_bucket == selectedCostBucket)
-  // .filter(d => )
-  // .map(d => {...d, potential_rank:})
+filteredData = allData.filter(d => d.cost_bucket == selectedCostBucket)
 ```
 
 ```{ojs}
@@ -91,6 +109,8 @@ Plot.plot({
         // fx: "cost_bucket",
         r: "potential_abatement_mtco2eq",
         title: "item",
+        title : d =>
+          d.item + " could remove up to the equivalent of " + d3.format(".0f")(d.potential_abatement_mtco2eq) + " Mt of CO2 each year in the \"" + selectedCostBucket + "\" cost bucket.\n\nThat's " + d3.format(".0%")(d.potential_frac) + " of its potential benefit across all cost buckets.",
         channels: {category: "category", item: "item"},
         fill: "cost_bucket",
         padding: 0.5,
@@ -99,28 +119,37 @@ Plot.plot({
     Plot.text(
       filteredData,
       Plot.dodgeX("middle", {
-        filter: d => d.potential_abatement_mtco2eq > 1000,
+        filter: d => d.potential_abatement_mtco2eq > 500,
         y: "potential_abatement_mtco2eq",
         r: "potential_abatement_mtco2eq",
         text: d => d.item,
+        lineWidth: 8,
+        fontSize: 12,
+        // fontSize: "potential_abatement_mtco2eq",
         channels: {category: "category", item: "item"},
         fill: "black",
-        stroke: "#ffffff99",
+        stroke: "#ffffffcc",
         padding: 0.5,
         pointerEvents: "none"
       })),
-    Plot.image(
-      [{src: "Example.svg", name: "Example", x: "Negative", y: 500}],
-      {
-        src: d => "https://upload.wikimedia.org/wikipedia/commons/8/84/" + d.src,
-        y: "y",
-        width: 60,
-        preserveAspectRatio: true
-        // filter: ???
-      }
-    )
+    /* icons not dodging in sync with bubbles */
+    // Plot.image(filteredData,
+    //   Plot.dodgeX("middle", {
+    //     src: d =>
+    //       (d.icon != "NA") ?
+    //         ("/solution-beeswarm/assets/" + d.icon + "-black.svg") :
+    //         ("/solution-beeswarm/assets/question-black.svg"),
+    //     y: "potential_abatement_mtco2eq",
+    //     // width: "potential_abatement_mtco2eq",
+    //     width: 20,
+    //     preserveAspectRatio: true
+    //     // filter: ???
+    //   }))
   ],
-  y: {axis: null},
+  y: {
+    axis: null,
+    type: "log",
+  },
   r: {
     domain: [0, maxPotential],
     range: [2, 95]

@@ -60,7 +60,18 @@ Visit the [GitHub repository](https://github.com/360-info/report-template/tree/m
 </header>
 
 :::: {#modal-about-content}
-This is a great place to add some more notes on the data!
+
+
+Icons used in this chart come from:
+
+- Google Material Icons ([Apache 2.0 licence](https://github.com/material-icons/material-icons/blob/master/LICENSE))
+- Material Symbols ([Apache 2.0 licence](https://github.com/google/material-design-icons/blob/master/LICENSE))
+- Material Design Icons ([Apache 2.0 licence](https://github.com/Templarian/MaterialDesign/blob/master/LICENSE))
+- Font Awesome Solid ([Creative Commons Attribution 4.0 licence](https://creativecommons.org/licenses/by/4.0/))
+- Tabler ([MIT licence](https://github.com/tabler/tabler-icons/blob/master/LICENSE))
+- Bootstrap Icons ([MIT licence](https://github.com/twbs/icons/blob/main/LICENSE.md))
+- Health Icons ([MIT licence](https://github.com/resolvetosavelives/healthicons/blob/main/LICENSE))
+
 ::::
 
 :::::

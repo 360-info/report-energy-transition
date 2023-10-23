@@ -4,6 +4,7 @@ project:
   resources:
     - /data/irena-totals.csv
     - /data/ipcc-decarbonisation-costs-processed.csv
+    - solution-beeswarm/assets/*.svg
   render:
     - analysis/ipcc/index.qmd
     - solution-beeswarm/index.qmd
