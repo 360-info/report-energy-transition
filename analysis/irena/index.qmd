@@ -37,7 +37,7 @@ sf::sf_use_s2(FALSE)
 country_points <-
   geoboundaries() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
-  select(country = shapeName, iso = shapeISO, geometry)
+  select(country = shapeName, iso = shapeGroup, geometry)
   
 missing_points <-
   tribble(
@@ -78,8 +78,10 @@ missing_points <-
   st_as_sf(coords = c("lon", "lat"), dim = "XY") %>%
   st_set_crs(4326)
 
-country_points <- bind_rows(missing_points, country_points)
-```
+country_points <-
+  bind_rows(missing_points, country_points) |>
+  distinct(iso, .keep_all = TRUE)
+``` 
 
 The original version of this analysis used data from IRENA's Excel downloading tool, but it seems to be playing up. I've downloaded the data from [IRENASTAT](https://pxweb.irena.org/pxweb/en/IRENASTAT) instead, but it's slightly differently shaped (partly because installed capacity and generation are separate tables; partly because IRENASTAT has a 100k row export limit).
 
@@ -185,7 +187,7 @@ Finally, we'll join the centroids and export to geoJSON.
 
 # first export a "tall" csv for deckgl...
 proportions %>%
-  left_join(country_points, by = "iso") %>%
+  left_join(country_points, by = "iso", relationship = "many-to-one") %>%
   select(-starts_with("country")) %>%
   mutate(
     country = standardise_countries(iso),
