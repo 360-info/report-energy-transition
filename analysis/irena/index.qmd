@@ -116,16 +116,20 @@ Most notably, nuclear does not appear to be considered renewable by IRENA.
 ```{r}
 #| label: aggregate-totals
 irena_bound %>%
-  mutate(renewable_status = if_else(
-    tech %in% c(
-      "Solar photovoltaic",   "Solar thermal energy",
-      "Onshore wind energy",  "Offshore wind energy",
-      "Renewable hydropower", "Mixed Hydro Plants",
-      "Pumped storage",       "Marine energy",
-      "Solid biofuels",       "Renewable municipal waste",
-      "Liquid biofuels",      "Biogas",
-      "Geothermal energy"),
-    "renewable", "nonrenewable")) %>%
+  mutate(
+    # remove '(the)' from country names
+    country = str_remove_all(country, fixed(" (the)")),
+    country = str_remove_all(country, fixed(" (Kingdom of the)")),
+    renewable_status = if_else(
+      tech %in% c(
+        "Solar photovoltaic",   "Solar thermal energy",
+        "Onshore wind energy",  "Offshore wind energy",
+        "Renewable hydropower", "Mixed Hydro Plants",
+        "Pumped storage",       "Marine energy",
+        "Solid biofuels",       "Renewable municipal waste",
+        "Liquid biofuels",      "Biogas",
+        "Geothermal energy"),
+      "renewable", "nonrenewable")) %>%
   group_by(country, measure, renewable_status, year) %>%
   summarise(total = sum(value, na.rm = TRUE)) %>%
   mutate(measure = recode(measure,
@@ -177,7 +181,7 @@ irena_joined %>%
     renewprop_gen_gwh = totalgen_gwh_renewable / total_gen_gwh,
     renewprop_cap_mw = totalcap_mw_renewable / total_cap_mw) %>%
   select(iso, country, year, starts_with("total"), starts_with("renewprop")) ->
-proportions
+irena_props
 ```
 
 Finally, we'll join the centroids and export to geoJSON.
@@ -186,7 +190,7 @@ Finally, we'll join the centroids and export to geoJSON.
 #| label: join-centroids-export
 
 # first export a "tall" csv for deckgl...
-proportions %>%
+irena_props %>%
   left_join(country_points, by = "iso", relationship = "many-to-one") %>%
   select(-starts_with("country")) %>%
   mutate(
@@ -198,7 +202,7 @@ proportions %>%
   write_csv(here("data", "irena-totals.csv"))
 
 # ... then a wide geojson for other map users
-proportions %>%
+irena_props %>%
   pivot_wider(
     names_from = year,
     values_from = c(total_gen_gwh, total_cap_mw, renewprop_gen_gwh,
