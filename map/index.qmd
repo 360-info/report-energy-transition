@@ -4,6 +4,12 @@ subtitle: "The transition to [**RENEWABLE ELECTRICITY**]{style='color:#3595ac;'}
 description: "The transition to renewable electricity is well underway, but there's still a long way to go"
 page-layout: custom
 theme: none
+twitter-card:
+  creator: "@360info_global"
+  image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
+open-graph:
+  image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
+  site-name: 360info
 # this includes some default css for the titling, the bootstrap icons (since
 # they only come with the bootstrap themes usually), and some extra css for the
 # modals 

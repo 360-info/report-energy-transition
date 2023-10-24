@@ -8,15 +8,7 @@ project:
   render:
     - analysis/*/index.qmd
     - solution-beeswarm/index.qmd
-    - map/index.qmd
-
-website:
-  twitter-card:
-    creator: "@360info_global"
-    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
-  open-graph:
-    image: https://360info-electricitytransition.pages.dev/map/electricity-transition-featuremedia.png
-    site-name: 360info
+    - map/index.qmd  
 
 execute:
   freeze: auto

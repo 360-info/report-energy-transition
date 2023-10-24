@@ -1,15 +1,24 @@
 ---
 title: Climate solutions
-subtitle: "Solutions with more potential to reduce emissions are shown as **larger circles**. They are grouped by their estimated cost as of 2030. They are 'sufficient to reduce global greenhouse gas (GHG) emissions to half of the current (2019) level or less,' <a href='https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf'>according to the IPCC</a>."
+subtitle: "Solutions with more potential to reduce emissions are shown as **larger circles**. They are grouped by their estimated cost as of 2030. They are 'sufficient to reduce global greenhouse gas (GHG) emissions to half of the current (2019) level or less,' [**according to the IPCC**](https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf)."
+resources:
+  - ipcc-solutions-featuremedia.png
+twitter-card:
+  creator: "@360info_global"
+  image: https://dec2023.360info-electricitytransition.pages.dev/solution-beeswarm/ipcc-solutions-featuremedia.png
+open-graph:
+  image: https://dec2023.360info-electricitytransition.pages.dev/solution-beeswarm/ipcc-solutions-featuremedia.png
+  site-name: 360info
 format:
   360-embed-html: default
 360embed:
   before: |
-    &lt;iframe allow=&quot;fullscreen&quot; allowfullscreen=&quot;true&quot; src=&quot;
-  # uncomment and modify this line for production
-  # url: https://feb2023.360info-heatmaps-narclim.pages.dev/news/
+    &lt;div style=&quot;aspect-ratio: 1 / 2; width: 100%;&quot;&gt;
+    &lt;iframe allow=&quot;fullscreen; clipboard-write self https://dec2023.360info-electricitytransition.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
+  url: https://dec2023.360info-electricitytransition.pages.dev/solution-beeswarm/
   after: |
-    &quot; title=&quot;Interactive: future heat&quot; style=&quot;width:100%; height:500px; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &quot; title=&quot;Interactive: climate solutions&quot; style=&quot;width:100%; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 ---
 
 {{< include _popup-buttons.qmd >}}
