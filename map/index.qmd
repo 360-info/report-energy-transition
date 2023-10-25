@@ -28,13 +28,14 @@ resources:
   - tiles/*/*/*.pbf
   - font/*
   - font/*/*
-include-in-header:
-  text: |
-    <script
-      defer
-      src='https://static.cloudflareinsights.com/beacon.min.js'
-      data-cf-beacon='{"token": "1d8ee784a39b4ff2b2b6a508b10ed28a"}'>
-    </script>
+360embed:
+  before: |
+    &lt;div style=&quot;aspect-ratio: 4 / 3; width: 100%;&quot;&gt;
+    &lt;iframe allow=&quot;fullscreen; clipboard-write self https://dec2023.360info-electricitytransition.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
+  url: https://dec2023.360info-electricitytransition.pages.dev/map/
+  after: |
+    &quot; title=&quot;Interactive: renewable electricity&quot; style=&quot;width:100%; height: 100%; border:none; background-color: black;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 ---
 
 {{< include _popup-buttons.qmd >}}

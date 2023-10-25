@@ -28,7 +28,7 @@ Copy and the following code and paste it into your story editor using the <i cla
 
 ::: {.embedcode}
 ```
-{{< var embed.before >}}{{< var embed.url >}}{{< var embed.after >}}
+{{< meta 360embed.before >}}{{< meta 360embed.url >}}{{< meta 360embed.after >}}
 ```
 :::
 
@@ -90,7 +90,7 @@ The renewable electricity sources in this dataset include:
 
 ## Data sources
 
-The data underpinning this map comes from the [**International Renewable Energy Agency**](https://www.irena.org), which licenses data from its [**Arms Industry Database**](https://www.sipri.org/databases/armsindustry) under Creative Commons 4.0 International.
+The data underpinning this map comes from the [**International Renewable Energy Agency**](https://www.irena.org) under Creative Commons 4.0 International.
 
 Vector map tiles are provided by [**MapLibre**](https://github.com/maplibre/demotiles) under the [**BSD 3-Clause licence**](https://github.com/maplibre/demotiles/blob/gh-pages/LICENSE).
 ::::

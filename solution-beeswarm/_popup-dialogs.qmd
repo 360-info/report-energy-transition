@@ -60,17 +60,11 @@ Visit the [GitHub repository](https://github.com/360-info/report-template/tree/m
 </header>
 
 :::: {#modal-about-content}
-This chart summarises data on the cost and efficacy of solutions for reducing greenhouse gas emissions from the [Inter-governmental Panel on Climate Change's](https://www.ipcc.ch) [Assessment Report 6](https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf).
+This chart summarises data on the cost and efficacy of solutions for reducing greenhouse gas emissions from the [Intergovernmental Panel on Climate Change's](https://www.ipcc.ch) [Climate Change 2022: Mitigating Climate Change](https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf).
 
-Icons used in this chart come from:
+Solutions here are evaluated on the amount of greenhouse gas emissions they could avoid each year. This estimate is subject to uncertainty that is not displayed here; the IPCC's graphic (Technical Summary Figure TS.23) shows this uncertainty.
 
-- Google Material Icons ([Apache 2.0 licence](https://github.com/material-icons/material-icons/blob/master/LICENSE))
-- Material Symbols ([Apache 2.0 licence](https://github.com/google/material-design-icons/blob/master/LICENSE))
-- Material Design Icons ([Apache 2.0 licence](https://github.com/Templarian/MaterialDesign/blob/master/LICENSE))
-- Font Awesome Solid ([Creative Commons Attribution 4.0 licence](https://creativecommons.org/licenses/by/4.0/))
-- Tabler ([MIT licence](https://github.com/tabler/tabler-icons/blob/master/LICENSE))
-- Bootstrap Icons ([MIT licence](https://github.com/twbs/icons/blob/main/LICENSE.md))
-- Health Icons ([MIT licence](https://github.com/resolvetosavelives/healthicons/blob/main/LICENSE))
+The solutions are also broken down into "cost buckets" to show how much of a solution can b e implemented either "cost-negative" (that is, saving money) or at low, medium, high or very high cost. There is also uncertainty associated with the proportions that fall into these cost buckets; the IPCC did not evaluate this.
 
 ::::
 
