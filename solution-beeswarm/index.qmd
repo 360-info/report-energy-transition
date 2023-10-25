@@ -13,11 +13,11 @@ format:
   360-embed-html: default
 360embed:
   before: |
-    &lt;div style=&quot;aspect-ratio: 1 / 2; width: 100%;&quot;&gt;
+    &lt;div style=&quot;aspect-ratio: 13 / 20; width: 100%;&quot;&gt;
     &lt;iframe allow=&quot;fullscreen; clipboard-write self https://dec2023.360info-electricitytransition.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
   url: https://dec2023.360info-electricitytransition.pages.dev/solution-beeswarm/
   after: |
-    &quot; title=&quot;Interactive: climate solutions&quot; style=&quot;width:100%; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &quot; title=&quot;Interactive: climate solutions&quot; style=&quot;width:100%; height: 100%; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 ---
 
