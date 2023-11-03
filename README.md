@@ -14,6 +14,25 @@ The data is made available by the [International Renewable Energy Agency](https:
 
 ## Reproduce the analysis
 
+### 💨 Quickstart: use the dev container
+
+This project comes with a ready-to-use [dev container](https://code.visualstudio.com/docs/remote/containers) that includes everything you need to reproduce the analysis (or do a similar one of your own!), including [R](https://r-project.org) and [Quarto](https://quarto.org).
+
+If you have a GitHub account, open the project in GitHub Codespaces for free with two clicks:
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/360-info/report-energy-transition?quickstart=1)
+
+If you have Docker installed, you can also build and run the container locally:
+  - Download or clone the project
+  - Open it in [Visual Studio Code](https://code.visualstudio.com)
+  - Run the **Remote-Containers: Reopen in Container** command
+
+Once the container has launched (it might take a few minutes to set up the first time), you can run the analysis scripts with:
+
+```sh
+quarto render
+```
+
+### Manually running
 We typically publish graphics using [Quarto](https://quarto.org) notebooks, which can be found in the`*.qmd` files. Quarto allows reproducible analysis and visualisation to be done in a mix of languages, but we typically use [R](https://r-project,.org) and [Observable JS](https://observablehq.com/@observablehq/observables-not-javascript).
 
 You'll need to:
