@@ -19,6 +19,7 @@ The data is made available by the [International Renewable Energy Agency](https:
 This project comes with a ready-to-use [dev container](https://code.visualstudio.com/docs/remote/containers) that includes everything you need to reproduce the analysis (or do a similar one of your own!), including [R](https://r-project.org) and [Quarto](https://quarto.org).
 
 If you have a GitHub account, open the project in GitHub Codespaces for free with two clicks:
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/360-info/report-energy-transition?quickstart=1)
 
 If you have Docker installed, you can also build and run the container locally:
