@@ -46,7 +46,7 @@ resources:
 r = require.alias({
   maplibregl: "maplibre-gl@2.1.9/dist/maplibre-gl.js",
   h3: {},
-  deck: "deck.gl@latest/dist.min.js"
+  deck: "deck.gl@8.9.35/dist.min.js"
 });
 
 maplibregl = r("maplibregl").catch(() => window["maplibregl"]);
